@@ -7,6 +7,7 @@ public/media/*.svg
 public/media/*.png
 public/media/*.gif
 public/media/*.jpeg
+mydatabase
 *.swp
 ~*
 
