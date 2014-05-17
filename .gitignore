@@ -1,0 +1,12 @@
+Sivigik/settings_prod.py
+public/google*
+public/static
+public/media/*.mp3
+public/media/*.jpg
+public/media/*.svg
+public/media/*.png
+public/media/*.gif
+public/media/*.jpeg
+*.swp
+~*
+
