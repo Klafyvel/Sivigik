@@ -54,7 +54,7 @@ img{
 {
     border-radius : 5px;
     background: #292824;
-    overflow: auto;
+    overflow: scroll;
     max-width: 100%;
 }
 #content h1 a
