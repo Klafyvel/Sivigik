@@ -35,14 +35,6 @@ iframe
 {
     max-width: 64px;
 }
-#author ul
-{
-    list-style:none;
-}
-#author li
-{
-    display:inline;
-}
 img{
     max-width:100%;
 }
@@ -184,7 +176,7 @@ img{
 }
 #author ul
 {
-    list-style: initial:
+    
 }
 #author table, #author table tr td, #author table tr
 {
