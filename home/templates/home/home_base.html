@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+
+{%block style %}<link rel="stylesheet" href="{% static 'home/style.css' %}" />{%endblock %}
+
+{% block title %}
+    {% if category %}
+        {{category.name|safe}}
+    {% else %}
+        Acceuil
+    {% endif %}
+{%endblock%}
+{% block article_title %}
+    {% if category %}
+        {{category.displayed_name|safe}}
+    {% else %}
+        Acceuil
+    {% endif %}
+{%endblock%}
+{% block intro %}
+{% if category %}
+<p></p>
+{%else%}
+<p>Sivigik est site de passionés de <strong>bidouilles et bricolages</strong> en informatique, électronique ou encore en mécanique. Nous aurons à coeur de vous faire découvrir nos réalisations !</p>
+{%endif %}
+{% endblock %}
+
+{% block content %}
+{% if category.comment %}
+    <div id="good_sites">
+        {{ category.comment }}
+    </div>
+{%endif%}
+    <div id='events'>
+{% cache 120 event_list event_list%}
+{% if event_list %}
+	{% for event in event_list %}
+    {% for article in event.article_set.all %}
+        {% if category.comment%}
+        {% if not article.is_beta or user.is_authenticated %}
+	<table>
+	<tr>
+		<td class="image"><a href="/article/{{article.pk }}"><img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/></a></td>
+		<td><h3>{{event.name}}</h3></td>
+	</tr>
+	</table>
+        {%endif%}
+        {%endif%}
+        {%if good_sites_list%}
+	<table>
+	<tr>
+		<td class="image"><a href="/article/{{article.pk }}"><img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/></a></td>
+		<td><h3>{{event.name}}</h3></td>
+	</tr>
+	</table>
+    
+        {%endif%}
+    {% endfor %}
+	{% endfor %}
+{% else %}
+    <table>
+    <tr>
+    <td>
+	<h3>Pas (encore !) d'évènements disponibles.</h3>
+    </td>
+    </tr>
+    </table>
+{% endif %}
+{% endcache %}
+    </div>
+{% if good_sites_list %}
+{% cache 600 good_sites %}
+    <div id="good_sites">
+    <h3>Quelques sites à visiter :</h3>
+    <ul>
+    {% for site in good_sites_list %}
+        <li><a href='http://{{site.link}}'>{{site.name}}</a><br/><div class="comment">{{site.comment}}</div></li>
+    {% endfor %}
+    </ul>
+    </div>
+{%endcache%}
+{% endif %}
+
+{% endblock %}

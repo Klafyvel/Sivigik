@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+{% load markdown %}
+
+{%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />{% endblock %}
+
+{%block scripts%}
+<script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+            },
+            messageStyle: "none",
+        });
+        </script>
+        <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <link rel="stylesheet" href="http://highlightjs.org/static/styles/atelier-dune.dark.css"/>
+        <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+{%endblock%}
+
+{% block title %}{{ article.event.name }}{% endblock %}
+
+{% block article_title %}{{article.event.name}}{%endblock%}
+
+{% block content %}
+{% if not user.username and article.is_beta %}
+<h3>Vous n'êtes pas autorisé à voir cet article.</h3>
+<a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
+{%else%}
+<div id="article">
+<p id='author-name'>Article par <em>{{article.author.user.username}}</em></p>
+<h1><a href='#toc'>Sommaire</a></h1>
+{% cache 120 article_text article.text %}
+{% autoescape off %}
+	{{ article.text|markdown }}
+{% endautoescape %}
+{% endcache %}
+</div>
+<div id='author'>
+<table>
+<tr>
+    <td>À propos de l'auteur</td>
+    <td>Autres articles du même auteur</td>
+</tr>
+<tr>
+    <td itemscope itemtype="http://schema.org/Person">
+        <img src="{{ MEDIA_URL }}{{ article.author.avatar }}" alt='avatar'/>
+        {{ article.author.user.username }}
+    </td>
+    <td><ul>{% for o_article in article.author.article_set.all %}
+            {% if not o_article.is_beta %}
+            <li><a href='/article/{{o_article.event.id}}'>{{o_article.event.name}}</a></li>
+            {% endif %}
+            {%endfor%}
+    </ul></td>
+</tr>
+</table>
+</div>
+{%endif%}
+{% endblock %}

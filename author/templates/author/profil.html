@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'author/style.css' %}" />{% endblock %}
+
+{% block title %}{{user.username}}{% endblock %}
+{% block article_title %}Profil{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href='/author/set_password'>Changer mon mot de passe</a></li>
+    <li><a href=''>Changer mon avatar</a></li>
+    <li><a href='/author/articles'>Mes articles</a></li>
+    <li><a href='/author/logout'>logout</a></li>
+</ul>
+{% endblock %}
+

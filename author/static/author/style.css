@@ -1,0 +1,34 @@
+#content 
+{
+    background: rgba(250, 250, 250, 0.8);
+    width:30%;
+    position:relative;
+    left:35%;
+    border-radius: 10px;
+}
+#content form{
+    display:block;
+    text-align:center;
+}
+#content ul
+{
+    list-style-type:none;
+    padding : 0px;
+}
+#content ul li
+{
+    padding: 4px;
+    text-indent: 10%;
+}
+
+#content ul li:hover
+{
+    background: linear-gradient(white, rgba(200, 200, 200, 1));
+}
+#content ul li a
+{
+    color:rgb(50, 50, 50);
+    display: block;
+    width: 100%;
+}
+

@@ -1,0 +1,15 @@
+@import url('/static/basic_style.css');
+#content {
+	background-image : url('http://peanutbutterjellytime.net/images/peanut-butter-jelly-time-93.gif');
+	background-repeat : repeat;
+}
+#content h2 {
+	font-family: Grandtitre, sans-serif;
+	font-style : normal;
+	color : red;
+	-moz-transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+	-ms-transform : rotate(45deg)
+	display: block;
+}

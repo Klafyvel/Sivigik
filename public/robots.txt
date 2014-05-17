@@ -1,0 +1,5 @@
+User-agent : *
+Allow : /articles
+Allow : /catergory
+Allow : /
+Disallow : /author

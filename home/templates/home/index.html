@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+
+{%block style %}<link rel="stylesheet" href="{% static 'home/style.css' %}" />{%endblock %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block content %}
+{% cache 120 event_list %}
+{% if event_list %}
+	{% for event in event_list %}
+	<table>
+	<tr>
+        {% for article in event.article_set.all %}
+		<td id="image"><a href="/article/{{article.pk }}"><img src="{{event.img_link}}" alt="Img"/></a></td>
+		<td><h3>{{event.name}}</h3></td>
+        {% endfor %}
+	</tr>
+	</table>
+	<br/>
+	{% endfor %}
+{% else %}
+    <table>
+    <tr>
+    <td>
+	<h2>Pas d'évènements disponibles.</h2>
+    </td>
+    </tr>
+    </table>
+{% endif %}
+{% endcache %}
+{% cache 600 good_sites %}
+{% if good_sites_list %}
+    <div id="good_sites">
+    <h3>Quelques sites à visiter :</h3>
+    <ul>
+    {% for site in good_sites_list %}
+        <li><a href='http://{{site.link}}'>{{site.name}}</a><br/><div class="comment">{{site.comment}}</div></li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{%endcache%}
+{% endblock %}
