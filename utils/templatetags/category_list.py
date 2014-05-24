@@ -12,6 +12,7 @@
 #
 #You should have received a copy of the GNU Affero General Public License
 #along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
 #-*- coding:utf-8 -*-
 from django import template
 from random import randint
@@ -22,7 +23,6 @@ register = template.Library()
 
 @register.tag
 def categories(parser, token):
-    """ Tag renvoyant la liste des catégories formattée."""
     return CategoryListNode()
 
 

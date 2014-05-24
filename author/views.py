@@ -17,11 +17,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth.views import login, logout, password_change
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.views import generic
 
-#from author.forms import ConnectForm
+from author.forms import CreateAuthorForm
 from author.models import Author
 from article.models import Article
 
@@ -47,4 +47,27 @@ def article_list(request):
         return render(request, 'author/article_list.html', {'author':my_author})
     else:
         return disconnect(request)
+
+@permission_required('is_superuser')
+def create_author(request):
+    if request.method == 'POST':
+        form = CreateAuthorForm(request.POST)
+
+        if form.is_valid():
+
+            name = form.cleaned_data['name']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+
+            user = User.objects.create_user(name, email, password)
+            user.save()
+
+            author = Author(user = user)
+            author.save()
+
+            created = True
+    else:
+        form = CreateAuthorForm()
+
+    return render(request, 'author/create_author.html', locals())
     
