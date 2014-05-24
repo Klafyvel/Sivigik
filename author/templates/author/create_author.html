@@ -9,7 +9,7 @@
 {% block content %}
 {% if created %}<h3>Auteur créé.</h3>{% endif %}
 
-<form action="/author/create_author/" method="post">{% csrf_token %}
+<form action="/author/create_author/" method="post" enctype="multipart/form-data">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Submit" />
 </form>

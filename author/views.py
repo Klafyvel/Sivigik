@@ -21,7 +21,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from django.views import generic
 
-from author.forms import CreateAuthorForm
+from author.forms import CreateAuthorForm, ChangeAvatarForm
 from author.models import Author
 from article.models import Article
 
@@ -48,6 +48,23 @@ def article_list(request):
     else:
         return disconnect(request)
 
+@login_required(login_url='/author/login/')
+def change_avatar(request):
+    if request.method == 'POST':
+        form = ChangeAvatarForm(request.POST)
+
+        if form.is_valid():
+
+            avatar = form.cleaned_data['avatar']
+
+            request.user.author.avatar = avatar
+
+            changed = True
+    else:
+        form = ChangeAvatarForm()
+
+    return render(request, 'author/change_avatar.html', locals())
+
 @permission_required('is_superuser')
 def create_author(request):
     if request.method == 'POST':
@@ -58,11 +75,12 @@ def create_author(request):
             name = form.cleaned_data['name']
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
+            avatar = form.cleaned_data['avatar']
 
             user = User.objects.create_user(name, email, password)
             user.save()
 
-            author = Author(user = user)
+            author = Author(user=user, avatar=avatar)
             author.save()
 
             created = True

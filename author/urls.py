@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^articles/$', views.article_list, name='articles_list'),
     url(r'^set_password/$', views.set_password, name='set_password'),
     url(r'^create_author/$', views.create_author, name='create_author'),
+    url(r'^change_avatar/$', views.change_avatar, name='change_avatar'),
 )
