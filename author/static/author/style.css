@@ -6,8 +6,17 @@
     left:35%;
     border-radius: 10px;
 }
+@media screen and (max-width: 980px)
+{
+    #content
+    {
+        width: 90%;
+        left: 5%;
+    }
+}
 #content form{
     display:block;
+    width:100%;
     text-align:center;
 }
 #content ul
