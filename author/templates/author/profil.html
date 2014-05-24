@@ -8,10 +8,13 @@
 
 {% block content %}
 <ul>
-    <li><a href='/author/set_password'>Changer mon mot de passe</a></li>
+    <li><a href='/author/set_password/'>Changer mon mot de passe</a></li>
     <li><a href=''>Changer mon avatar</a></li>
-    <li><a href='/author/articles'>Mes articles</a></li>
-    <li><a href='/author/logout'>logout</a></li>
+    <li><a href='/author/articles/'>Mes articles</a></li>
+    <li><a href='/author/logout/'>logout</a></li>
+    {% if user.is_superuser %}
+    <li><a href='/author/create_author/'>Créer un auteur</a></li>
+    {% endif %}
 </ul>
 {% endblock %}
 
