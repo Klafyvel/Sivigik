@@ -33,7 +33,7 @@
     </div>
 {%endif%}
     <div id='events'>
-{% cache 120 event_list event_list%}
+{% cache 10800 event_list event_list%}
 {% if event_list %}
 	{% for event in event_list %}
     {% for article in event.article_set.all %}
@@ -70,7 +70,7 @@
 {% endcache %}
     </div>
 {% if good_sites_list %}
-{% cache 600 good_sites %}
+{% cache 21600 good_sites %}
     <div id="good_sites">
     <h3>Quelques sites à visiter :</h3>
     <ul>
