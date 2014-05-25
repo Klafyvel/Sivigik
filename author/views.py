@@ -51,13 +51,14 @@ def article_list(request):
 @login_required(login_url='/author/login/')
 def change_avatar(request):
     if request.method == 'POST':
-        form = ChangeAvatarForm(request.POST)
+        form = ChangeAvatarForm(request.POST, request.FILES)
 
         if form.is_valid():
 
             avatar = form.cleaned_data['avatar']
 
             request.user.author.avatar = avatar
+            request.user.author.save()
 
             changed = True
     else:
@@ -68,7 +69,7 @@ def change_avatar(request):
 @permission_required('is_superuser')
 def create_author(request):
     if request.method == 'POST':
-        form = CreateAuthorForm(request.POST)
+        form = CreateAuthorForm(request.POST, request.FILES)
 
         if form.is_valid():
 
@@ -77,7 +78,10 @@ def create_author(request):
             email = form.cleaned_data['email']
             avatar = form.cleaned_data['avatar']
 
+
+
             user = User.objects.create_user(name, email, password)
+            user.groups.add()
             user.save()
 
             author = Author(user=user, avatar=avatar)
