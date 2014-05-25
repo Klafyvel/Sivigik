@@ -31,7 +31,9 @@
 <a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
 {%else%}
 <div id="article">
-<p id='author-name'>Article rédigé par <em>{{article.author.user.username}}</em></p>
+<p id='author-name'>Article rédigé par <em>{{article.author.user.username}}</em>. 
+{% if user.username %}<a href="{{article.get_edit_url}}">[Éditer]</a>{%endif%}
+</p>
 <h1><a href='#toc'>Sommaire</a></h1>
 {% cache 1200 article_text article.text %}
 {% autoescape off %}

@@ -26,3 +26,5 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return '/article/' + str(self.id) + '/'
+    def get_edit_url(self):
+    	return '/article/edit/' + str(self.id) + '/'

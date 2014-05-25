@@ -34,10 +34,14 @@
 {
     background: linear-gradient(white, rgba(200, 200, 200, 1));
 }
+
+#content ul li a.new_article
+{
+    color:red;
+}
 #content ul li a
 {
     color:rgb(50, 50, 50);
     display: block;
     width: 100%;
 }
-

@@ -11,5 +11,6 @@
     {% for article in author.article_set.all %}
     <li><a href='/article/{{article.id}}'>{{article.event.name}}</a></li>
     {% endfor %} 
+    <li><a href='/article/new/' class='new_article'>Créer un nouvel article.</a></li>
 </ul>
 {%endblock %}

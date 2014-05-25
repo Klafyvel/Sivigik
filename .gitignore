@@ -7,6 +7,12 @@ public/media/*.svg
 public/media/*.png
 public/media/*.gif
 public/media/*.jpeg
+public/media/imgArticle/*.mp3
+public/media/imgArticle/*.jpg
+public/media/imgArticle/*.svg
+public/media/imgArticle/*.png
+public/media/imgArticle/*.gif
+public/media/imgArticle/*.jpeg
 mydatabase
 *.swp
 ~*
