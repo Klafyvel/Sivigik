@@ -13,10 +13,16 @@
 #You should have received a copy of the GNU Affero General Public License
 #along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 
 from django.views import generic
 
 from article.models import Article
+from home.models import Event
+
+from article.forms import EditArticleForm
+
+from django.utils import timezone
 
 #import markdown
 
@@ -32,4 +38,28 @@ class DetailView(generic.DetailView):
 	template_name = "article/detail.html" 
 	#context_object_name = 'article'
 
+def edit_article(request):
+    if request.method == 'POST':
+        form = EditArticleForm(request.POST, request.FILES)
 
+        if form.is_valid():
+
+            author = request.user.author
+            date = timezone.now()
+            title = form.cleaned_data['title']
+            is_beta = form.cleaned_data['is_beta']
+            text = form.cleaned_data['text']
+            category = form.cleaned_data['category']
+            image = form.cleaned_data['image']
+
+            e = Event(name=title, pub_date=date, category=category, image=image)
+            e.save()
+
+            a = Article(event=e, author=author, is_beta=is_beta, text=text)
+            a.save()
+
+            return HttpResponseRedirect(a.get_absolute_url())
+    else:
+        form = EditArticleForm()
+    
+    return render(request, 'article/edit.html', locals())

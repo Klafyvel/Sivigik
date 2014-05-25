@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+{% load markdown %}
+
+{%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />{% endblock %}
+
+{% block title %}Édition{% endblock %}
+
+{% block article_title %}Édition{%endblock%}
+
+{% block content %}
+<div id="article">
+<form action="/article/new/" method="post" enctype="multipart/form-data">{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Enregistrer" />
+</form>
+</div>
+{% endblock %}

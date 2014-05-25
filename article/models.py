@@ -25,4 +25,4 @@ class Article(models.Model):
     text = models.TextField()
 
     def get_absolute_url(self):
-        return '/article/' + str(self.id)
+        return '/article/' + str(self.id) + '/'

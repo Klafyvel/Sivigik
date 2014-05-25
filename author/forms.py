@@ -8,3 +8,4 @@ class CreateAuthorForm(forms.Form):
 
 class ChangeAvatarForm(forms.Form):
 	avatar = forms.ImageField()
+
