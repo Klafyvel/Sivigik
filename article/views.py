@@ -15,6 +15,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
+from django.contrib.auth.decorators import login_required
+
 from django.views import generic
 
 from article.models import Article
@@ -38,7 +40,8 @@ class DetailView(generic.DetailView):
 	template_name = "article/detail.html" 
 	#context_object_name = 'article'
 
-def edit_article(request):
+@login_required(login_url='/author/login/')
+def edit_article(request, article_id=0):
     if request.method == 'POST':
         form = EditArticleForm(request.POST, request.FILES)
 
@@ -52,14 +55,43 @@ def edit_article(request):
             category = form.cleaned_data['category']
             image = form.cleaned_data['image']
 
-            e = Event(name=title, pub_date=date, category=category, image=image)
-            e.save()
+            if article_id == 0:
+            	e = Event(name=title, pub_date=date, category=category, image=None)
 
-            a = Article(event=e, author=author, is_beta=is_beta, text=text)
+            	a = Article(event=e, author=author, is_beta=is_beta, text=text)
+            else:
+            	a = get_object_or_404(Article, pk=article_id)
+            	if image is None:
+            		image = a.event.image
+            	e = a.event
+            	a.author = author
+            	a.is_beta = is_beta
+            	a.text = text
+            	e.name = title
+            	e.pub_date = date
+            	e.category = category
+            	e.image = image
+            	a.event = e
+
+            e.save()
             a.save()
+
+
 
             return HttpResponseRedirect(a.get_absolute_url())
     else:
-        form = EditArticleForm()
+    	if article_id == 0:
+        	form = EditArticleForm()
+        else:
+        	a = get_object_or_404(Article, pk=article_id)
+    		form = EditArticleForm(initial={'title':a.event.name,
+    										'image':a.event.image,
+    										'category':a.event.category,
+    										'is_beta':a.is_beta,
+    										'text':a.text})
+    if article_id == 0:
+    	send_to = '/article/new'
+    else :
+    	send_to = '/article/edit/' + article_id + '/'
     
     return render(request, 'article/edit.html', locals())

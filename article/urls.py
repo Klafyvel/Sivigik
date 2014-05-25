@@ -18,5 +18,6 @@ from article import views
 
 urlpatterns = patterns('',
 	url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name="detail"),
+	url(r'^edit/(?P<article_id>\d+)/$', views.edit_article, name="edit"),
 	url(r'^new/$', views.edit_article, name="new"),
 )
