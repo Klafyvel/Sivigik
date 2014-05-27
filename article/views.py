@@ -90,7 +90,7 @@ def edit_article(request, article_id=0):
     										'is_beta':a.is_beta,
     										'text':a.text})
     if article_id == 0:
-    	send_to = '/article/new'
+    	send_to = '/article/new/'
     else :
     	send_to = '/article/edit/' + article_id + '/'
     
