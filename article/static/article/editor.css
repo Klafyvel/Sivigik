@@ -9,3 +9,22 @@
     display: block;
     width:100%;
 }
+.error
+{
+	color: red;
+}
+.errorlist
+{
+	color:red;
+	list-style: none;
+	background-color: #FFBB00;
+    border-radius: 5px;
+    padding: 3px;
+}
+.errorlist li
+{
+	background: url('warning.png') no-repeat;
+	text-indent: 70px;
+    display:block;
+    height:40px;
+}
