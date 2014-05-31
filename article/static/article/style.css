@@ -21,7 +21,10 @@ iframe
 }
 #author-name
 {
-    text-align:right;
+    text-align: right;
+    display: block;
+    float: right;
+    list-style: none;
 }
 #author
 {

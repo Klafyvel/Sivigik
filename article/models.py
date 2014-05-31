@@ -23,6 +23,7 @@ class Article(models.Model):
     author = models.ForeignKey(Author)
     is_beta = models.BooleanField()
     text = models.TextField()
+    modifiers = models.ManyToManyField(Author, related_name='modifiers+')
 
     def get_absolute_url(self):
         return '/article/' + str(self.id) + '/'

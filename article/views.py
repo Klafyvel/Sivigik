@@ -67,7 +67,8 @@ def edit_article(request, article_id=0):
             	if image is None:
             		image = a.event.image
             	e = a.event
-            	a.author = author
+                if author != a.author and author not in a.modifiers.all():
+            	   a.modifiers.add(author)
             	a.is_beta = is_beta
             	a.text = text
             	e.name = title
