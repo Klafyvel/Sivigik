@@ -187,5 +187,10 @@ img{
     border: none;
 }
 
-
-
+blockquote
+{
+    background: rgb(200, 200, 200);
+    padding: 10px;
+    border-radius: 5px;
+    font-style: italic;
+}
