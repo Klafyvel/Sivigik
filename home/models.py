@@ -46,7 +46,7 @@ def get_latest_events():
 
 def get_events_by_category(category):
     returned_events = []
-    for e in Event.objects.all():
+    for e in Event.objects.all().order_by('-pub_date'):
         if e.category == category and e.pub_date < timezone.now():
             returned_events.append(e)
     return returned_events
