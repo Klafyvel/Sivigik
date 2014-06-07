@@ -29,7 +29,7 @@
 {% block content %}
 {% if category.comment %}
     <div id="good_sites">
-        {{ category.comment }}
+        {{ category.comment | safe }}
     </div>
 {%endif%}
     <div id='events'>

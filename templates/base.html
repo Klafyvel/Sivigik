@@ -59,6 +59,9 @@
 			<ul id="nav_table">
 					<li> <a href="/">Accueil</a></li>
                     {% categories %}
+                    {% if user.is_authenticated %}
+                    <li> <a href="/category/beta/">Articles en b&ecirc;ta</a></li>
+                    {% endif %}
 			</ul>
             {% if user.username %}
                 <a id='user_nav' href='/author/profil'>{{user.username}}</a>

@@ -59,3 +59,6 @@ def get_category_by_name(category_name):
     for c in Category.objects.all():
         if c.name == category_name:
             return c
+
+def get_beta_events():
+    return Event.objects.all().filter(article__is_beta=True)

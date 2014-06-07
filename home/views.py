@@ -18,7 +18,7 @@ from django.utils import timezone
 
 from django.views import generic
 
-from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name
+from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name, get_beta_events, Category
 
 def home(request):
     """Displays the home page."""
@@ -29,8 +29,12 @@ def home(request):
                                                    'good_sites_list':good_sites_list})
 def category(request, category_name):
     """Display the asked category"""
-    category = get_category_by_name(category_name)
-    event_list = get_events_by_category(category)
+    if category_name == 'beta':
+        event_list = get_beta_events()
+        category = Category(name='B&ecirc;ta', displayed_name='B&ecirc;ta', comment='Articles en b&ecirc;ta')
+    else:
+        category = get_category_by_name(category_name)
+        event_list = get_events_by_category(category)
 
     return render(request, 'home/home_base.html', {'event_list' :event_list,
                                                    'category':category})
