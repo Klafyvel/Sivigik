@@ -19,6 +19,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.gzip import gzip_page
 
 from django.views import generic
 
@@ -31,17 +32,11 @@ from django.utils import timezone
 
 #import markdown
 
-def view_article(request, article_id):
-    a = get_object_or404(Article, pk=article_id)
-    d = {'event_name' : a.event.name, 
-         'text' : self.text
-        }
-    #return render(request, 'article/detail.html'
-
-class DetailView(generic.DetailView):
-	model = Article
-	template_name = "article/detail.html" 
-	#context_object_name = 'article'
+@gzip_page
+def view_article(request, pk):
+    a = get_object_or_404(Article, pk=pk)
+    d = {'article' : a,}
+    return render(request, 'article/detail.html', d)
 
 @login_required(login_url='/author/login/')
 def edit_article(request, article_id=0):
