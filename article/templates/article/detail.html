@@ -7,7 +7,6 @@
 {%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />{% endblock %}
 
 {%block scripts%}
-{% compress js %}
 <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {
@@ -17,7 +16,6 @@
             messageStyle: "none",
         });
         </script>
-        {% endcompress %}
         {% compress js %}
         <script src='/static/article/highlight.min.js'></script>
         {% endcompress %}
