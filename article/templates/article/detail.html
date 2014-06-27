@@ -2,10 +2,12 @@
 {% load staticfiles %}
 {% load cache %}
 {% load markdown %}
+{% load compress %}
 
 {%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />{% endblock %}
 
 {%block scripts%}
+{% compress js %}
 <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {
@@ -15,10 +17,19 @@
             messageStyle: "none",
         });
         </script>
-        <script type="text/javascript" src="{% static 'article/mathjax.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'article/atelier-dune.dark.css' %}"/>
-        <script src="{%static 'article/highlight.min.js' %}"></script>
+        {% endcompress %}
+        {% compress js %}
+        <script src='/static/article/highlight.min.js' %}></script>
+        {% endcompress %}
+        {% compress js %}
         <script>hljs.initHighlightingOnLoad();</script>
+        {% endcompress %}
+        {% compress js %}
+        <script type="text/javascript" src='/static/article/mathjax.js'></script>
+        {% endcompress %}
+        {% compress css %}
+        <link rel="stylesheet" href='/static/article/atelier-dune.dark.css'/>
+        {%endcompress%}
 {%endblock%}
 
 {% block title %}{{ article.event.name }}{% endblock %}
