@@ -1,3 +1,6 @@
+article/static/article/mathjax.js
+article/static/article/highlight.min.js
+article/static/article/atelier-dune.dark.css
 Sivigik/settings_prod.py
 public/google*
 public/static

@@ -17,7 +17,7 @@
         {% compress js%}
         {%block scripts%}
         {%endblock%}
-        {% endcompress %}
+        
     <script>
     function set_nav_table_displayed()
     {
@@ -28,6 +28,7 @@
         }
     }
     </script>
+    {% endcompress %}
 	</head>
 	<body onresize='set_nav_table_displayed()'>
         <!-- <script>

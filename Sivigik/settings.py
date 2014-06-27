@@ -30,6 +30,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+COMPRESS_ENABLED = True
+
 TEMPLATE_DEBUG = True
 
 INTERNAL_IPS = ('127.0.0.1')
@@ -70,6 +72,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
+    )
 
 ROOT_URLCONF = 'Sivigik.urls'
 

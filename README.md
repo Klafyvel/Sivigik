@@ -9,3 +9,5 @@ Dependencies
 ------------
 - django debug toolbar
 - django_compressor
+- mathjax
+- highlightjs
