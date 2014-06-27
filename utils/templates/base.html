@@ -1,18 +1,23 @@
 {% load staticfiles %}
 {% load category_list %}
+{% load compress %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, target-densitydpi=device-dpi"/>
-		<link rel="stylesheet" href="{% static 'basic_style.css' %}" />
         <link rel="icon" type="image/png" href="{% static 'Svgk.png' %}" />
+        {% compress css %}
+        <link rel="stylesheet" href="{% static 'basic_style.css' %}" />
 		{% block style %}{% endblock %}
+        {%endcompress%}
 		<title>{% block title %}{% endblock %} • Sivigik</title>
 
         <meta name="description" content="Un site de passionnés de bidouillage qui vous font partager cette passion !"/>
+        {% compress js%}
         {%block scripts%}
         {%endblock%}
+        {% endcompress %}
     <script>
     function set_nav_table_displayed()
     {
