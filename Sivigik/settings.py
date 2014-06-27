@@ -74,6 +74,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     'compressor.finders.CompressorFinder',
     )
 
@@ -108,8 +110,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-STATIC_ROOT = BASE_DIR + '/public/static'
+STATIC_ROOT = BASE_DIR + '/public/static/'
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = BASE_DIR + '/public/media/'
 MEDIA_URL = '/media/'
+
+COMPRESS_ROOT = STATIC_ROOT
