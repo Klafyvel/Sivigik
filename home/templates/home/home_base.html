@@ -41,7 +41,14 @@
         {% if not article.is_beta or user.is_authenticated %}
 	<table>
 	<tr>
-		<td class="image"><a href="/article/{{article.pk }}"><img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/></a></td>
+		<td class="image"><a href="/article/{{article.pk }}">
+        {% if event.image %}
+        <img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/>
+        {% else %}
+        <img src="/static/Svgk.png" alt="Img"/>
+        {% endif %}
+        </a>
+        </td>
 		<td><h3>{{event.name}}</h3></td>
         <td><em>par {{article.author.user.username}}</em></td>
 	</tr>
@@ -51,7 +58,13 @@
         {%if good_sites_list%}
 	<table>
 	<tr>
-		<td class="image"><a href="/article/{{article.pk }}"><img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/></a></td>
+		<td class="image"><a href="/article/{{article.pk }}">        
+        {% if event.image %}
+        <img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/>
+        {% else %}
+        <img src="/static/Svgk.png" alt="Img"/>
+        {% endif %}
+        </a></td>
 		<td><h3>{{event.name}}</h3></td>
         <td><em>par {{article.author.user.username}}</em></td>
 	</tr>
