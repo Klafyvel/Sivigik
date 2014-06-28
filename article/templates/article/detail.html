@@ -4,7 +4,9 @@
 {% load markdown %}
 {% load compress %}
 
-{%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />{% endblock %}
+{%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />
+<link rel="stylesheet" href='/static/article/atelier-dune.dark.css'/>
+{% endblock %}
 
 {%block scripts%}
 <script type="text/x-mathjax-config">
@@ -23,9 +25,6 @@
         <script>hljs.initHighlightingOnLoad();</script>
         {% endcompress %}
         <script type="text/javascript" src='https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-        {% compress css %}
-        <link rel="stylesheet" href='/static/article/atelier-dune.dark.css'/>
-        {%endcompress%}
 {%endblock%}
 
 {% block title %}{{ article.event.name }}{% endblock %}
