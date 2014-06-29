@@ -8,6 +8,13 @@ var disableStr = 'ga-disable-' + gaProperty;
 if (document.cookie.indexOf('hasConsent=false') > -1) {
 window[disableStr] = true;
 }
+
+function delFirstElemClass(elem_class)
+{
+   var elem = document.getElementsByClassName(elem_class)[0];
+   elem.parentNode.removeChild(elem);
+} 
+
 //Cette fonction retourne la date d’expiration du cookie de consentement 
 
 function getCookieExpireDate() { 
@@ -30,7 +37,7 @@ function askConsent(){
     En continuant à naviguer, vous nous autorisez à déposer des cookies à des fins de \
     mesure d\'audience.  Pour s\'opposer à ce dépôt vous pouvez cliquer  \
     <a href="javascript:gaOptout()">ici</a>.<input type=button id="btn_nonDisp" value="Ne plus afficher" \
-    onclick="document.cookie = \'hasConsent=true; \'+ getCookieExpireDate() +\' ; path=/\';"/></div>';          
+    onclick="document.cookie = \'hasConsent=true; \'+ getCookieExpireDate() +\' ; path=/\'; delFirstElemClass(\'baneer\') "/></div>';          
     bodytag.insertBefore(div,bodytag.firstChild); // Ajoute la bannière juste au début de la page 
     document.getElementsByTagName('body')[0].className+=' cookiebanner';              
 }
