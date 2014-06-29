@@ -180,4 +180,15 @@ h2
 }
 
 }
-
+.baneer
+{
+    background-color: #9E9E9E;
+    z-index: 3;
+    position: absolute;
+    top: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    width: 95%;
+    left: 2.5%;
+}
