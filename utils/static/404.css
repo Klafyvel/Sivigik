@@ -7,9 +7,9 @@
 	font-family: Grandtitre, sans-serif;
 	font-style : normal;
 	color : red;
-	-moz-transform:rotate(45deg);
-	-webkit-transform:rotate(45deg);
-	-o-transform:rotate(45deg);
-	-ms-transform : rotate(45deg)
+	-moz-transform:rotate(12deg);
+	-webkit-transform:rotate(12deg);
+	-o-transform:rotate(12deg);
+	-ms-transform : rotate(12deg)
 	display: block;
 }
