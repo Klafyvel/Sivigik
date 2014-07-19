@@ -10,6 +10,6 @@
 	-moz-transform:rotate(12deg);
 	-webkit-transform:rotate(12deg);
 	-o-transform:rotate(12deg);
-	-ms-transform : rotate(12deg)
+	-ms-transform : rotate(12deg);
 	display: block;
 }
