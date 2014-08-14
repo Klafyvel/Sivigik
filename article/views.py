@@ -62,7 +62,6 @@ def edit_article(request, article_id=0):
                 a.save()
                 idx = a.id
             else:
-                e.is_pinned =  is_pinned
             	a = get_object_or_404(Article, pk=article_id)
             	if image is None:
             		image = a.event.image
@@ -71,6 +70,7 @@ def edit_article(request, article_id=0):
             	   a.modifiers.add(author)
             	a.is_beta = is_beta
             	a.text = text
+                e.is_pinned =  is_pinned
             	e.name = title
             	e.pub_date = date
             	e.category = category
