@@ -52,15 +52,17 @@ def edit_article(request, article_id=0):
             text = form.cleaned_data['text']
             category = form.cleaned_data['category']
             image = form.cleaned_data['image']
+            is_pinned = form.cleaned_data['is_pinned']
 
             if article_id == 0:
-            	e = Event(name=title, pub_date=date, category=category, image=None)
+            	e = Event(name=title, pub_date=date, category=category, image=image, is_pinned=is_pinned)
                 e.save()
             	a = Article(event=e, author=author, is_beta=is_beta, text=text)
 
                 a.save()
                 idx = a.id
             else:
+                e.is_pinned =  is_pinned
             	a = get_object_or_404(Article, pk=article_id)
             	if image is None:
             		image = a.event.image

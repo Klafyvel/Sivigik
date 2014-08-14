@@ -30,6 +30,7 @@ class Event(models.Model):
     category = models.ForeignKey(Category)
     img_link = models.CharField(max_length=200)
     image = models.ImageField(null=True, blank=True, upload_to="imgArticles/")
+    is_pinned = models.BooleanField()
     def __unicode__(self):
         return self.name
 
@@ -40,9 +41,13 @@ class GoodSite(models.Model):
     def __unicode__(self):
         return self.name + " : " + self.comment
 
+def get_pinned_events():
+    """Returns the pinneds events."""
+    return Event.objects.filter(is_pinned=True)[:2]
+
 def get_latest_events():
     """ Returns the last published events."""
-    return Event.objects.filter(pub_date__lte=timezone.now()).filter(article__is_beta=False).order_by('-pub_date')[:4]
+    return Event.objects.filter(pub_date__lte=timezone.now()).filter(article__is_beta=False).filter(is_pinned=False).order_by('-pub_date')[:4]
 
 def get_events_by_category(category):
     returned_events = []

@@ -18,15 +18,17 @@ from django.utils import timezone
 
 from django.views import generic
 
-from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name, get_beta_events, Category
+from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name, get_beta_events, Category, get_pinned_events
 
 def home(request):
     """Displays the home page."""
+    pinned = get_pinned_events()
     event_list = get_latest_events()
     good_sites_list = get_good_sites()
 
     return render(request, 'home/home_base.html', {'event_list'     :event_list,
-                                                   'good_sites_list':good_sites_list})
+                                                   'good_sites_list':good_sites_list,
+                                                   'pinned':pinned})
 def category(request, category_name):
     """Display the asked category"""
     if category_name == 'beta':

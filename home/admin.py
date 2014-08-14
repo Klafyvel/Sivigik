@@ -9,8 +9,8 @@ class GoodSiteAdmin(admin.ModelAdmin):
     fields=['name', 'comment', 'link']
 
 class EventAdmin(admin.ModelAdmin):
-	fields=['name', 'pub_date', 'category', 'image']
-	inlines = [ArticleInline]
+    fields=['name', 'pub_date', 'category', 'image', 'is_pinned']
+    inlines = [ArticleInline]
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Event, EventAdmin)

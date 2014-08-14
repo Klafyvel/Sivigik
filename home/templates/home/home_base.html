@@ -32,16 +32,36 @@
         {{ category.comment | safe }}
     </div>
 {%endif%}
+    <div id='pinned'>
+        {%for event in pinned%}
+            {%for article in event.article_set.all %}
+            <table>
+            <tr>
+                <td class="image"><a href="/article/{{article.pk }}">
+                {% if event.image %}
+                <img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/>
+                {% else %}
+                <img src="/static/Svgk.png" alt="Img"/>
+                {% endif %}
+                </a>
+                </td>
+                <td><h3>{{event.name}}</h3></td>
+                <td><em>par {{article.author.user.username}}</em></td>
+            </tr>
+            </table>
+            {%endfor%}
+        {%endfor%}
+    </div>
     <div id='events'>
 {% cache 10800 event_list event_list%}
 {% if event_list %}
-	{% for event in event_list %}
+    {% for event in event_list %}
     {% for article in event.article_set.all %}
         {% if category.comment%}
         {% if not article.is_beta or user.is_authenticated %}
-	<table>
-	<tr>
-		<td class="image"><a href="/article/{{article.pk }}">
+    <table>
+    <tr>
+        <td class="image"><a href="/article/{{article.pk }}">
         {% if event.image %}
         <img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/>
         {% else %}
@@ -49,35 +69,35 @@
         {% endif %}
         </a>
         </td>
-		<td><h3>{{event.name}}</h3></td>
+        <td><h3>{{event.name}}</h3></td>
         <td><em>par {{article.author.user.username}}</em></td>
-	</tr>
-	</table>
+    </tr>
+    </table>
         {%endif%}
         {%endif%}
         {%if good_sites_list%}
-	<table>
-	<tr>
-		<td class="image"><a href="/article/{{article.pk }}">        
+    <table>
+    <tr>
+        <td class="image"><a href="/article/{{article.pk }}">        
         {% if event.image %}
         <img src="{{MEDIA_URL}}{{event.image}}" alt="Img"/>
         {% else %}
         <img src="/static/Svgk.png" alt="Img"/>
         {% endif %}
         </a></td>
-		<td><h3>{{event.name}}</h3></td>
+        <td><h3>{{event.name}}</h3></td>
         <td><em>par {{article.author.user.username}}</em></td>
-	</tr>
-	</table>
+    </tr>
+    </table>
     
         {%endif%}
     {% endfor %}
-	{% endfor %}
+    {% endfor %}
 {% else %}
     <table>
     <tr>
     <td>
-	<h3>Pas (encore !) d'évènements disponibles.</h3>
+    <h3>Pas (encore !) d'évènements disponibles.</h3>
     </td>
     </tr>
     </table>
