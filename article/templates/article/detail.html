@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load cache %}
-{% load markdown %}
+{% load emarkdown %}
 {% load compress %}
 
 {%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />
@@ -43,10 +43,9 @@
 {%endfor%}
 {% if user.username %}<li><a href="{{article.get_edit_url}}">[Éditer]</a></li>{%endif%}
 </ul>
-<h1><a href='#toc'>Sommaire</a></h1>
 {% cache 1200 article_text article.text %}
 {% autoescape off %}
-	{{ article.text|markdown }}
+	{{ article.text|emarkdown }}
 {% endautoescape %}
 {% endcache %}
 </div>

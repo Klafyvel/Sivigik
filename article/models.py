@@ -7,15 +7,14 @@
 #
 #Foobar is distributed in the hope that it will be useful,
 #but WITHOUT ANY WARRANTY; without even the implied warranty of
-#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #GNU Affero General Public License for more details.
 #
 #You should have received a copy of the GNU Affero General Public License
-#along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+#along with Foobar. If not, see <http://www.gnu.org/licenses/>.
+
 from django.db import models
-
 from home.models import Event
-
 from author.models import Author
 
 class Article(models.Model):
@@ -27,5 +26,7 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return '/article/' + str(self.id) + '/'
+
     def get_edit_url(self):
-    	return '/article/edit/' + str(self.id) + '/'
+        return '/article/edit/' + str(self.id) + '/'
+
