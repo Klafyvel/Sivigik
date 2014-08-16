@@ -198,3 +198,7 @@ blockquote
     border-radius: 5px;
     font-style: italic;
 }
+.part
+{
+    display: none;
+}
