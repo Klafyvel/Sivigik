@@ -44,6 +44,8 @@ ADMINS = (
     ('user', 'mail'),
 )
 
+IS_MAINTENANCE = True
+
 SECRET_KEY = 'secret!'
 
 # Application definition
@@ -62,6 +64,7 @@ INSTALLED_APPS = (
 	'article',
     'author',
     'utils',
+    'maintenance',
 )
 
 MIDDLEWARE_CLASSES = (
