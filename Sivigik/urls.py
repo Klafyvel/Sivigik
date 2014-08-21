@@ -28,7 +28,8 @@ sitemaps = {
 
 if IS_MAINTENANCE:
     urlpatterns = patterns('',
-    url(r'', include('maintenance.urls', namespace='maintenance')),
+        url(r'', include('maintenance.urls', namespace='maintenance')),
+        url(r'^admin/', include(admin.site.urls)),
 )
 else: 
     urlpatterns = patterns('',
