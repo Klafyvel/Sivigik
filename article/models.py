@@ -21,7 +21,6 @@ class Article(models.Model):
     event = models.ForeignKey(Event)
     author = models.ForeignKey(Author)
     is_beta = models.BooleanField()
-    text = models.TextField()
     modifiers = models.ManyToManyField(Author, related_name='modifiers+')
 
     def get_absolute_url(self):
@@ -30,3 +29,7 @@ class Article(models.Model):
     def get_edit_url(self):
         return '/article/edit/' + str(self.id) + '/'
 
+class Part(models.Model):
+    text = models.TextField()
+    title = models.CharField(max_length=200)
+    article = models.ForeignKey(Article, related_name='parts')

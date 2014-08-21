@@ -22,56 +22,12 @@ import random
 import re
 import markdown
 
-single_dieses = re.compile(r'#+')
-highest_level_title = re.compile(r'#\w*\r')
-the_end = re.compile(r'\r')
-line_regex = re.compile(r'\n')
-title_level = [ re.compile(r'^#\w'),
-                re.compile(r'^##\w'),
-                re.compile(r'^###\w'),
-                re.compile(r'^####\w'),
-                re.compile(r'^#####\w'),
-                re.compile(r'^######\w')]
-
-extract_title_name = lambda t: the_end.sub('', single_dieses.sub('',t)) 
-
-def compile_titles(title):
-    if title_level[0].match(title):
-        return '<h3 onclick="show(\'{0}\');">{0}</h3>\n'.format(extract_title_name(title))
-    elif title_level[1].match(title):
-        return '<h4>{}</h4>\n'.format(extract_title_name(title))
-    elif title_level[2].match(title):
-        return '<h5>{}</h5>\n'.format(extract_title_name(title))
-    elif title_level[3].match(title):
-        return '<h6>{}</h6>\n'.format(extract_title_name(title))
-    elif title_level[4].match(title):
-        return '<strong>{}</strong>\n'.format(extract_title_name(title))
-    elif title_level[5].match(title):
-        return '<strong>{}</strong>\n'.format(extract_title_name(title))
-
-def parts_to_div(text):
-    output = str()
-    titles = highest_level_title.findall(text)
-    print(titles)
-    parts = highest_level_title.split(text)[1:]
-    for t, p in zip(titles, parts):
-        output += t + u'\n<div id=\'{}\' class=\'part\'>\n\n'.format(extract_title_name(t)) + markdown.markdown(p) + u'\n\n</div>\n'
-    return output    
-
 register = template.Library()
 
 @register.filter(is_safe=True)
 def emarkdown(text):
     """Parse the given markdown text in html."""
-    first_preprocessed=parts_to_div(text)
-    second_preprocessed = str()
-    for l in line_regex.split(first_preprocessed):
-        if single_dieses.match(l): 
-            second_preprocessed += compile_titles(l)
-        else:
-            second_preprocessed += l
-    print(second_preprocessed)
-    return second_preprocessed
+    return markdown.markdown(text)
 
 class JavascriptShowNode(template.Node):
     def __init__(self):
