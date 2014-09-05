@@ -37,13 +37,13 @@ class JavascriptShowNode(template.Node):
     function show(id)
     {
         var obj=document.getElementById(id);
-        if(obj.style.display == 'none')
+        if(obj.style.display == 'block')
         {
-            obj.style.display='block';
+            obj.style.display='none';
         }
         else
         {
-        obj.style.display='none';
+        obj.style.display='block';
         }
     }
 </script>

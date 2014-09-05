@@ -19,9 +19,12 @@ from article.models import Article, Part
 class PartInline(admin.StackedInline):
     model = Part
 
+class ArticleAdmin(admin.ModelAdmin):
+    inlines=[PartInline]
+
 class ArticleInline(admin.StackedInline):
 	model = Article
 	extra = 1
 	max_num = 1
 admin.site.register(Part)
-admin.site.register(Article)
+admin.site.register(Article, ArticleAdmin)

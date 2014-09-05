@@ -26,6 +26,20 @@
         {% endcompress %}
         <script type="text/javascript" src='https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
         {% javascript_show %}
+        <script type="text/javascript">
+        function revert_arrow(id)
+        {
+            var obj = document.getElementById(id);
+            if(obj.className=="close")
+            {
+                obj.className="open";
+            }
+            else
+            {
+                obj.className="close";
+            }
+        }
+        </script>
 {%endblock%}
 
 {% block title %}{{ article.event.name }}{% endblock %}
@@ -33,23 +47,36 @@
 {% block article_title %}{{article.event.name}}{%endblock%}
 
 {% block content %}
+
 {% if not user.username and article.is_beta %}
 <h3>Vous n'êtes pas autorisé à voir cet article.</h3>
 <a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
+
 {%else%}
-<div id="article">
-<ul id='author-name'><li>Article rédigé par <em>{{article.author.user.username}}</em>.</li>
+
+<!--<ul id='author-name'><li>Article rédigé par <em>{{article.author.user.username}}</em>.</li>
+
 {% for modifier in article.modifiers.all %}
 <li>Édité par <em>{{modifier.user.username}}</em></li>
 {%endfor%}
+
 {% if user.username %}<li><a href="{{article.get_edit_url}}">[Éditer]</a></li>{%endif%}
-</ul>
-{% cache 1200 article_text article.text %}
-{% autoescape off %}
-	{{ article.text|emarkdown }}
-{% endautoescape %}
-{% endcache %}
-</div>
+</ul>--!>
+
+{%for part in article.parts.all%}
+    <div class="article_part" id="part_{{part.id}}">
+    <h3 id="title_{{part.id}}"><a href="#part_{{part.id}}">{{part.title}}</a></h3>
+    <div id="text_{{part.id}}" class="part">
+	{{ part.text|emarkdown|safe }}
+    <a href="#content" class="close">&uarr; Sommaire</a>
+    </div>
+    </div>
+{%endfor%}
+    <br/>
+    <br/>
+{%endif%}
+{% endblock %}
+{%block bulle%}
 <div id='author'>
 <table>
 <tr>
@@ -70,5 +97,5 @@
 </tr>
 </table>
 </div>
-{%endif%}
-{% endblock %}
+
+{%endblock%}

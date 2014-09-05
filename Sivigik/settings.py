@@ -30,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = True
 

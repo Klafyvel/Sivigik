@@ -33,17 +33,6 @@
 	</head>
 	<body onresize='set_nav_table_displayed()' id='body'>
         <script type="text/javascript">main_analytic();</script>
-		<header>
-			{% block header %}
-				<h1>Sivigik</h1>
-			{% endblock %}
-            <h2>
-			{% block article_title %}
-			{% endblock  %}
-            </h2>
-            {% block intro %}
-            {%endblock%}
-		</header>
 		<nav>
 			{%block nav %}
             <h3 onclick="var nav_table=getElementById('nav_table');
@@ -69,11 +58,26 @@
             {%endif%}
 			{% endblock %}
 		</nav>
-
-		<section id="content">
+		<header>
+			{% block header %}
+				<h1>Sivigik</h1>
+			{% endblock %}
+            <h2>
+			{% block article_title %}
+			{% endblock  %}
+            </h2>
+            {% block intro %}
+            {%endblock%}
+		</header>
+        <section>
+        <aside class="bulle">
+        {%block bulle%}{%endblock%}
+        </aside>
+		<article id="content">
 			{% block content %}{% endblock %}
             <br/>
-		</section>
+		</article>
+        </section>
 
         <footer>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.
