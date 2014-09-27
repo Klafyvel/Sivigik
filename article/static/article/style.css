@@ -47,7 +47,7 @@ img{
 #content h3
 {
     text-indent: 30px;
-    background: #b1c70d;
+    background: #FD8900;
     height: 60px;
     width: 50%;
     position: relative;
@@ -64,7 +64,7 @@ img{
 #content h3::before
 {
     content: ' ';
-    border-color: transparent #a1b70d  transparent transparent;
+    border-color: transparent #ED7900  transparent transparent;
     border-style:solid;
     border-width:20px;
     height:0px;

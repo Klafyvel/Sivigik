@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load compress %}
 
 {%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'article/editor.css' %}">{% endblock %}
-
+{% block scripts %}
+{% compress js %}
+<script src="{%static 'article/editor.js'%}"></script>
+{% endcompress %}
+{%endblock%}
 {% block title %}Édition{% endblock %}
 
 {% block article_title %}Édition{%endblock%}
@@ -12,7 +17,27 @@
 <div id="article">
 <form action="{{send_to}}" method="post" enctype="multipart/form-data">{% csrf_token %}
 {{ form.as_p }}
-<input type="submit" value="Enregistrer" />
+{{ parts.management_form }}
+<div id="formsetZone">
+{% for p in parts %}
+<div class="npart">
+    {{p.as_p}}
+    <div class='btn btn-warning btn-sm bt_rm_sorte'>
+                <button class='glyphicon glyphicon-trash'>Supprimer</button>
+    </div>
+</div>
+{%endfor%}
+</div>
+<button id="bt_add_part" type="button">Ajouter une partie</button>
+<br/><input type="submit" value="Enregistrer" />
 </form>
+<div style="display:none;">
+<div id="epart" class="npart">
+{{ parts.empty_form.as_p }}
+<div class='bt_rm_sorte'>
+                <button class='glyphicon glyphicon-trash'>Supprimer</button>
+        </div>
+</div>
+</div>
 </div>
 {% endblock %}

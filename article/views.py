@@ -22,11 +22,12 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.gzip import gzip_page
 
 from django.views import generic
+from django.forms.formsets import formset_factory
 
-from article.models import Article
+from article.models import Article, Part
 from home.models import Event
 
-from article.forms import EditArticleForm
+from article.forms import EditArticleForm, EditPartForm
 
 from django.utils import timezone
 
@@ -42,6 +43,7 @@ def view_article(request, pk):
 def edit_article(request, article_id=0):
     if request.method == 'POST':
         form = EditArticleForm(request.POST, request.FILES)
+        formset=formset_factory( EditPartForm )( request.POST )
 
         if form.is_valid():
 
@@ -49,7 +51,6 @@ def edit_article(request, article_id=0):
             date = timezone.now()
             title = form.cleaned_data['title']
             is_beta = form.cleaned_data['is_beta']
-            text = form.cleaned_data['text']
             category = form.cleaned_data['category']
             image = form.cleaned_data['image']
             is_pinned = form.cleaned_data['is_pinned']
@@ -57,9 +58,15 @@ def edit_article(request, article_id=0):
             if article_id == 0:
             	e = Event(name=title, pub_date=date, category=category, image=image, is_pinned=is_pinned)
                 e.save()
-            	a = Article(event=e, author=author, is_beta=is_beta, text=text)
-
+            	a = Article(event=e, author=author, is_beta=is_beta)
                 a.save()
+                if formset.is_valid():
+                    print(len(formset))
+                    for p in formset:
+                        text = p.cleaned_data['text']
+                        title= p.cleaned_data['title']
+                        part=Part(text=text, title=title, article=a)
+                        part.save()
                 idx = a.id
             else:
             	a = get_object_or_404(Article, pk=article_id)
@@ -69,31 +76,45 @@ def edit_article(request, article_id=0):
                 if author != a.author and author not in a.modifiers.all():
             	   a.modifiers.add(author)
             	a.is_beta = is_beta
-            	a.text = text
                 e.is_pinned =  is_pinned
             	e.name = title
             	e.pub_date = date
             	e.category = category
             	e.image = image
             	a.event = e
+
+                if formset.is_valid():
+                    print(len(formset))
+                    print(request)
+                    for p in a.parts.all():
+                        p.delete()
+                    for p in formset:
+                        print(p.cleaned_data)
+                        a.parts.create(title=p.cleaned_data['title'], text=p.cleaned_data['text'])
+
                 e.save()
                 a.save()
-
-            
-
-
 
             return HttpResponseRedirect(a.get_absolute_url())
     else:
     	if article_id == 0:
-        	form = EditArticleForm()
+            form = EditArticleForm()
+            parts = formset_factory(EditPartForm, extra=1)()
         else:
-        	a = get_object_or_404(Article, pk=article_id)
-    		form = EditArticleForm(initial={'title':a.event.name,
+            a = get_object_or_404(Article, pk=article_id)
+            p_list = []
+            no_parts = True
+            for i in a.parts.all():
+                p_list.append({'title': i.title,'text':i.text})
+                no_parts = False
+            if no_parts:
+                parts = formset_factory(EditPartForm, extra=1)(initial=p_list)
+            else:
+                parts = formset_factory(EditPartForm, extra=0)(initial=p_list)
+            form = EditArticleForm(initial={'title':a.event.name,
     										'image':a.event.image,
     										'category':a.event.category,
-    										'is_beta':a.is_beta,
-    										'text':a.text})
+    										'is_beta':a.is_beta,})
     if article_id == 0:
     	send_to = '/article/new/'
     else :

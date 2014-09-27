@@ -22,3 +22,5 @@ class Author(models.Model):
             if a.event.pub_date < timezone.now():
                 articles.append(a)
         return articles
+    def get_five_last_articles(self):
+        return self.get_latest_articles()[:3]
