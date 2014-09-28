@@ -22,17 +22,6 @@
     border-radius : 10px;
     width: 64px;
 }
-#good_sites
-{
-    float:right;
-    border-radius:10px;
-    background-color : rgba(255, 255, 255, 0.75);
-    text-align : justify;
-    padding: 1%;
-    padding-left : 2%;
-    width : 23%;
-    margin-bottom: 10px;
-}
 #good_sites ul
 {
     list-style:none;
@@ -52,10 +41,5 @@
 {
     float:left;
     width:100%;
-}
-#good_sites 
-{
-    float:left;
-    width:97%;
 }
 }

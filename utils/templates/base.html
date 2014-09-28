@@ -15,8 +15,6 @@
 
         <meta name="description" content="Un site de passionnés de bidouillage qui vous font partager cette passion !"/>
         
-        {%block scripts%}
-        {%endblock%}
         {% compress js inline %}
         <script>
         function set_nav_table_displayed()
@@ -29,21 +27,13 @@
         }
         </script>
         <script src="{% static 'analytic.js' %}"></script>
+        <script src="{% static 'jquery-1.7.1.min.js' %}"></script>
         {% endcompress %}
+        {%block scripts%}
+        {%endblock%}
 	</head>
 	<body onresize='set_nav_table_displayed()' id='body'>
         <script type="text/javascript">main_analytic();</script>
-		<header>
-			{% block header %}
-				<h1>Sivigik</h1>
-			{% endblock %}
-            <h2>
-			{% block article_title %}
-			{% endblock  %}
-            </h2>
-            {% block intro %}
-            {%endblock%}
-		</header>
 		<nav>
 			{%block nav %}
             <h3 onclick="var nav_table=getElementById('nav_table');
@@ -69,18 +59,45 @@
             {%endif%}
 			{% endblock %}
 		</nav>
-
-		<section id="content">
+		<header>
+			{% block header %}
+				<h1>Sivigik</h1>
+			{% endblock %}
+            <h2>
+			{% block article_title %}
+			{% endblock  %}
+            </h2>
+            {% block intro %}
+            {%endblock%}
+		</header>
+        <aside class="bulle" id="bulle">
+        {%block bulle%}{%endblock%}
+        </aside>
+        <section>
+		<article id="content">
 			{% block content %}{% endblock %}
             <br/>
-		</section>
+		</article>
+        </section>
 
-        <footer>
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.
-        <br/>
-        <p>Vous pouvez retrouver le code source de ce site <a href='https://github.com/Klafyvel/Sivigik'>ici</a>.</p>
-        <p><a href="javascript:gaOptout()">Cliquez ici pour vous opposer aux cookies de mesure d'audience de Google</a></p>
-
-        </footer>
+        <footer><div id="footer_content">
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="{% static '80x15.png' %}" /></a> Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a>.
+ | Vous pouvez retrouver le code source de ce site <a href='https://github.com/Klafyvel/Sivigik'>ici</a>. | <a href="javascript:gaOptout()">Cliquez ici pour vous opposer aux cookies de mesure d'audience de Google</a></p>
+        </div></footer>
+        <script type="text/javascript">
+        // listen for scroll
+        var positionElementInPage = $('#bulle').offset().top;
+        $(window).scroll(
+            function() {
+                if ($(window).scrollTop() >= positionElementInPage) {
+                    // fixed
+                    $('#bulle').addClass("floatable");
+                } else {
+                    // relative
+                    $('#bulle').removeClass("floatable");
+                }
+            }
+        );
+        </script>
 	</body>
 </html>

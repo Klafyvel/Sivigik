@@ -1,42 +1,19 @@
-#content
-{
-    position:relative;
-    left:5%;
-    margin-top: 15px;
+#content{
+    z-index: 10;
 }
 iframe
 {
     max-width:100%;
 }
-#article
+.article_part
 {
-    
-    background-color: rgba(254, 254, 254, 0.7);
-    border-radius: 15px;
-    padding : 15%;
     font-size: 1.25em;
-    text-align: justify;
     color: rgb(50, 50, 50);
     word-wrap: break-word;
-}
-#author-name
-{
-    text-align: right;
-    display: block;
-    float: right;
-    list-style: none;
-}
-#author
-{
-    background-color: rgba(254, 254, 254, 0.7);
-    border-radius: 15px;
-    margin-top:20px;
-    padding : 1%;
-    font-size: 1.25em;
-}
-#author img
-{
-    max-width: 64px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    font-family: sans-serif;
 }
 img{
     max-width:100%;
@@ -56,81 +33,112 @@ img{
     overflow: scroll;
     max-width: 100%;
 }
-#content h1 a
+#content img
 {
-    color : #D45500;
+    max-width:100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-#content h2 a, #content h3 a, #content h4 a, #content h5 a, #content h6 a
+#content .article_part
 {
-    color : black;
-}
-#content h1, #content h2, #content h3 
-{
-    text-align : justify;
-}
-#content h1
-{
-    font-size : 3em;
+    z-index: 20;
 }
 #content h3
 {
-    text-indent : 50px;
-    font-size : 1em;
+    text-indent: 30px;
+    background: #FD8900;
+    height: 60px;
+    width: 50%;
+    position: relative;
+    left:-50px;
+    top: 30px;
+    //float: left;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.55);
+    font-size: 25px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    text-align: left;
+    margin-bottom: 0px; 
 }
-#content h2
+#content h3::before
 {
+    content: ' ';
+    border-color: transparent #ED7900  transparent transparent;
+    border-style:solid;
+    border-width:20px;
+    height:0px;
+    width:0px;
+    position: absolute;
+    left: -20px;
+    top: 41px;
+    z-index: -101;
+}
+#content h3 a
+{
+    color: #fff;
+    text-decoration: none;
+}
+#content h3 a::after
+{
+content:'';
+display:block;
+position:absolute;
+top:10px;
+left:90%; /*should be set to 100% */
+width:0;
+height:0;
+border-color: transparent transparent transparent white ; /*border color should be same as div div background color*/
+border-style: solid;
+border-width: 10px;
+}
+#content .close
+{   
+    display: block;
+    color: red;
+    font-size: 0.75em;
+    text-align: right;
+}
+#author table, #author table tr td, #author table tr
+{
+    background: rgba(0,0,0,0);
+    border: none;
+}
+
+blockquote
+{
+    background: rgb(200, 200, 200);
+    padding: 10px;
+    border-radius: 5px;
+    font-style: italic;
+}
+.part
+{
+    display: none;
+    transition: all .5s ease-in;
+}
+#content div.article_part:target .part
+{
+    display: block;
+}
+#content div.article_part:target h3
+{
+    margin-bottom: 50px;
+}
+#content div.article_part:target a:after
+{
+    border-color: white transparent transparent transparent ;
+}
+#content h4
+{
+    color : #E46510;
     text-indent : 25px;
     font-size : 2em;
 }
-#content h4, #content h5, #content h6
+#content h5, #content h6
 {
-    text-indent : 75px;
+    text-indent : 50px;
 }
-#toc ul li ul
-{
-    display:none;
-}
-#content #toc ul
-{
-    border-radius : 5px;
-    width : 100%;
-    list-style : none;
-    padding:0px;
-    margin:0px;
-    background-color : rgba(63, 63, 63, 0.8);
-    box-shadow: 0px 2px 5px #1c1a19;
-
-}
-#content #toc
-{
-
-    width : 100%;
-    font-size : 1.25em;
-}
-#content #toc a
-{
-    font-weight: bold;
-    display : block;
-    color :  #FF6600;
-    height : 25px;
-
-}
-#content #toc ul li
-{
-    width:auto;
-    margin-left:0px;
-    padding-bottom: 7px;
-    padding-left:25px;
-    text-indent:5px;
-    height:23px;
-    background : url('menu_left.png') no-repeat;
-}
-#content #toc ul li:hover
-{
-    background : url('menu_fleche.png') no-repeat;
-
-}
-
 #content table
 {
     background-color:white;
@@ -160,41 +168,12 @@ img{
 }
 @media screen and (max-width:980px)
 {
-#article
+.article_part
 {
     font-size:0.75em;
 }
-#content #toc
-{
-    font-size:1em;
-}
-#content #toc ul li ul
-{
-    display:none;
-}
-#content #toc ul 
-{
-    width:100%;
-}
-#content #toc ul li:hover ul
-{
-    display:none;
-}
-}
-#author ul
-{
-    
-}
-#author table, #author table tr td, #author table tr
-{
-    background: rgba(0,0,0,0);
-    border: none;
-}
-
-blockquote
-{
-    background: rgb(200, 200, 200);
-    padding: 10px;
-    border-radius: 5px;
-    font-style: italic;
+    #content h3
+    {
+        width:100%;
+    }
 }
