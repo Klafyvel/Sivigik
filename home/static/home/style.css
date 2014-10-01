@@ -42,4 +42,8 @@
     float:left;
     width:100%;
 }
+    .bulle, .floatable
+    {
+        display: none;
+    }
 }

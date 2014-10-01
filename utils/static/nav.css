@@ -70,8 +70,8 @@ nav ul li
 {
     border-top : 1px solid silver;
     width:auto;
-    display:none;
     padding:3px;
+    display: inherit;
 }
 nav ul li a
 {

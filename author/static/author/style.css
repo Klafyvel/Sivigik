@@ -6,6 +6,10 @@
     left:35%;
     border-radius: 10px;
 }
+#bulle
+{
+    display: none;
+}
 @media screen and (max-width: 980px)
 {
     #content

@@ -61,7 +61,6 @@ def edit_article(request, article_id=0):
             	a = Article(event=e, author=author, is_beta=is_beta)
                 a.save()
                 if formset.is_valid():
-                    print(len(formset))
                     for p in formset:
                         text = p.cleaned_data['text']
                         title= p.cleaned_data['title']
@@ -84,12 +83,9 @@ def edit_article(request, article_id=0):
             	a.event = e
 
                 if formset.is_valid():
-                    print(len(formset))
-                    print(request)
                     for p in a.parts.all():
                         p.delete()
                     for p in formset:
-                        print(p.cleaned_data)
                         a.parts.create(title=p.cleaned_data['title'], text=p.cleaned_data['text'])
 
                 e.save()

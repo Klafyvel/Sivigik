@@ -59,6 +59,19 @@
             {%endif%}
 			{% endblock %}
 		</nav>
+        <div id="hide_legal">
+        <div id="show_legal">
+        <aside id="legal">
+            <ul>
+                <li><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="{% static '80x15.png' %}" /></a> Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons   Attribution 4.0 International</a>.</li>
+                <li>Vous pouvez retrouver le code source de ce site <a href='https://github.com/Klafyvel/Sivigik'>ici</a>.  </li>
+                <li><a href="javascript:gaOptout()">Cliquez ici pour vous opposer aux cookies de mesure d'audience de Google</a></li>
+            </ul>
+        </aside>
+        <a id="close_legal" href="#hide_legal">&larr;</a>
+        <a id="open_legal" href="#show_legal">&rarr;</a>
+        </div>
+        </div>
 		<header>
 			{% block header %}
 				<h1>Sivigik</h1>
@@ -81,8 +94,7 @@
         </section>
 
         <footer><div id="footer_content">
-<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="{% static '80x15.png' %}" /></a> Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a>.
- | Vous pouvez retrouver le code source de ce site <a href='https://github.com/Klafyvel/Sivigik'>ici</a>. | <a href="javascript:gaOptout()">Cliquez ici pour vous opposer aux cookies de mesure d'audience de Google</a></p>
+
         </div></footer>
         <script type="text/javascript">
         // listen for scroll

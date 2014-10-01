@@ -44,8 +44,7 @@ ADMINS = (
     ('user', 'mail'),
 )
 
-IS_MAINTENANCE = True
-
+IS_MAINTENANCE = False
 SECRET_KEY = 'secret!'
 
 # Application definition

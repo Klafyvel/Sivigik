@@ -176,4 +176,8 @@ blockquote
     {
         width:100%;
     }
+    #author table
+    {
+        width: 100%;
+    }
 }
