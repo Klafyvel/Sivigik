@@ -1,6 +1,10 @@
 #content{
     z-index: 10;
 }
+#toc
+{
+    display: none;
+}
 iframe
 {
     max-width:100%;
@@ -130,15 +134,18 @@ blockquote
 {
     border-color: white transparent transparent transparent ;
 }
-#content h4
+#content h4, #content h4 a
 {
     color : #E46510;
     text-indent : 25px;
-    font-size : 2em;
+    font-size : 2rem;
+    text-decoration: none;
 }
-#content h5, #content h6
+#content h5,#content h5 a, #content h6, #content h6 a
 {
     text-indent : 50px;
+    text-decoration: none;
+    color: black;
 }
 #content table
 {
