@@ -46,10 +46,11 @@ img{
 }
 #content h3
 {
-    text-indent: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     background: #FD8900;
     height: 60px;
-    width: 50%;
+    width: 75%;
     position: relative;
     left:-50px;
     top: 30px;
@@ -179,5 +180,12 @@ blockquote
     #author table
     {
         width: 100%;
+    }
+}
+@media screen and (max-width:400px)
+{
+    #content h3
+    {
+        font-size: 12px;
     }
 }

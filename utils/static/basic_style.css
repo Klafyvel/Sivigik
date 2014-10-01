@@ -77,6 +77,10 @@ h2
     z-index: 20;
     box-shadow: 1px 1px black;
 }
+.bulle img
+{
+    max-width: 64px;
+}
 .bulle::before
 {
     content: ' ';
@@ -161,11 +165,11 @@ header p
     display: none;
 }
     
-.bulle, .floatable
+/*.bulle, .floatable
 {
     position:absolute;
     left:0px;
     top:0px;
-}
+}*/
 
 }
