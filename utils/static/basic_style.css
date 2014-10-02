@@ -137,12 +137,26 @@ h2
 {
     content: ' ';
     position: relative;
-    top:196px;
+    top:00%;
+    left: 47%;
+    display: none;
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid black;
+    border-bottom: 10px solid transparent; 
+    border-right:10px solid transparent;
+    border-left: 10px solid transparent;
+}
+.bulle::after
+{
+    content: ' ';
+    position: relative;
+    top:25px;
     left: 47%;
     display: block;
     width: 0; 
     height: 0; 
-    border-top: 10px solid #FFFFFF;
+    border-top: 10px solid #FFF;
     border-bottom: 10px solid transparent; 
     border-right:10px solid transparent;
     border-left: 10px solid transparent;
