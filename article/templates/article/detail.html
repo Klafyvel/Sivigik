@@ -84,7 +84,7 @@
     </td>
     <td><ul>{% for o_article in article.author.get_five_last_articles %}
             {% if not o_article.is_beta %}
-            <li><a href='/article/{{o_article.event.id}}'>{{o_article.event.name}}</a></li>
+            <li><a href='/article/{{o_article.id}}'>{{o_article.event.name}}</a></li>
             {% endif %}
             {%endfor%}
     </ul></td>
