@@ -14,13 +14,30 @@
 #along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 #-*-coding:utf-8-*-
 
-def add_page_to_sitemap(url):
-    file_content =''
-    with open('/home/sivigik/Sivigik/public/sitemap.xml', 'r') as file:
-        file_content = file.read()
+#def add_page_to_sitemap(url):
+#    file_content =''
+#    with open('/home/sivigik/Sivigik/public/sitemap.xml', 'r') as file:
+#        file_content = file.read()
+#
+#    file_content = file_content.replace('</urlset>', '\n')
+#    file_content += '<url><loc>' + url + '</loc></url>\n</urlset>'
+#
+#    with open('/home/sivigik/Sivigik/public/sitemap.xml', 'w') as file:
+#        file.write(file_content)
 
-    file_content = file_content.replace('</urlset>', '\n')
-    file_content += '<url><loc>' + url + '</loc></url>\n</urlset>'
+import json
+from article.models import Article, Part
+from author.models import Author
+from home.models import Category, Event, GoodSite
 
-    with open('/home/sivigik/Sivigik/public/sitemap.xml', 'w') as file:
-        file.write(file_content)
+def save_json_site():
+    site = {}
+    site['Article'] = [a.get_as_dict() for a in Article.objects.all()]
+    site['Part'] = [p.get_as_dict() for p in Part.objects.all()]
+    site['Author'] = [a.get_as_dict() for a in Author.objects.all()]
+    site['Category'] = [c.get_as_dict() for c in Category.objects.all()]
+    site['Event'] = [e.get_as_dict() for e in Event.objects.all()]
+    site['GoodSite'] = [g.get_as_dict() for g in GoodSite.objects.all()]
+    with open('save.json', 'w') as f:
+        json.dump(site, f, indent=4)
+

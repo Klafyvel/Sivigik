@@ -23,16 +23,39 @@ class Category(models.Model):
     comment = models.TextField()
     def __unicode__(self):
         return self.name + " : " + self.comment
+    def get_as_dict(self):
+        returned = {}
+        returned['name'] = self.name
+        returned['displayed_name'] = self.displayed_name
+        returned['comment'] = self.comment
+        return returned
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date publication')
     category = models.ForeignKey(Category)
-    img_link = models.CharField(max_length=200)
     image = models.ImageField(null=True, blank=True, upload_to="imgArticles/")
     is_pinned = models.BooleanField()
     def __unicode__(self):
         return self.name
+    def get_as_dict(self):
+        returned = {}
+        returned['name'] = self.name
+        returned['pub_date'] = {'year'       : self.pub_date.year,
+                                'month'      : self.pub_date.month,
+                                'day'        : self.pub_date.day,
+                                'hour'       : self.pub_date.hour,
+                                'minute'     : self.pub_date.minute,
+                                'second'     : self.pub_date.second,
+                                'microsecond': self.pub_date.microsecond,
+                                }
+        returned['category'] = self.category.id
+        try:
+            returned['image'] = self.image.file.name
+        except ValueError:
+            returned['image'] = ''
+        returned['is_pinned'] = self.is_pinned
+        return returned
 
 class GoodSite(models.Model):
     name = models.CharField(max_length=200)
@@ -40,6 +63,11 @@ class GoodSite(models.Model):
     link = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name + " : " + self.comment
+    def get_as_dict(self):
+        returned = {}
+        returned['name'] = self.name
+        returned['comment'] = self.comment
+        returned['link'] = self.link
 
 def get_pinned_events():
     """Returns the pinneds events."""

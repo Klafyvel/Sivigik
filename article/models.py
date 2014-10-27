@@ -28,8 +28,27 @@ class Article(models.Model):
 
     def get_edit_url(self):
         return '/article/edit/' + str(self.id) + '/'
+    def get_as_dict(self):
+        returned = {}
+        returned['event'] = self.event.id
+        returned['author'] = self.author.id
+        returned['is_beta'] = self.is_beta
+        returned['modifiers'] = []
+        for m in self.modifiers.all():
+            returned['modifiers'].append(m.id)
+        #returned['parts'] = []
+        #for p in self.parts:
+        #    returned['parts'].append(p.id)
+        return returned
+
 
 class Part(models.Model):
     text = models.TextField()
     title = models.CharField(max_length=200)
     article = models.ForeignKey(Article, related_name='parts')
+    def get_as_dict(self):
+        returned = {}
+        returned['text'] = self.text
+        returned['title'] = self.title
+        returned['article'] = self.article.id
+        return returned
