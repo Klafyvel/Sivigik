@@ -68,6 +68,7 @@ class GoodSite(models.Model):
         returned['name'] = self.name
         returned['comment'] = self.comment
         returned['link'] = self.link
+        return returned
 
 def get_pinned_events():
     """Returns the pinneds events."""
