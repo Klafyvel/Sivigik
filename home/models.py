@@ -24,6 +24,21 @@ class Category(models.Model):
     comment = models.TextField()
     def __unicode__(self):
         return self.name + " : " + self.comment
+    def get_as_dict(self):
+        returned = {}
+        returned['name'] = self.name
+        returned['displayed_name'] = self.displayed_name
+        returned['comment'] = self.comment
+        returned['pk'] = self.pk
+    def load_from_dict(self, d):
+        if 'name' in d:
+            self.name = d['name']
+        if 'displayed_name' in d:
+            self.displayed_name = d['displayed_name']
+        if 'comment' in d:
+            self.comment = d['comment']
+        if 'pk' in d:
+            self.pk = d['pk']
 
 
 class Event(models.Model):
