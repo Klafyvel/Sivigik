@@ -64,4 +64,4 @@ class Part(models.Model):
         if 'title' in d:
             self.title = d['title']
         if 'article' in d:
-            self.article = d['article']
+            self.article = Article.objects.get(pk=d['article'])

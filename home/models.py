@@ -70,8 +70,13 @@ class Event(models.Model):
         if 'category' in d:
             self.category = Category.objects.get(pk = d['category'])
         if 'image' in d:
-            f = File(open(d['image']))
-            self.image.save(f.name, f, save=False)
+            try:
+                f = File(open(d['image']))
+                self.image.save(f.name, f, save=False)
+            except:
+                pass
+        if 'is_pinned' in d:
+            self.is_pinned = d['is_pinned']
         if 'pk' in d:
             self.pk = d['pk']
 

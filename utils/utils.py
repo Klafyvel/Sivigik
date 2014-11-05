@@ -36,6 +36,7 @@ def save_json_site():
     site['Part'] = [p.get_as_dict() for p in Part.objects.all()]
     site['Event'] = [e.get_as_dict() for e in Event.objects.all()]
     site['Category'] = [e.get_as_dict() for e in Category.objects.all()]
+    site['Author'] = [e.get_as_dict() for e in Author.objects.all()]
     with open('save.json', 'w') as f:
         json.dump(site, f, indent=4)
 
@@ -43,6 +44,13 @@ def load_json_site(fic):
     site = {}
     with open(fic, 'r') as json_file:
         site = json.load(json_file)
+    for a_json in site['Author']:
+        try :
+            a = Author.objects.get(pk=a_json['pk'])
+        except:
+            a = Author()
+        a.load_from_dict(a_json)
+        a.save()
     for a_json in site['Category']:
         try :
             a = Category.objects.get(pk=a_json['pk'])
