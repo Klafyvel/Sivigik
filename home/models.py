@@ -16,6 +16,7 @@ from django.db import models
 
 import datetime
 from django.utils import timezone
+from django.core.files import File
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -23,12 +24,7 @@ class Category(models.Model):
     comment = models.TextField()
     def __unicode__(self):
         return self.name + " : " + self.comment
-    def get_as_dict(self):
-        returned = {}
-        returned['name'] = self.name
-        returned['displayed_name'] = self.displayed_name
-        returned['comment'] = self.comment
-        return returned
+
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
@@ -41,21 +37,27 @@ class Event(models.Model):
     def get_as_dict(self):
         returned = {}
         returned['name'] = self.name
-        returned['pub_date'] = {'year'       : self.pub_date.year,
-                                'month'      : self.pub_date.month,
-                                'day'        : self.pub_date.day,
-                                'hour'       : self.pub_date.hour,
-                                'minute'     : self.pub_date.minute,
-                                'second'     : self.pub_date.second,
-                                'microsecond': self.pub_date.microsecond,
-                                }
-        returned['category'] = self.category.id
+        returned['pub_date'] = self.pub_date.toordinal()
+        returned['category'] = self.category.pk
         try:
             returned['image'] = self.image.file.name
         except ValueError:
             returned['image'] = ''
         returned['is_pinned'] = self.is_pinned
+        returned['pk'] = self.pk
         return returned
+    def load_from_dict(self, d):
+        if 'name' in d:
+            self.name = d['name']
+        if 'pub_date' in d:
+            self.pub_date = datetime.datetime.fromordinal(d['pub_date'])
+        if 'category' in d:
+            self.category = Category.objects.get(pk = d['category'])
+        if 'image' in d:
+            f = File(open(d['image']))
+            self.image.save(f.name, f, save=False)
+        if 'pk' in d:
+            self.pk = d['pk']
 
 class GoodSite(models.Model):
     name = models.CharField(max_length=200)
@@ -63,12 +65,6 @@ class GoodSite(models.Model):
     link = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name + " : " + self.comment
-    def get_as_dict(self):
-        returned = {}
-        returned['name'] = self.name
-        returned['comment'] = self.comment
-        returned['link'] = self.link
-        return returned
 
 def get_pinned_events():
     """Returns the pinneds events."""

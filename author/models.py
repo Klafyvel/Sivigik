@@ -25,8 +25,3 @@ class Author(models.Model):
         return articles
     def get_five_last_articles(self):
         return self.get_latest_articles()[:3]
-    def get_as_dict(self):
-        returned = {}
-        returned['avatar'] = self.avatar.file.name
-        returned['user'] = self.user.id
-        return returned

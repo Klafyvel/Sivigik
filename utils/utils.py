@@ -30,14 +30,36 @@ from article.models import Article, Part
 from author.models import Author
 from home.models import Category, Event, GoodSite
 
-def save_json_site():
+def save_json_articles():
     site = {}
     site['Article'] = [a.get_as_dict() for a in Article.objects.all()]
     site['Part'] = [p.get_as_dict() for p in Part.objects.all()]
-    site['Author'] = [a.get_as_dict() for a in Author.objects.all()]
-    site['Category'] = [c.get_as_dict() for c in Category.objects.all()]
     site['Event'] = [e.get_as_dict() for e in Event.objects.all()]
-    site['GoodSite'] = [g.get_as_dict() for g in GoodSite.objects.all()]
     with open('save.json', 'w') as f:
         json.dump(site, f, indent=4)
 
+def load_json_articles(fic):
+    site = {}
+    with open(fic, 'r') as json_file:
+        site = json.load(json_file)
+    for a_json in site['Event']:
+        try :
+            a = Event.objects.get(pk=a_json['pk'])
+        except:
+            a = Event()
+        a.load_from_dict(a_json)
+        a.save()
+    for a_json in site['Article']:
+        try :
+            a = Article.objects.get(pk=a_json['pk'])
+        except:
+            a = Article()
+        a.load_from_dict(a_json)
+        a.save()
+    for a_json in site['Part']:
+        try :
+            a = Part.objects.get(pk=a_json['pk'])
+        except:
+            a = Part()
+        a.load_from_dict(a_json)
+        a.save()
