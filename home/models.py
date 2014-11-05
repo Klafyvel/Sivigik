@@ -30,6 +30,7 @@ class Category(models.Model):
         returned['displayed_name'] = self.displayed_name
         returned['comment'] = self.comment
         returned['pk'] = self.pk
+        return returned
     def load_from_dict(self, d):
         if 'name' in d:
             self.name = d['name']
