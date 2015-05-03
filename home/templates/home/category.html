@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load cache %}
+{% load emarkdown %}
+
+{%block style %}<link rel="stylesheet" type="text/scss" href="{% static 'home/style.scss' %}" />
+<link rel="stylesheet" type="text/scss" href="{% static 'home/category.scss' %}">{%endblock %}
+
+{% block title %}{{category.name|safe}}{%endblock%}
+
+{% block article_title %}
+        <h2>{{category.displayed_name|safe}}</h2>
+        <p>Derniers articles :</p>
+{%endblock%}
+
+{% block intro %}
+{% endblock %}
+
+{% block bulle %}
+{% endblock %}
+
+{% block content %}
+<!--
+{%for event in pinned%}
+    --><figure class='pinned'>
+        {%for article in event.article_set.all %}
+                {%if event.image%}<img src="{{MEDIA_URL}}{{event.image}}"/>{%else%}<img src="{% static 'Svgk_baneer.png' %}"/>{%endif%}
+                <a class="button right_arrow" href="/article/{{article.pk }}">Consulter</a>
+                <figcaption><h3>{{event.name}}</h3> <em>par {{article.author.user.username}}</em></figcaption>
+        {%endfor%}
+    </figure><!--
+{% endfor %}
+-->
+    <div id='events'>
+    <!--
+{% cache 10800 event_list event_list%}
+{% if event_list %}
+    {% for event in event_list %}
+    {% for article in event.article_set.all %}
+        {% if category.comment%}
+        {% if not article.is_beta or user.is_authenticated %}
+    --><figure>
+            {%if event.image%}<img src="{{MEDIA_URL}}{{event.image}}"/>{%else%}<img src="{% static 'Svgk_baneer.png' %}"/>{%endif%}
+            <figcaption><h3>{{event.name}}</h3> <em>par {{article.author.user.username}}</em><a class="button right_arrow" href="/article/{{article.pk }}">Consulter</a>{{event.article.introduction|emarkdown|safe}}</figcaption>
+        </figure><!--
+        {%endif%}
+        {%endif%}
+    {% endfor %}{% endfor %}-->
+{% else %}
+    --><h3>Pas (encore !) d'évènements disponibles.</h3>
+{% endif %}
+{% endcache %}
+    </div>
+
+{% endblock %}

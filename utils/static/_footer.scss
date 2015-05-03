@@ -1,0 +1,45 @@
+footer
+{
+    position: relative;
+		top:80px;
+    clear:both;
+    /*margin-top: -50px;*/
+    height: 30px;
+		padding: 5px;
+    overflow: hidden;
+}
+
+footer, footer a
+{
+	color:  #2071b6;
+	text-decoration: none;
+	font-weight: bold;
+}
+footer p
+{
+    position: relative;
+    top: -4px;
+	width: 100%;
+	text-align:center;
+}
+footer ul, footer li
+{
+    list-style: none;
+}
+footer #flavour
+{
+    display: block;
+    position: absolute;
+    right: 0;
+}
+@media screen and (max-width: 980px)
+{
+footer p
+	{
+		font-size: 0.75em;
+	}
+footer
+	{
+		height: 30px;
+	}
+}

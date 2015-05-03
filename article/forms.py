@@ -18,4 +18,5 @@ class EditArticleForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), label=u'Catégorie :')
     is_beta = forms.BooleanField(label=unicode(u'Cet article est en bêta :'), required=False)
     is_pinned = forms.BooleanField(label=unicode(u'Épingler cet article sur la page d\'accueil :'), required=False)
+    introduction = forms.CharField(widget=forms.Textarea, label='introduction :')
 

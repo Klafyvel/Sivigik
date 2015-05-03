@@ -14,7 +14,7 @@
 #along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 from django.contrib import admin
 
-from article.models import Article, Part
+from article.models import Article, Part, Comment
 
 class PartInline(admin.StackedInline):
     model = Part
@@ -28,3 +28,4 @@ class ArticleInline(admin.StackedInline):
 	max_num = 1
 admin.site.register(Part)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Comment)

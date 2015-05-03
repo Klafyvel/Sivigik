@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block style %}<link rel="stylesheet" type="text/scss" href="{% static 'member/style.scss' %}" />{% endblock %}
+
+{% block title %}{{user.username}}{% endblock %}
+{% block article_title %}<div id="page_title">Profil</div>{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a class='button right_arrow full_width' href='/member/set_password/'>Changer mon mot de passe</a></li>
+    <li><a class='button right_arrow full_width' href='/member/change_avatar/'>Changer mon avatar</a></li>
+    {%if user.member.is_author%}
+    <li><a class='button right_arrow full_width' href='/member/articles/'>Mes articles</a></li>
+    <li><a class='button right_arrow full_width' href='/member/static_pages/'>Mes pages statiques</a></li>
+    {%endif%}
+    <li><a class='button right_arrow full_width' href='/member/logout/'>logout</a></li>
+    {% if user.is_superuser %}
+    <li><a class='button right_arrow full_width' href='/member/create_author/'>Créer un auteur</a></li>
+    {% endif %}
+</ul>
+{% endblock %}
+

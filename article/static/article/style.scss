@@ -1,0 +1,319 @@
+@import "code";
+#content img
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 100%;
+}
+#content, #article_control
+{
+    margin-top:30px;
+}
+#content
+{
+    display: block;
+    float: right;
+    width: 70%;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+.part .part_text a.close_part_bottom
+{
+    color:#F00;
+    display: block;
+    width: 100%;
+    text-align: right;
+    text-decoration: none;
+    text-decoration: overline;
+    margin-top: 15px;
+}
+.show_part:target ~ .part_text,
+#expandAll:target ~ .part .part_text
+{
+    display: block;
+}
+#expandAll:target ~ .part .part_text a.close_part_bottom
+{
+    display: none;
+}
+.part
+{
+    width:95%;
+    text-align: justify;
+    margin-left: 20px;
+    float: right;
+}
+.part_text
+{
+    display: none;
+}
+.part p, .part div
+{
+    width: 95%;
+}
+.part *
+{
+    // width:95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.part a
+{
+    color: #4A6985;
+    font-weight: bold;
+    text-decoration: none;
+}
+.part h3
+{
+    width:99.5%;;
+    padding: 5px;
+    margin: 0;
+    padding-right: 0;
+    color: #424242;
+    text-decoration: none;
+}
+.part h3:hover
+{
+    text-decoration: underline;
+    position: relative;
+    /*left: -14px;*/
+}
+.show_part:target ~ a h3:before, h3:hover:before
+{
+    position: relative;
+    margin-left: -15px;
+    float: left;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    content:"";
+    display: inline-block;
+    transform: rotate(-45deg);
+    border-style: solid;
+    border-width: 1px; 
+}
+.show_part:target ~ a h3:before
+{
+    border-color: transparent #424242 #424242 transparent;
+}
+h3:hover:before
+{
+    border-color: transparent transparent #424242 #424242;
+}
+.part .part_text a
+{
+    text-decoration: underline;
+}
+#page_title h2
+{
+    position: absolute;
+    font-size: 7vw;
+    font-family: "eurof" !important;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    text-align: 100%;
+    display: block;
+    top: 0;
+    line-height: 300px;
+}
+#page_title
+{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 0px;
+    padding: 0;
+}
+#page_title span
+{
+    display: block;
+    height: 300px;
+    width: 100%;
+    background-color: transparent;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0px 0px, 100% 0%;
+    background-clip: border-box, border-box;
+    background-origin: padding-box, padding-box;
+    background-size: 100% auto;
+    box-shadow: 0px 0px 20px #000 inset;
+    background-attachment: fixed;
+}
+#article_control
+{
+    width: 28%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    float: left;
+    text-align: center;
+}
+@media screen and (max-width: 980px)
+{
+    #page_title span
+    {
+        background-size: auto 350px;
+    }
+}
+#article_control img
+{
+    display: inline-block;
+    width: 80px;
+    border-radius: 100%;
+    background-color: white;
+    padding: 5px;
+}
+#article_control table
+{
+    display: inline-block;
+}
+#article_control img, #article_control #bulle_control
+{
+    vertical-align: top;
+}
+#article_control #bulle_control
+{
+    display: inline-block;
+    background-color: #424242;
+    color: #F7F7F7;
+    width: 90%;
+    border-radius: 10px;
+    margin-left: 5%;
+    padding: 2%;
+    text-align: left;
+}
+#article_control #author
+{
+    display: inline-block;
+}
+#article_control #author h3
+{
+    width: 100%;
+    text-align: center;
+}
+#article_control #bulle_control:before
+{
+    width: 0px;
+    height: 0px;
+    display: block;
+    position: relative;
+    border-width: 12px;
+    border-style: solid;
+    border-color: transparent transparent #424242 transparent;
+    left: calc(50% - 20px);
+    content: "";
+    top: -30px;
+}
+#article_control #bulle_control a
+{
+    color: #F7F7F7;
+    text-decoration: none;
+    border-bottom: dashed 1px #F7F7F7;
+}
+code
+{
+    font-family: "DejaVu Sans Mono";
+    border-radius: 5px;
+}
+.caption
+{
+    border-top: solid 1px #424242;
+    text-align: center;
+}
+blockquote
+{
+    background-color: rgb(215, 215, 215);
+    display: block;
+    padding-left: 64px;
+    min-height: 70px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    max-width: calc(95% - 60px);
+    padding-right: 10px;
+    border-radius: 10px;
+    background-image: url('/static/article/quote.png');
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    color: #424242;
+}
+table
+{
+    border: 2px solid #424242;
+    border-collapse: collapse;
+}
+thead
+{
+    background-color: rgb(66, 66, 66);
+    color: white;
+}
+tbody tr:nth-child(odd) {
+   background-color: #ccc;
+}
+td
+{
+    border-right: 1px solid #424242;
+}
+dt
+{
+    font-weight: bold;
+    color: #2071B6;
+}
+dt:before
+{
+    content: "Def. : ";
+    font-style: italic;
+}
+dl
+{
+    background-color: #E7E7E7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#zenActivator
+{
+    a
+    {
+        color: #FFFFFF;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    position: absolute;
+    right: 0px;
+    background-color: rgb(199, 199, 199);
+    padding: 5px;
+    border: 2px solid rgb(151, 151, 151);
+}
+.beta_banneer
+{
+    background-color: #ED2A2A;
+    transform: rotate(-45deg);
+    padding-top:3px;
+    padding-bottom:3px;
+    width:10%;
+    position: absolute;
+    top:15px;
+    left:-35px;
+    text-align: center;
+    p {
+        display: inline-block;
+        color: white;
+        margin: 3px;
+        padding: 3px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-top-style: dashed;
+        border-bottom-style: dashed;
+        border-top-color: #FFF;
+        border-bottom-color: #FFF;
+        border-top-width: 2px;
+        border-bottom-width: 2px;
+        font-weight: bold;
+    }
+}

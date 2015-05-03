@@ -28,9 +28,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True#False
 
-COMPRESS_ENABLED = False
+if DEBUG:
+    CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ('*')
@@ -38,6 +45,22 @@ INTERNAL_IPS = ('127.0.0.1')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+)
+TEMPLATE_LOADERS = (
+('django_mobile.loader.CachedLoader', (
+'django_mobile.loader.Loader',
+'django.template.loaders.filesystem.Loader',
+'django.template.loaders.app_directories.Loader',
+)),
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+"django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django_mobile.context_processors.flavour",
+"django_mobile.context_processors.is_mobile",
 )
 
 ADMINS = (
@@ -57,13 +80,22 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'debug_toolbar',
+    #'debug_toolbar',
     'compressor',
 	'home',
 	'article',
-    'author',
+    # 'author',
     'utils',
     'maintenance',
+    'search',
+    'staticContent',
+    'south',
+    'poll',
+    'member',
+)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/scss', 'sass --scss {infile} {outfile}'),
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,6 +105,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
+
 )
 
 STATICFILES_FINDERS = (
@@ -91,8 +126,11 @@ WSGI_APPLICATION = 'Sivigik.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sivigik_base',
+        'USER': 'sivigik',
+        'PASSWORD' : 'gHAz9uepo56',
+        'HOST' : '127.0.0.1',
     }
 }
 

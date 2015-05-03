@@ -18,6 +18,7 @@ from article import views
 
 urlpatterns = patterns('',
 	url(r'^(?P<pk>\d+)/$', views.view_article, name="detail"),
-	url(r'^edit/(?P<article_id>\d+)/$', views.edit_article, name="edit"),
+	url(r'^(?P<article_id>\d+)/edit/$', views.edit_article, name="edit"),
 	url(r'^new/$', views.edit_article, name="new"),
+    url(r'^(?P<pk>\d+)/comments/$', views.view_comments, name="comments"),
 )

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Rechercher{%endblock%}
+{% block article_title %}
+        <h2>Rechercher</h2>
+{%endblock%}
+{% block content %}
+<form action="/search/result/">
+    {% csrf_token %}
+    <input type="text" placeholder="Rechercher" name="q"></input>
+    
+    <button title="Lancer la recherche" type='submit'>Lancer la rechercher<img src='{% static "icon/magnifying_glass_bl.png" %}'/></button>
+</form>
+{% endblock %}

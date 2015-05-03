@@ -2,8 +2,8 @@
 {% load staticfiles %}
 {% load compress %}
 
-{%block style %}<link rel="stylesheet" href="{% static 'article/style.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'article/editor.css' %}">{% endblock %}
+{%block style %}<link rel="stylesheet" type="text/scss" href="{% static 'article/style.scss' %}" />
+<link rel="stylesheet" type="text/scss" href="{% static 'article/editor.scss' %}">{% endblock %}
 {% block scripts %}
 {% compress js %}
 <script src="{%static 'article/editor.js'%}"></script>
@@ -11,7 +11,7 @@
 {%endblock%}
 {% block title %}Édition{% endblock %}
 
-{% block article_title %}Édition{%endblock%}
+{% block article_title %}<div id="page_title"><h2>Édition</h2></div>{%endblock%}
 
 {% block content %}
 <div id="article">
@@ -23,19 +23,19 @@
 <div class="npart">
     {{p.as_p}}
     <div class='btn btn-warning btn-sm bt_rm_sorte'>
-                <button class='glyphicon glyphicon-trash'>Supprimer</button>
+                <button class='glyphicon glyphicon-trash maximized'>Supprimer</button>
     </div>
 </div>
 {%endfor%}
 </div>
-<button id="bt_add_part" type="button">Ajouter une partie</button>
-<br/><input type="submit" value="Enregistrer" />
+<button id="bt_add_part" type="button" class="maximized">Ajouter une partie</button>
+<br/><input type="submit" value="Enregistrer" class="maximized"/>
 </form>
 <div style="display:none;">
 <div id="epart" class="npart">
 {{ parts.empty_form.as_p }}
 <div class='bt_rm_sorte'>
-                <button class='glyphicon glyphicon-trash'>Supprimer</button>
+                <button class='glyphicon glyphicon-trash maximized'>Supprimer</button>
         </div>
 </div>
 </div>

@@ -15,18 +15,24 @@
 
 from django.db import models
 from home.models import Event
-from author.models import Author
+from member.models import Member
 
 class Article(models.Model):
     event = models.ForeignKey(Event)
-    author = models.ForeignKey(Author)
+    author = models.ForeignKey(Member)
     is_beta = models.BooleanField()
-
+    introduction = models.TextField()
+    def __unicode__(self):
+        return self.event.name
     def get_absolute_url(self):
         return '/article/' + str(self.pk) + '/'
 
     def get_edit_url(self):
-        return '/article/edit/' + str(self.pk) + '/'
+        return '/article/' + str(self.pk) + '/edit/'
+
+    def get_comment_url(self):
+        return '/article/' + str(self.pk) + '/comments/'
+
     def get_as_dict(self):
         returned = {}
         returned['event'] = self.event.pk
@@ -52,6 +58,8 @@ class Part(models.Model):
     text = models.TextField()
     title = models.CharField(max_length=200)
     article = models.ForeignKey(Article, related_name='parts')
+    def __unicode__(self):
+        return self.title
     def get_as_dict(self):
         returned = {}
         returned['text'] = self.text
@@ -65,3 +73,10 @@ class Part(models.Model):
             self.title = d['title']
         if 'article' in d:
             self.article = Article.objects.get(pk=d['article'])
+
+class Comment(models.Model):
+    text = models.TextField()
+    article = models.ForeignKey(Article, related_name='comments')
+    member = models.ForeignKey(Member, related_name='comments')
+    def __unicode__(self):
+        return self.text

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load compress %}
+
+{%block style %}<link rel="stylesheet" type="text/scss" href="{% static 'article/style.scss' %}" />
+<link rel="stylesheet" type="text/scss" href="{% static 'article/editor.scss' %}">{% endblock %}
+{#{% block scripts %}
+{% compress js %}
+<script src="{%static 'article/editor.js'%}"></script>
+{% endcompress %}
+{%endblock%}#}
+{% block title %}Édition de page statique{% endblock %}
+
+{% block article_title %}<div id="page_title"><h2>Édition de page statique</h2></div>{%endblock%}
+
+{% block content %}
+<form action="{{send_to}}" method="post" enctype="multipart/form-data">{% csrf_token %}
+{{ form.as_p }}
+<br/><input type="submit" value="Enregistrer" class="maximized"/>
+</form>
+<a class="button warning maximized" href="/member/static_pages/">Annuler</a>
+{% endblock %}

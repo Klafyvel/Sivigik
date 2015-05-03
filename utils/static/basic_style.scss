@@ -1,0 +1,86 @@
+@import "nav";
+@import "footer";
+@import "button";
+@import "fonts";
+@import "colors";
+
+html, body{min-height: 100%;padding: 0;margin: 0;}
+*{
+    font-family: "DejaVu Sans Light", sans-serif;
+}
+a
+{
+    color : blue;
+}
+a:focus
+{
+outline:0;
+} 
+/*html, body {height: 100%;}*/
+// #main
+// {
+//     min-height: calc(100% - 80px);
+//     min-width: 100%;
+//     position: relative;
+//     margin-left:auto;
+//     margin-right: auto;
+//     top:40px;
+// }
+body
+{
+    background: $white;
+}
+#intro
+{
+    position: relative;
+    display: block;
+    text-align: center;
+    vertical-align: top;
+    color: $grey;
+    font-size: 1.25em;
+}
+#page_title
+{
+    width:75%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+#page_title h2
+{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 7em;
+    margin:5px;
+}
+#page_title p
+{
+    font-size: 2em;
+    font-weight: bold;
+    margin:0;
+    color: white;
+    letter-spacing: 1px;
+}
+.baneer
+{
+    background-color: $grey;
+    z-index: 3000000;
+    position: absolute;
+    top: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    width: 95%;
+    left: 2.5%;
+}
+.floatable
+{
+    position:fixed;
+    top:0px;
+    right: 7px;
+    
+}
+@media screen and (max-width: 980px)
+{
+}

@@ -113,3 +113,7 @@ def get_category_by_name(category_name):
 
 def get_beta_events():
     return Event.objects.all().filter(article__is_beta=True)
+
+class HomeInfo(models.Model):
+    contact = models.TextField()
+    site_intro = models.CharField(max_length=140)

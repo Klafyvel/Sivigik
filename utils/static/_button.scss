@@ -1,0 +1,132 @@
+.button, button, input[type="submit"]
+{
+    font-family: "DejaVu Sans", Helvetica,Arial,"Liberation Sans",sans-serif;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    z-index: 1000;
+    color: #424242;
+    background-color: #F7F7F7;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-right: 25px;
+    border-radius: 0.2em;
+    border: 1px solid #424242;
+}
+.button:hover
+{
+    background: #1061a6;
+    color: #F7F7F7;
+
+}
+.button:active
+{
+    box-shadow: 2px 2px 0px #005196 inset;
+}
+.button.validate, input[type="submit"]
+{
+    // background-image: linear-gradient(to bottom, #3fc02a, #35b620);
+}
+.button.validate:hover, 
+input[type="submit"]:hover
+{
+    background: #25a610;
+}
+.button.warning
+{
+    // background-image: linear-gradient(to bottom, #c02a2a, #b42020);
+}
+.right_arrow:after
+{
+    content:"";
+    position: absolute;
+    margin-left: 10px;
+    width:0;
+    right: 0;
+    height: 0;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: transparent  transparent  transparent #424242; 
+}
+.left_arrow:before
+{
+    content:"";
+    position: absolute;
+    margin-left: 10px;
+    width:0;
+    height: 0;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: transparent #424242 transparent  transparent; 
+}
+.right_arrow:hover:after
+{
+    content:"";
+    position: absolute;
+    margin-left: 10px;
+    width:0;
+    height: 0;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: transparent  transparent  transparent #F7F7F7; 
+}
+.left_arrow:hover:before
+{
+    content:"";
+    position: absolute;
+    margin-left: 10px;
+    width:0;
+    height: 0;
+    border-width: 0.5em;
+    border-style: solid;
+    border-color: transparent #F7F7F7 transparent  transparent; 
+}
+.full_width
+{
+    width: calc(100% - 30px);
+}
+.maximized
+{
+    width: 100%;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.menu_button
+{
+    padding: unset;
+    box-shadow: unset;
+    display: inline-block;
+    height: 100%;
+    background-color: unset;
+    background-image: unset;
+    color:#FFF;
+}
+.menu_button_separator_l
+{
+    margin-right: 5px !important;
+    padding-left: 5px;
+    border-left: solid 1px #070046;
+}
+.menu_button_separator_r
+{
+    margin-left:5px !important;
+    padding-right: 5px;
+    border-right: solid 1px #070046;
+}
+@media screen and (max-width:980px)
+{
+    .maximized_small_screen
+    {
+        max-width: 100%;
+        text-align: center;
+        position: relative;
+        left:0;
+        top:0;
+        margin: 0;
+        display: block;
+    }
+}

@@ -1,0 +1,45 @@
+article.message
+{
+    position: relative;
+    vertical-align: top;
+    .author {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+
+        .author_name {
+            max-width: 64px;
+        }
+        .author_avatar {
+            img {
+                max-width: 64px !important;
+            }
+        }
+    }
+    .message_text
+    {
+        position: relative;
+        left: 70px;
+        display: inline-block;
+        background-color: #B7B7B7;
+        margin: 5px;
+        padding: 5px;
+        width: 80%;
+        min-height: 100px;
+    }
+    .message_text:before
+    {
+        width: 0px;
+        height: 0px;
+        display: block;
+        position: relative;
+        border-width: 12px;
+        border-style: solid;
+        border-color: transparent #B7B7B7 transparent transparent;
+        content: "";
+        left: -28px;
+        top: 5px;
+    }
+
+
+}

@@ -36,10 +36,15 @@ from django.utils import timezone
 @gzip_page
 def view_article(request, pk):
     a = get_object_or_404(Article, pk=pk)
-    d = {'article' : a,}
+    d = {'article' : a,
+         'current' : a.event.category.pk}
     return render(request, 'article/detail.html', d)
-
-@login_required(login_url='/author/login/')
+def view_comments(request, pk):
+    a = get_object_or_404(Article, pk=pk)
+    d = {'article' : a,
+         'current' : a.event.category.pk}
+    return render(request, 'article/comments.html', d)
+@login_required(login_url='/member/login/')
 def edit_article(request, article_id=0):
     if request.method == 'POST':
         form = EditArticleForm(request.POST, request.FILES)
@@ -47,18 +52,19 @@ def edit_article(request, article_id=0):
 
         if form.is_valid():
 
-            author = request.user.author
+            author = request.user.member
             date = timezone.now()
             title = form.cleaned_data['title']
             is_beta = form.cleaned_data['is_beta']
             category = form.cleaned_data['category']
             image = form.cleaned_data['image']
             is_pinned = form.cleaned_data['is_pinned']
+            introduction = form.cleaned_data['introduction']
 
             if article_id == 0:
             	e = Event(name=title, pub_date=date, category=category, image=image, is_pinned=is_pinned)
                 e.save()
-            	a = Article(event=e, author=author, is_beta=is_beta)
+            	a = Article(event=e, author=author, is_beta=is_beta, introduction=introduction)
                 a.save()
                 if formset.is_valid():
                     for p in formset:
@@ -66,14 +72,13 @@ def edit_article(request, article_id=0):
                         title= p.cleaned_data['title']
                         part=Part(text=text, title=title, article=a)
                         part.save()
-                idx = a.id
+                idx = a.pk
             else:
             	a = get_object_or_404(Article, pk=article_id)
             	if image is None:
             		image = a.event.image
             	e = a.event
-                if author != a.author and author not in a.modifiers.all():
-            	   a.modifiers.add(author)
+                a.introduction = introduction
             	a.is_beta = is_beta
                 e.is_pinned =  is_pinned
             	e.name = title
@@ -104,16 +109,17 @@ def edit_article(request, article_id=0):
                 p_list.append({'title': i.title,'text':i.text})
                 no_parts = False
             if no_parts:
-                parts = formset_factory(EditPartForm, extra=1)(initial=p_list)
+                parts = formset_factory(EditPartForm, extra=0)(initial=p_list)
             else:
                 parts = formset_factory(EditPartForm, extra=0)(initial=p_list)
             form = EditArticleForm(initial={'title':a.event.name,
     										'image':a.event.image,
     										'category':a.event.category,
-    										'is_beta':a.is_beta,})
+    										'is_beta':a.is_beta,
+                                            'introduction':a.introduction,})
     if article_id == 0:
     	send_to = '/article/new/'
     else :
-    	send_to = '/article/edit/' + article_id + '/'
+    	send_to = '/article/' + article_id + '/edit/'
     
     return render(request, 'article/edit.html', locals())

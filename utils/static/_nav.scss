@@ -1,0 +1,279 @@
+@import "colors";
+
+nav.desktop
+{
+    background-color:$white;
+    position: relative;
+    left : 0px;
+    top: 44px;
+    width : 100%;
+    box-shadow: 0px 2px 0px #1c1a19;
+    z-index: 10;
+    height : 32px;
+}
+nav.desktop a{
+    text-decoration: none;
+    font-weight: bold;
+}
+nav.desktop h3
+{
+    display: none;
+    color: white;
+}
+nav.desktop ul{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+nav.desktop ul li
+{
+    display: inline-block;
+    height: 100%;
+}
+nav.desktop ul li a
+{    
+    position:relative;
+    transition-property: color;
+    transition-duration: 0.5s;
+    display: inline-block;
+    padding: 5px;
+    width:100%;
+    height:calc(100% - 10px);
+    font-weight:bold;
+    text-decoration:none;
+    color:  $skyblue;
+}
+nav.desktop ul li a:hover, nav.desktop ul li a.current_category
+{
+    color: $white;
+    background-color:  $skyblue;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+#show_menu, #hide_menu
+{
+    position: fixed;
+}
+nav.mobile
+{
+    display: none;
+    float: left;
+    position: fixed;
+    top:0;
+    bottom: 0;
+    width: 60%;
+    left: -60%;
+    background-color: $grey;
+}
+nav.mobile .nav_table
+{
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+nav.mobile .nav_table li {
+    margin-top: 5px;
+}
+nav.mobile #search input
+{
+    width: calc(100% - 80px);
+}
+
+header
+{
+    background: $blue;
+    position: fixed;
+    padding: 5px;
+    padding-top: 7px;
+    width: calc(100% - 5px);
+    height: 32px;
+    top:0px;
+    left:0;
+    text-align: left;
+    z-index: 1000000000;
+}
+header img
+{
+    max-height: 24px;
+}
+header h1
+{
+    font-family: Grandtitre, sans-serif;
+    color : $white;
+    text-align: left;
+    font-size: 1.5em;
+    display: inline-block;
+    padding: 0;
+    padding-right: 10px;
+    margin: 0;
+    vertical-align: top;
+    text-shadow: 2px 2px 15px $grey;
+}
+header p
+{
+    color:$white;
+    text-align: left;
+    font-size:1.5em;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+header #to_user
+{
+    float: right;
+    margin-right: 10px;
+}
+header #user_nav
+{
+    color:$white;
+    display: block;
+    float:right;
+    font-size: 1.25em;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+header #hide_menu_btn:before,
+header #hide_menu_btn,
+header #hide_menu_btn:after,
+header #show_menu_btn:before,
+header #show_menu_btn,
+header #show_menu_btn:after
+{
+    content:" ";
+    display: none;
+    width: 32px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: $white;
+    position: relative
+}
+header #hide_menu_btn,
+header #show_menu_btn
+{
+    top:12px;
+}
+header #hide_menu_btn:before,
+header #show_menu_btn:before
+{
+    top: -10px;
+}
+header #hide_menu_btn:after,
+header #show_menu_btn:after
+{
+    bottom: -5px;
+}
+
+header #search
+{
+    display: inline-block;
+    /*float:left;*/
+}
+#search input {
+    border-radius: 0px;
+    border: none;
+    padding: 4px 4px 4px 24px;
+    background-image: url("/static/icon/magnifying_glass.png");
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    color: $blue;
+    background-position: 1px 1px;
+    transition: all .2s ease-in;
+    vertical-align: middle;
+}
+#search input:focus
+{
+    box-shadow: 0px 0px 7px $white;
+}
+#search button
+{
+    max-width:32px;
+    max-height: 32px;
+    background-position: top;
+
+}
+#search *
+{
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 980px)
+{
+
+nav.desktop
+{
+    display: none;
+}
+header #search,
+header #to_user #user_nav
+{
+    display: none;
+}
+#main_view
+{
+    position: relative;
+    left: 0%;
+}
+nav.mobile
+{
+    display: block;
+}
+header #to_user
+{
+    position: relative;
+    margin: 0px;
+    padding-right: 5px;
+}
+header h1
+{
+    display: block;
+    float: right;
+}
+header #show_menu_btn:before,
+header #show_menu_btn:after,
+header #show_menu_btn
+{
+    display: block;
+}
+
+/*MENU*/
+#show_menu:target ~ #main_view header #hide_menu_btn:before,
+#show_menu:target ~ #main_view header #hide_menu_btn:after,
+#show_menu:target ~ #main_view header #hide_menu_btn
+{
+    display: block;
+}
+#show_menu:target ~ nav.mobile
+{
+    left: 0%;
+    transition: all .5s ease-in;
+}
+#show_menu:target ~ #main_view,
+#show_menu:target ~ #main_view header
+{
+    left: 60%;
+    transition: all .5s ease-in;
+    overflow-x: hidden;
+}
+
+#hide_menu:target ~ nav.mobile
+{
+    left: -60%;
+    transition: all .5s ease-in;
+}
+#hide_menu:target ~ #main_view,
+#hide_menu:target ~ #main_view header
+{
+    left: 0%;
+    transition: all .5s ease-in;
+}
+#show_menu:target ~ #main_view header #show_menu_btn:before,
+#show_menu:target ~ #main_view header #show_menu_btn:after,
+#show_menu:target ~ #main_view header #show_menu_btn
+{
+    display: none !important;
+}
+}

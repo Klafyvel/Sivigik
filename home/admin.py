@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Event, GoodSite, Category
+from home.models import Event, GoodSite, Category, HomeInfo
 from article.admin import ArticleInline
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -15,3 +15,4 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(GoodSite, GoodSiteAdmin)
+admin.site.register(HomeInfo)

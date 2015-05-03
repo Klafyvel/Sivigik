@@ -15,41 +15,26 @@
 
 # -*- coding:utf-8 -*-
 from django import template
-
-import os
-import random
-
-import re
 import markdown
 
 register = template.Library()
 
+extensions = ['markdown.extensions.extra', 
+              'markdown.extensions.codehilite',
+              'markdown.extensions.smarty',
+              'markdown.extensions.mathjax',
+             ]
+
+extension_configs = {
+    'CodeHilite' : {
+        'linenums' : True,
+        # 'linenos' : True,
+        'use_pygments': False,
+    },
+}
+md = markdown.Markdown(extensions, extension_configs)
+
 @register.filter(is_safe=True)
 def emarkdown(text):
     """Parse the given markdown text in html."""
-    return markdown.markdown(text)
-
-class JavascriptShowNode(template.Node):
-    def __init__(self):
-        pass
-    def render(self, context):
-        return """<script type="text/javascript">
-    function show(id)
-    {
-        var obj=document.getElementById(id);
-        if(obj.style.display == 'block')
-        {
-            obj.style.display='none';
-        }
-        else
-        {
-        obj.style.display='block';
-        }
-    }
-</script>
-"""
-
-@register.tag()
-def javascript_show(parser, token):
-    return JavascriptShowNode()
-    
+    return md.convert(text)

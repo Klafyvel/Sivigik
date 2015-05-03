@@ -18,26 +18,33 @@ from django.utils import timezone
 
 from django.views import generic
 
-from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name, get_beta_events, Category, get_pinned_events
+from home.models import get_latest_events, get_good_sites, get_events_by_category, get_category_by_name, get_beta_events, Category, get_pinned_events, HomeInfo
+from member.forms import CreateMemberForm
 
 def home(request):
     """Displays the home page."""
     pinned = get_pinned_events()
     event_list = get_latest_events()
-    good_sites_list = get_good_sites()
-
-    return render(request, 'home/home_base.html', {'event_list'     :event_list,
-                                                   'good_sites_list':good_sites_list,
-                                                   'pinned':pinned})
+    site_infos = get_object_or_404(HomeInfo, pk=1)
+    signin_form = CreateMemberForm()
+    return render(request, 'home/accueil.html', {'event_list'     :event_list,
+                                                   'pinned':pinned,
+                                                   'current':-1,
+                                                   'site_infos':site_infos,
+                                                   'signin':signin_form})
 def category(request, category_name):
     """Display the asked category"""
+    print(request.path)
     if category_name == 'beta':
         event_list = get_beta_events()
         category = Category(name='B&ecirc;ta', displayed_name='B&ecirc;ta', comment='Articles en b&ecirc;ta')
+        current=-2
     else:
         category = get_category_by_name(category_name)
         event_list = get_events_by_category(category)
+        current = category.pk
 
-    return render(request, 'home/home_base.html', {'event_list' :event_list,
-                                                   'category':category})
+    return render(request, 'home/category.html', {'event_list' :event_list,
+                                                   'category':category,
+                                                   'current':current})
 

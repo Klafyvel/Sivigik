@@ -6,6 +6,7 @@ cd tmp
 wget http://yandex.st/highlightjs/8.0/highlight.min.js
 wget http://highlightjs.org/static/styles/atelier-dune.dark.css
 wget http://code.jquery.com/jquery-1.7.1.min.js
+pip install --user django_mobile
 
 cp highlight.min.js ../article/static/article
 cp atelier-dune.dark.css ../article/static/article

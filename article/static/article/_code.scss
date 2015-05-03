@@ -1,0 +1,35 @@
+.codehilite
+{
+    font-family: "DejaVu Sans Mono";
+    background-color: #0C1021;
+    overflow-x: scroll; 
+    color:#FFFFFF;
+    .c, .c1
+    {
+        color: #AEAEAE;
+    }
+    .kn, .k, .o, .ow, .kt, .no
+    {
+        color: #FBDE2D;
+    }
+    .nn, .ne, .nb, .na
+    {
+        color: #7F90AA;
+    }
+    .s, .sd, .cp, .sc, .s2
+    {
+        color: #61CE3C;
+    }
+    .n, .p
+    {
+        color: #FFFFFF;
+    }
+    .nc, .nf, .bp, .nt
+    {
+        color: #FF6400;
+    }
+    .mi, .se
+    {
+        color: #D8FA3C;
+    }
+}

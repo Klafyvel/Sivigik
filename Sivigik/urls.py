@@ -15,7 +15,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from Sivigik.settings import IS_MAINTENANCE
+from Sivigik.settings import IS_MAINTENANCE, MEDIA_ROOT, STATIC_ROOT
 
 from sitemap import *
 
@@ -23,7 +23,7 @@ admin.autodiscover()
 sitemaps = {
     'main': BaseSitemap,
     'articles':ArticleSitemap,
-    'category':CategorySitemap,
+    'categories':CategorySitemap,
 }
 
 if IS_MAINTENANCE:
@@ -37,10 +37,14 @@ else:
         # url(r'^$', 'Sivigik.views.home', name='home'),
         # url(r'^blog/', include('blog.urls')),
 	    url(r'^article/', include('article.urls', namespace="article")),
+        url(r'^search/', include('search.urls', namespace="search")),
         url(r'^admin/', include(admin.site.urls)),
 	    url(r'^$', include('home.urls', namespace="home")),
-	    url(r'^category/', include('home.urls', namespace="home")),
-        url(r'^author/', include('author.urls', namespace="author")),
+	    url(r'^categories/', include('home.urls', namespace="home")),
+        url(r'^member/', include('member.urls', namespace="member")),
         url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT}),
+        url(r'^staticcontent/', include('staticContent.urls', namespace="staticContent")),
     )
 
