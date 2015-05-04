@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from django.views import generic
 
-from author.forms import CreateAuthorForm, ChangeAvatarForm
-from author.models import Author
+from member.forms import CreateAuthorForm#, ChangeAvatarForm
+from member.models import Member
 from article.models import Article
 
 def connect(request):
