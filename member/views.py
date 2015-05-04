@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from django.views import generic
 
-from member.forms import CreateAuthorForm#, ChangeAvatarForm
+from member.forms import CreateMemberForm#, ChangeAvatarForm
 from member.models import Member
 from article.models import Article
 
