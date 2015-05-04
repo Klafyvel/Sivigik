@@ -58,7 +58,7 @@
                 <figcaption>
                   <h3>{{event.name}}</h3> 
                   <em>par {{article.author.user.username}}</em>
-                <a class="button right_arrow" href="/ article/{{article.pk }}">Consulter</a>
+                <a class="button right_arrow" href="/article/{{article.pk }}">Consulter</a>
                   <span id='intro_article'>
                     {%for a in event.article_set.all%}
                     {{a.introduction | cut_intro | emarkdown |  safe}}
@@ -84,8 +84,11 @@
   --><li><a title="slide4" href="#sl_i4" id="sldot_4">Slide 4</a  ></li>  
   </ul>  
   </div>
+  <a href="#contact" class="scrollTo" title="Ça a l'air intéressant !"></a>
 </section>
-<section id="contact"><h2>Contact :</h2>{{site_infos.contact|emarkdown|safe}}</section>
+<section id="contact"><h2>Contact :</h2>{{site_infos.contact|emarkdown|safe}}
+<a href="#signin" class="scrollTo" title="Ça a l'air intéressant !"></a>
+</section>
 <section id="signin">
   <h2>Inscription <small>(engagez vous qu'ils disaient)</small> :</h2>
   <form action="/member/signin/" method="post" enctype="multipart/form-data">{% csrf_token %}

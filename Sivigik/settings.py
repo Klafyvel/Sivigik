@@ -46,21 +46,21 @@ INTERNAL_IPS = ('127.0.0.1')
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
-TEMPLATE_LOADERS = (
-('django_mobile.loader.CachedLoader', (
-'django_mobile.loader.Loader',
-'django.template.loaders.filesystem.Loader',
-'django.template.loaders.app_directories.Loader',
-)),
-)
+# TEMPLATE_LOADERS = (
+# ('django_mobile.loader.CachedLoader', (
+# 'django_mobile.loader.Loader',
+# 'django.template.loaders.filesystem.Loader',
+# 'django.template.loaders.app_directories.Loader',
+# )),
+# )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
 "django.contrib.auth.context_processors.auth",
 "django.core.context_processors.debug",
 "django.core.context_processors.i18n",
 "django.core.context_processors.media",
-"django_mobile.context_processors.flavour",
-"django_mobile.context_processors.is_mobile",
+# "django_mobile.context_processors.flavour",
+# "django_mobile.context_processors.is_mobile",
 )
 
 ADMINS = (
@@ -89,8 +89,8 @@ INSTALLED_APPS = (
     'maintenance',
     'search',
     'staticContent',
-    'south',
-    'poll',
+    #'south',
+    #'poll',
     'member',
 )
 
@@ -105,8 +105,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_mobile.middleware.MobileDetectionMiddleware',
-    'django_mobile.middleware.SetFlavourMiddleware',
+    # 'django_mobile.middleware.MobileDetectionMiddleware',
+    # 'django_mobile.middleware.SetFlavourMiddleware',
 
 )
 
