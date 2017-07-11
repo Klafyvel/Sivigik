@@ -1,0 +1,28 @@
+div#content {
+	display: inline-block;
+	width: 70%;
+}
+
+div#more {
+	display: inline-block;
+	width: 28%;
+	vertical-align: top;
+}
+
+aside.right_aside {
+  display: inline-block;
+  background: white;
+  width: 100%;
+  margin-top: 0.5em;
+  vertical-align: top;
+  padding: 1em;
+  margin-bottom: 1.25em;
+  text-align : center;
+}
+
+aside.right_aside#connect a {
+	text-decoration: none;
+	color : black;
+	font-weight: bold;
+	text-align: center;
+}

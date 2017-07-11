@@ -1,0 +1,26 @@
+{% extends "article/articleBase.html" %}
+
+{%load static%}
+
+{% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">{% endblock %}
+
+{% block author %}
+<h2>Auteur(s) :</h2>
+<p><ul>
+	{% for a in article.authors.all %}<li>{{a.username}}</li>{%endfor%}
+</ul></p>
+{% if user.is_authenticated %}
+<a href="{% url 'article:edit' article.slug %}">Éditer cet article</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if not user.is_authenticated and article.is_beta %}
+<h3>Vous n'êtes pas autorisé à voir cet article.</h3>
+<a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
+{%else%}
+<p>
+Ici le texte de l'article.
+</p>
+{%endif%}
+{% endblock content %}

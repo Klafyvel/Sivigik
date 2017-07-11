@@ -1,0 +1,11 @@
+div#content {
+	background: white;
+	padding: 0.9em;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
+
+div#content form {
+	line-height: 4em;
+}

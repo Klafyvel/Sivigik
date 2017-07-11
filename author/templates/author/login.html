@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}<link rel="stylesheet" type="text/css" href="{% static 'author/login.css'%}">{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+<form action="{% url 'author:login' %}" method="post">
+{% csrf_token %}
+<label for="id">Identifiant : </label><input type="text" name="username" id="id"/><br/>
+<label for="password">Mot de passe : </label><input type="password" name="password" id="password"/><br/>
+<input type="submit" value="Se connecter" />
+</form>
+{% endblock %}
+
