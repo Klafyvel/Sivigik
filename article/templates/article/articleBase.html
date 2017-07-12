@@ -2,7 +2,25 @@
 {% load static %}
 {% block style %}<link rel="stylesheet" type="text/css" href="{% static 'article/article.css' %}">
 {% block articleStyle %}{% endblock %}{% endblock %}
-{% block script %}{%endblock%}
+{% block script %}
+{% block articleScript %}{%endblock%}
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+{%endblock%}
 
 
 
@@ -12,7 +30,7 @@
 	{% block author %}{% endblock %}
 	<h2>Nos derniers tweets</h2>
 	<a class="twitter-timeline"
-  href="https://twitter.com/Sivigik">
+  href="https://twitter.com/Sivigik" data-tweet-limit="3">
 Tweets by @{Sivigik}
 </a>
 </aside>

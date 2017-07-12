@@ -6,7 +6,7 @@
 {% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'article/code.css' %}">{% endblock %}
 
-{% block script %}<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
+{% block articleScript %}<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
 </script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -15,22 +15,6 @@ MathJax.Hub.Config({
   extensions: ["MathMenu.js", "MathZoom.js"]
 });
 </script>
-<script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));</script>
 {%endblock%}
 
 {% block begining %}<div id="fb-root"></div>
