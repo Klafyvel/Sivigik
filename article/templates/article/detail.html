@@ -1,8 +1,38 @@
 {% extends "article/articleBase.html" %}
 
 {%load static%}
+{% load emarkdown %}
 
-{% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">{% endblock %}
+{% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'article/code.css' %}">{% endblock %}
+
+{% block script %}<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+  extensions: ["MathMenu.js", "MathZoom.js"]
+});
+</script>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+{%endblock%}
+
 
 {% block author %}
 <h2>Auteur(s) :</h2>
@@ -14,13 +44,19 @@
 {% endif %}
 {% endblock %}
 
+{%block connect%}{% endblock %}
+
 {% block content %}
 {% if not user.is_authenticated and article.is_beta %}
 <h3>Vous n'êtes pas autorisé à voir cet article.</h3>
 <a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
 {%else%}
-<p>
-Ici le texte de l'article.
-</p>
+<h1>{{article.title}}</h1>
+<p id="pub_date"> Le {{article.pub_date|date}}</p>
+
+{{text | emarkdown |safe}}
 {%endif%}
+<a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?via=Sivigik" data-size="large" data-text="{{article.title}}" data-url="{{ request.build_absolute_uri }}">
+Tweet</a>
 {% endblock content %}

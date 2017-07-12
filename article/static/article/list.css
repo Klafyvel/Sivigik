@@ -4,7 +4,6 @@ article h2, article p {
 
 article {
 	display: block;
-	margin: 0.5em;
 	padding: 1.5em;
 	background: white;
 }

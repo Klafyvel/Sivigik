@@ -33,6 +33,15 @@ class ArticleView(generic.DetailView):
     template_name = 'article/detail.html'
     model = Article
 
+    def get_context_data(self, **kwargs):
+        context = super(ArticleView, self).get_context_data(**kwargs)
+
+        print(self.object.file.storage)
+        with self.object.file.storage.open(self.object.file, 'r') as f:
+            context['text'] = f.read()
+        print(context['text'])
+        return context
+
 
 class AuthorView(LoginRequiredMixin, generic.ListView):
     login_url = reverse_lazy('author:ask_login')

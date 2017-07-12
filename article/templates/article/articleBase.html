@@ -2,14 +2,21 @@
 {% load static %}
 {% block style %}<link rel="stylesheet" type="text/css" href="{% static 'article/article.css' %}">
 {% block articleStyle %}{% endblock %}{% endblock %}
+{% block script %}{%endblock%}
+
+
 
 {% block more %}
 {% block articleMore %}{% endblock %}
 <aside class="right_aside">
 	{% block author %}{% endblock %}
 	<h2>Nos derniers tweets</h2>
-	Ici les tweets.
+	<a class="twitter-timeline"
+  href="https://twitter.com/Sivigik">
+Tweets by @{Sivigik}
+</a>
 </aside>
+{% block connect %}
 <aside class="right_aside" id="connect">
 	{% if not user.is_authenticated %}
 	<a href="{% url 'author:login' %}">Connexion</a>
@@ -19,6 +26,7 @@
 	<a href="{% url 'article:author' %}">Accéder à la page d'édition</a>
 	{% endif %}
 </aside>
+{% endblock %}
 {% endblock more %}
 
 {% block content %}{% endblock content %}
