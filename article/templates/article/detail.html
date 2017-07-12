@@ -48,6 +48,7 @@ MathJax.Hub.Config({
 <meta property="og:title" content="{{ article.title }}"/>
 <meta property="og:description" content="{{article.short}}"/>
 <meta property="og:locale" content="fr-FR"/>
+<!-- <meta property="fb:app_id" content="{YOUR_APP_ID}" /> -->
 {%endblock%}
 {% block author %}
 <h2>Auteur(s) :</h2>
@@ -80,5 +81,6 @@ On est sur les réseaux sociaux !
   href="https://twitter.com/intent/tweet?via=Sivigik" data-size="large" data-text="{{article.title}}" data-url="{{ request.build_absolute_uri }}">
 Tweet</a>
 <div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button" data-size="large" data-mobile-iframe="false"></div>
+<div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
 </div>
 {% endblock content %}
