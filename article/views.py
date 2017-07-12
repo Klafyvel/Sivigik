@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views import generic
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone
+
 
 from .models import Article, URL_TO_CATEGORY, URL_TO_CATEGORY_NAME, URL_TO_DESCRP
 
@@ -8,6 +12,7 @@ class IndexView(generic.ListView):
     template_name = 'article/listArticles.html'
     context_object_name = 'articles'
     model = Article
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -29,14 +34,33 @@ class ArticleView(generic.DetailView):
     model = Article
 
 
-class AuthorView(generic.ListView):
+class AuthorView(LoginRequiredMixin, generic.ListView):
+    login_url = reverse_lazy('author:ask_login')
+
     template_name = 'article/author.html'
     model = Article
     context_object_name = 'articles'
 
 
-class EditView(generic.UpdateView):
+class EditView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy('author:ask_login')
+
     template_name = 'article/edit.html'
     model = Article
     fields = ['authors', 'title', 'file', 'category', 'pub_date', 'is_beta']
     success_url = reverse_lazy('article:author')
+
+
+def new_article(request):
+    a = Article()
+    a.pub_date = timezone.now()
+    a.title = "Nouvel article"
+    a.save()
+    return HttpResponseRedirect(reverse('article:edit', kwargs={'pk':a.pk}))
+
+
+class DeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy('author:ask_login')
+    model = Article
+    success_url = reverse_lazy('article:author')
+    template_name = "article/delete.html"

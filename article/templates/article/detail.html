@@ -10,7 +10,7 @@
 	{% for a in article.authors.all %}<li>{{a.username}}</li>{%endfor%}
 </ul></p>
 {% if user.is_authenticated %}
-<a href="{% url 'article:edit' article.slug %}">Éditer cet article</a>
+<a href="{% url 'article:edit' article.pk %}">Éditer cet article</a>
 {% endif %}
 {% endblock %}
 

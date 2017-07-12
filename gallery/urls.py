@@ -1,12 +1,10 @@
 from django.conf.urls import url
 
-from gallery.views import GalleryView, ImageView
+from gallery.views import *
 
 app_name = "gallery"
 urlpatterns = [
-    url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^(?P<pk>\d+)/$', ArticleView.as_view(), name='article-detail-pk'),
-    url(r'^(?P<year>\d+)/(?P<month>\d+)/(?P<slug>(\w|-)+)/$', ArticleView.as_view(), name='article-detail-wp'),
-    url(r'^categorie/(\w+)/$', IndexView.as_view(), name='article-category'),
-    url(r'^page-auteurs/$', AuthorView.as_view(), name='author'),
+    url(r'^edit/(?P<pk>\d+)/$', EditView.as_view(), name='edit'),
+    url(r'^delete/(?P<pk>\d+)/$', DeleteView.as_view(), name='delete'),
+    url(r'^new/(?P<article_pk>\d+)/$', new_image, name='new'),
 ]

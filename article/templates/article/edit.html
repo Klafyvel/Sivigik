@@ -1,12 +1,34 @@
 {% extends "article/articleBase.html" %}
 {% load static %}
 
+{%block articleStyle%}<link rel="stylesheet" type="text/css" href="{% static 'article/edit.css' %}">
+{%endblock%}
 
 {% block content %}
 <h1>Édition</h1>
+<hr>
+<h2>Général</h2>
 <form action="" enctype=multipart/form-data method=POST>
 {% csrf_token %}
 {{form.as_p}}
-<input type="submit" name="Mettre à jour">
+<input type="submit" value="Mettre à jour">
 </form>
+<hr>
+<h2>Images</h2>
+<a href="{% url 'gallery:new' object.pk %}" class="add_image">Ajouter une image</a>
+
+<table>
+	<tr>
+		<th>Image</th>
+		<th>URL</th>
+		<th>Édition</th>
+	</tr>
+	{% for image in object.image_set.all %}
+	<tr>
+		<td><img src="/media/{{image.image}}"/></td>
+		<td>/media/{{image.image}}</td>
+		<td><a href="{% url 'gallery:edit' image.pk %}">Éditer</a></td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}

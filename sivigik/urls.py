@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^', include('article.urls')),
     url(r'^login/', include('author.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^gallery/', include('gallery.urls')),
 ]
 
 if settings.DEBUG :

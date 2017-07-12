@@ -1,0 +1,57 @@
+div#content {
+	background: white;
+}
+
+div#content h1, div#content h2, div#content form {
+	margin-left: 4em;
+	margin-right: 1em;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+a.add_image {
+	color : black;
+	font-weight: bold;
+	text-decoration: none;
+	border: 1px solid black;
+	padding: 5px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1em;
+	width: 30%;
+	text-align: center;
+}
+
+form * {
+	vertical-align: middle;
+}
+
+
+#content table
+{
+  background: white;
+  border-collapse: collapse;
+}
+tr
+{
+  padding: 10px;
+}
+#content tr:nth-child(even) {
+    background-color: #dddddd;
+}
+#content th, #content td {
+  border-left: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+#content th {
+  background-color: #222222;
+  color : white; 
+}
+
+#content table img
+{
+	max-width: 100%;
+}

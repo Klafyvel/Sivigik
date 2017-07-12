@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from article.views import IndexView, ArticleView, AuthorView, EditView
+from article.views import *
 
 app_name = "article"
 urlpatterns = [
@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^(?P<year>\d+)/(?P<month>\d+)/(?P<slug>(\w|-)+)/$', ArticleView.as_view(), name='article-detail-wp'),
     url(r'^categorie/(\w+)/$', IndexView.as_view(), name='article-category'),
     url(r'^page-auteurs/$', AuthorView.as_view(), name='author'),
-    url(r'^edit/(?P<slug>(\w|-)+)/$', EditView.as_view(), name='edit'),
+    url(r'^edit/(?P<pk>\d+)/$', EditView.as_view(), name='edit'),
+    url(r'^new/$', new_article, name='new'),
+    url(r'^delete/(?P<pk>\d+)$', DeleteView.as_view(), name='delete'),
 ]
