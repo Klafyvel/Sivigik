@@ -33,7 +33,22 @@ MathJax.Hub.Config({
 }(document, "script", "twitter-wjs"));</script>
 {%endblock%}
 
+{% block begining %}<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>{% endblock %}
 
+{% block meta %}
+<meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ article.title }}"/>
+<meta property="og:description" content="{{article.short}}"/>
+<meta property="og:locale" content="fr-FR"/>
+{%endblock%}
 {% block author %}
 <h2>Auteur(s) :</h2>
 <p><ul>
@@ -56,7 +71,14 @@ MathJax.Hub.Config({
 
 {{text | emarkdown |safe}}
 {%endif%}
+<hr>
+<p>
+On est sur les réseaux sociaux !
+</p>
+<div id=social>
 <a class="twitter-share-button"
   href="https://twitter.com/intent/tweet?via=Sivigik" data-size="large" data-text="{{article.title}}" data-url="{{ request.build_absolute_uri }}">
 Tweet</a>
+<div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button" data-size="large" data-mobile-iframe="false"></div>
+</div>
 {% endblock content %}

@@ -38,6 +38,7 @@ URL_TO_DESCRP = {
 class Article(models.Model):
     authors = models.ManyToManyField(User)
     title = models.CharField(max_length=100)
+    short = models.CharField(max_length=1000, default="")
     file = models.FileField(upload_to='uploads/%Y/%m/%d/', null=True)
     category = models.CharField(
         max_length=30,

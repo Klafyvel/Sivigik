@@ -32,3 +32,15 @@ div#content #pub_date {
 .codehilite {
 	overflow-x: scroll;
 }
+
+#social {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+div#content div#social * {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: initial;
+}

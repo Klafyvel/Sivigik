@@ -5,12 +5,14 @@
 	<title>Sivigik</title>
 	<meta charset="utf-8"/>
 	<meta name="description" content="Un site de passionnés de bidouillage qui vous font partager cette passion !"/>
+	{% block meta %}{%endblock%}
 	<link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
 	{% block style %}{% endblock %}
 	{% block script %}{%endblock%}
 </head>
 <body>
+{% block begining %}{% endblock %}
 <header>
 	<a href="/"><img src="{% static 'images/baniere.png' %}"></a>
 </header>
