@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}<link rel="stylesheet" type="text/css" href="{% static 'article/article.css' %}">
+{% block articleStyle %}{% endblock %}{% endblock %}
+{% block script %}
+{% block articleScript %}{%endblock%}
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+{%endblock%}
+
+
+
+{% block more %}
+{% block articleMore %}{% endblock %}
+<aside class="right_aside">
+	{% block author %}{% endblock %}
+	<h2>Nos derniers tweets</h2>
+	<a class="twitter-timeline"
+  href="https://twitter.com/Sivigik" data-tweet-limit="3">
+Tweets by @{Sivigik}
+</a>
+</aside>
+{% block connect %}
+<aside class="right_aside" id="connect">
+	{% if not user.is_authenticated %}
+	<a href="{% url 'author:login' %}">Connexion</a>
+	{% else %}
+	Connecté en tant que {{ user.username }} <br />
+	<a href="{% url 'author:logout' %}">Déconnexion</a> <br>
+	<a href="{% url 'article:author' %}">Accéder à la page d'édition</a>
+	{% endif %}
+</aside>
+{% endblock %}
+{% endblock more %}
+
+{% block content %}{% endblock content %}

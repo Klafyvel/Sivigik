@@ -1,0 +1,48 @@
+{% extends "article/articleBase.html" %}
+{% load static %}
+{% block articleStyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'article/author.css' %}">
+{%endblock%}
+
+{% block more %}{%endblock%}
+
+{% block beforeContent %}
+<aside id="connect" class="right_aside">
+	{% if not user.is_authenticated %}
+	<a href="{% url 'author:login' %}">Connexion</a>
+	{% else %}
+	Connecté en tant que {{ user.username }} <br />
+	<a href="{% url 'author:logout' %}">Déconnexion</a> <br>
+	{% endif %}
+</aside>
+{% endblock %}
+
+
+{% block content %}
+<a href="{% url 'article:new' %}" class="command">Nouvel Article</a>
+<a href="#" class="command">Télécharger tous les articles</a>
+
+<table>
+	<tr>
+		<th>Titre</th>
+		<th>Date de parution</th>
+		<th>Auteur(s)</th>
+		<th>Lien de téléchargement</th>
+		<th>Lien de modification</th>
+		<th>Lien vers l'article</th>
+		<th>Suppression de l'article</th>
+	</tr>	
+	{% for article in articles %}
+	<tr>
+		<td>{{ article.title }}</td>
+		<td>{{ article.pub_date | date}}
+		<td>{% for a in article.authors.all %}{{ a.get_username }} {%endfor%}</td>
+		<td><a href="/media/{{article.file}}">Télécharger</a></td>
+		<td><a href="{% url 'article:edit' article.pk %}">Modifier</a></td>
+		<td><a href="{% url 'article:article-detail-wp' article.year article.month article.slug %}">Voir</a></td>
+		<td class="delete"><a href="{% url 'article:delete' article.pk %}">Supprimer</a></td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+article h2, article p {
+	display: inline;
+}
+
+article {
+	display: block;
+	padding: 1.5em;
+	background: white;
+}
+
+article:hover {
+	background: #EAEAEA;
+}
+
+article h2 {
+	margin-right : 1em;
+}
+
+article .pub_date {
+	font-style: italic;
+	display: inline-block;
+	float : right;
+}
+
+a.article_link {
+	display: block;
+	text-decoration: none;
+	color: black;
+	margin-bottom: 1.25em;
+}
+
+a.article_link h2 {
+	color: #233858;
+	font-weight: normal;
+}
+
+article#category-name {
+	margin-bottom: 1.25em;
+}
+
+article#category-name p {
+	display: block;
+}

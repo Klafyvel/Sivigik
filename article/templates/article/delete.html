@@ -1,0 +1,11 @@
+{% extends "article/articleBase.html" %}
+{% load static %}
+
+
+{% block content %}
+<h1>Supression</h1>
+<form action="" method="post">{% csrf_token %}
+    <p>Êtes-vous sûr de vouloir supprimer "{{ object }}"?</p>
+    <input type="submit" value="Meurt !" />
+</form>
+{% endblock %}

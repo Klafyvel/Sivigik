@@ -1,0 +1,10 @@
+from django.conf.urls import url
+
+from gallery.views import *
+
+app_name = "gallery"
+urlpatterns = [
+    url(r'^edit/(?P<pk>\d+)/$', EditView.as_view(), name='edit'),
+    url(r'^delete/(?P<pk>\d+)/$', DeleteView.as_view(), name='delete'),
+    url(r'^new/(?P<article_pk>\d+)/$', new_image, name='new'),
+]

@@ -1,43 +1,34 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-{% load compress %}
+{% extends "article/articleBase.html" %}
+{% load static %}
 
-{%block style %}<link rel="stylesheet" type="text/scss" href="{% static 'article/style.scss' %}" />
-<link rel="stylesheet" type="text/scss" href="{% static 'article/editor.scss' %}">{% endblock %}
-{% block scripts %}
-{% compress js %}
-<script src="{%static 'article/editor.js'%}"></script>
-{% endcompress %}
+{%block articleStyle%}<link rel="stylesheet" type="text/css" href="{% static 'article/edit.css' %}">
 {%endblock%}
-{% block title %}Édition{% endblock %}
-
-{% block article_title %}<div id="page_title"><h2>Édition</h2></div>{%endblock%}
 
 {% block content %}
-<div id="article">
-<form action="{{send_to}}" method="post" enctype="multipart/form-data">{% csrf_token %}
-{{ form.as_p }}
-{{ parts.management_form }}
-<div id="formsetZone">
-{% for p in parts %}
-<div class="npart">
-    {{p.as_p}}
-    <div class='btn btn-warning btn-sm bt_rm_sorte'>
-                <button class='glyphicon glyphicon-trash maximized'>Supprimer</button>
-    </div>
-</div>
-{%endfor%}
-</div>
-<button id="bt_add_part" type="button" class="maximized">Ajouter une partie</button>
-<br/><input type="submit" value="Enregistrer" class="maximized"/>
+<h1>Édition</h1>
+<hr>
+<h2>Général</h2>
+<form action="" enctype=multipart/form-data method=POST>
+{% csrf_token %}
+{{form.as_p}}
+<input type="submit" value="Mettre à jour">
 </form>
-<div style="display:none;">
-<div id="epart" class="npart">
-{{ parts.empty_form.as_p }}
-<div class='bt_rm_sorte'>
-                <button class='glyphicon glyphicon-trash maximized'>Supprimer</button>
-        </div>
-</div>
-</div>
-</div>
+<hr>
+<h2>Images</h2>
+<a href="{% url 'gallery:new' object.pk %}" class="add_image">Ajouter une image</a>
+
+<table>
+	<tr>
+		<th>Image</th>
+		<th>URL</th>
+		<th>Édition</th>
+	</tr>
+	{% for image in object.image_set.all %}
+	<tr>
+		<td><img src="/media/{{image.image}}"/></td>
+		<td>/media/{{image.image}}</td>
+		<td><a href="{% url 'gallery:edit' image.pk %}">Éditer</a></td>
+	</tr>
+	{% endfor %}
+</table>
 {% endblock %}
