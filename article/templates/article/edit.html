@@ -16,7 +16,7 @@
 <hr>
 <h2>Images</h2>
 <a href="{% url 'gallery:new' object.pk %}" class="add_image">Ajouter une image</a>
-
+<div id="image_list">
 <table>
 	<tr>
 		<th>Image</th>
@@ -31,4 +31,5 @@
 	</tr>
 	{% endfor %}
 </table>
+</div>
 {% endblock %}

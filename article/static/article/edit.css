@@ -55,3 +55,9 @@ tr
 {
 	max-width: 100%;
 }
+
+div#image_list {
+	max-height: 25em;
+	overflow-y: scroll;
+
+}
