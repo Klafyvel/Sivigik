@@ -11,6 +11,10 @@ header {
   padding-left: 10%;
 }
 
+header img {
+  max-width: 100%;
+}
+
 main {
   width: 80%;
   margin-left: auto;

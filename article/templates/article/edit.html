@@ -15,19 +15,36 @@
 </form>
 <hr>
 <h2>Images</h2>
-<a href="{% url 'gallery:new' object.pk %}" class="add_image">Ajouter une image</a>
-<div id="image_list">
+<a href="{% url 'gallery:new_image' object.pk %}" class="add_attachement">Ajouter une image</a>
+<div class="attachement_list">
 <table>
 	<tr>
 		<th>Image</th>
 		<th>URL</th>
 		<th>Édition</th>
 	</tr>
-	{% for image in object.image_set.all %}
+	{% for image in images %}
 	<tr>
 		<td><img src="/media/{{image.image}}"/></td>
 		<td>/media/{{image.image}}</td>
 		<td><a href="{% url 'gallery:edit' image.pk %}">Éditer</a></td>
+	</tr>
+	{% endfor %}
+</table>
+</div>
+<hr>
+<h2>Fichiers</h2>
+<a href="{% url 'gallery:new_file' object.pk %}" class="add_attachement">Ajouter un fichier</a>
+<div class="attachement_list">
+<table>
+	<tr>
+		<th>Fichier</th>
+		<th>Édition</th>
+	</tr>
+	{% for file in files %}
+	<tr>
+		<td>/media/{{image.image}}</td>
+		<td><a href="{% url 'gallery:edit' file.pk %}">Éditer</a></td>
 	</tr>
 	{% endfor %}
 </table>
