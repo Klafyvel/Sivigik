@@ -35,6 +35,7 @@ URL_TO_DESCRP = {
     'site' : "Les informations à propos du site.",
 }
 
+
 class Article(models.Model):
     authors = models.ManyToManyField(User)
     title = models.CharField(max_length=100)
@@ -60,5 +61,3 @@ class Article(models.Model):
         self.month = self.pub_date.month
         self.year = self.pub_date.year
         super(Article, self).save(*args, **kwargs)
-
-

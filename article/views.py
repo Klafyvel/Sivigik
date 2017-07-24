@@ -36,10 +36,8 @@ class ArticleView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
 
-        print(self.object.file.storage)
         with self.object.file.storage.open(self.object.file, 'r') as f:
             context['text'] = f.read()
-        print(context['text'])
         return context
 
 
@@ -59,6 +57,12 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
     fields = ['authors', 'title', 'file', 'category', 'pub_date', 'is_beta']
     success_url = reverse_lazy('article:author')
 
+    def get_context_data(self, **kwargs):
+        context = super(EditView, self).get_context_data(**kwargs)
+
+        context['images'] = self.object.attachement_set.filter(attachement_type='IMG')
+        context['files'] = self.object.attachement_set.filter(attachement_type='FILE')
+        return context
 
 def new_article(request):
     a = Article()
