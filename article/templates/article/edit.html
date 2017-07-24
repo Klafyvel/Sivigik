@@ -22,12 +22,14 @@
 		<th>Image</th>
 		<th>URL</th>
 		<th>Édition</th>
+		<th>Suppression</th>
 	</tr>
 	{% for image in images %}
 	<tr>
 		<td><img src="/media/{{image.image}}"/></td>
 		<td>/media/{{image.image}}</td>
 		<td><a href="{% url 'gallery:edit' image.pk %}">Éditer</a></td>
+		<td><a href="{% url 'gallery:delete' image.pk %}">Supprimer</a></td>
 	</tr>
 	{% endfor %}
 </table>
@@ -40,11 +42,13 @@
 	<tr>
 		<th>Fichier</th>
 		<th>Édition</th>
+		<th>Suppression</th>
 	</tr>
 	{% for file in files %}
 	<tr>
 		<td>/media/{{image.image}}</td>
 		<td><a href="{% url 'gallery:edit' file.pk %}">Éditer</a></td>
+		<td><a href="{% url 'gallery:delete' file.pk %}">Supprimer</a></td>
 	</tr>
 	{% endfor %}
 </table>
