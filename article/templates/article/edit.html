@@ -11,7 +11,8 @@
 <form action="" enctype=multipart/form-data method=POST>
 {% csrf_token %}
 {{form.as_p}}
-<input type="submit" value="Mettre à jour">
+<input type="submit" name="save" value="Mettre à jour et rester sur cette page">
+<input type="submit" name="save_and_quit" value="Mettre à jour et retourner à la page d'édition">
 </form>
 <hr>
 <h2>Images</h2>

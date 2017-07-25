@@ -64,6 +64,11 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
         context['files'] = self.object.attachement_set.filter(attachement_type='FILE')
         return context
 
+    def post(self, request, **kwargs):
+        if "save" in request.POST:
+            self.success_url = reverse('article:edit', kwargs={'pk':self.get_object().pk})
+        return super(EditView, self).post(request, **kwargs)
+
 def new_article(request):
     a = Article()
     a.pub_date = timezone.now()
