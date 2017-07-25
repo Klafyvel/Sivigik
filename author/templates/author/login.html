@@ -5,10 +5,15 @@
 
 {% block content %}
 <h1>Connexion</h1>
+
+{% if form.errors %}
+<p>Erreur d'authentification, merci de ré-essayer.</p>
+{% endif %}
+
 <form action="{% url 'author:login' %}" method="post">
 {% csrf_token %}
-<label for="id">Identifiant : </label><input type="text" name="username" id="id"/><br/>
-<label for="password">Mot de passe : </label><input type="password" name="password" id="password"/><br/>
+<label for="id">Identifiant : </label>{{ form.username }}<br/>
+<label for="password">Mot de passe : </label>{{ form.password }}<br/>
 <input type="submit" value="Se connecter" />
 </form>
 {% endblock %}

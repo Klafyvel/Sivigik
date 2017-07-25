@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Attachement
+from .models import Attachment
 
-admin.site.register(Attachement)
+admin.site.register(Attachment)

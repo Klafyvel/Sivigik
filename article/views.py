@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.conf import settings
 
+import os
+import shutil
 
 from .models import Article, URL_TO_CATEGORY, URL_TO_CATEGORY_NAME, URL_TO_DESCRP
 
@@ -60,9 +64,14 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditView, self).get_context_data(**kwargs)
 
-        context['images'] = self.object.attachement_set.filter(attachement_type='IMG')
-        context['files'] = self.object.attachement_set.filter(attachement_type='FILE')
+        context['images'] = self.object.attachment_set.filter(attachment_type='IMG')
+        context['files'] = self.object.attachment_set.filter(attachment_type='FILE')
         return context
+
+    def post(self, request, **kwargs):
+        if "save" in request.POST:
+            self.success_url = reverse('article:edit', kwargs={'pk':self.get_object().pk})
+        return super(EditView, self).post(request, **kwargs)
 
 def new_article(request):
     a = Article()
@@ -77,3 +86,17 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Article
     success_url = reverse_lazy('article:author')
     template_name = "article/delete.html"
+
+@login_required(login_url='/login/')
+def make_archive(request, pk):
+    a = get_object_or_404(Article, pk=pk)
+    archive = a.archive()
+    return HttpResponseRedirect('/media/archive/'+archive)
+
+@login_required(login_url='/login/')
+def save_site(request):
+    for a in Article.objects.all():
+        a.archive()
+    dest = os.path.join(settings.MEDIA_ROOT, 'site')
+    shutil.make_archive(dest, 'zip', settings.ARCHIVE_ROOT)
+    return  HttpResponseRedirect('/media/site.zip')
