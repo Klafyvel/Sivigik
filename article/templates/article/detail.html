@@ -64,7 +64,7 @@ On est sur les réseaux sociaux !
 <a class="twitter-share-button"
   href="https://twitter.com/intent/tweet?via=Sivigik" data-size="large" data-text="{{article.title}}" data-url="{{ request.build_absolute_uri }}">
 Tweet</a>
-<div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button" data-size="large" data-mobile-iframe="false"></div>
-<div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+<div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button" data-size="large" data-mobile-iframe="false"></div><br/>
+<div class="fb-comments" data-mobile="true" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
 </div>
 {% endblock content %}
