@@ -36,9 +36,7 @@ MathJax.Hub.Config({
 {%endblock%}
 {% block author %}
 <h2>Auteur(s) :</h2>
-<p><ul>
-	{% for a in article.authors.all %}<li>{{a.username}}</li>{%endfor%}
-</ul></p>
+<p>{% for a in article.authors.all %}{{a.username}}<br/>{%endfor%}</p>
 {% if user.is_authenticated %}
 <a href="{% url 'article:edit' article.pk %}">Éditer cet article</a>
 {% endif %}
