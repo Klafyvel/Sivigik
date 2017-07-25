@@ -2,29 +2,14 @@ main {
 	padding-top: 2em;
 }
 
-div#content {
-	display: inline-block;
-	width: 70%;
-}
-
-div#content iframe {
-	display: block;
-}
-
 div#more {
-	display: inline-block;
-	width: 28%;
 	vertical-align: top;
-	margin-left: 1em;
+	margin-top: 1em;
 }
 
 aside.right_aside {
-  display: inline-block;
   background: white;
-  width: 100%;
   vertical-align: top;
-  padding: 1em;
-  margin-bottom: 1.5em;
   text-align : center;
 }
 
@@ -33,4 +18,26 @@ aside.right_aside#connect a {
 	color : black;
 	font-weight: bold;
 	text-align: center;
+}
+
+@media only screen and (min-width: 1280px) {
+
+div#content {
+	display: inline-block;
+	width: 70%;
+	margin-bottom: 3em;
+}
+
+aside.right_aside {
+  display: inline-block;
+  width: 100%;
+}
+
+div#more {
+	margin-top: 0;
+	margin-left: 1%;
+	display: inline-block;
+	width: 28%;
+}
+
 }
