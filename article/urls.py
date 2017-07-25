@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^new/$', new_article, name='new'),
     url(r'^delete/(?P<pk>\d+)$', DeleteView.as_view(), name='delete'),
     url(r'^archive/(?P<pk>\d+)$', make_archive, name='archive'),
+    url(r'^save_site/$', save_site, name='save_site'),
 ]

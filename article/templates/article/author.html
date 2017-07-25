@@ -20,7 +20,7 @@
 
 {% block content %}
 <a href="{% url 'article:new' %}" class="command">Nouvel Article</a>
-<a href="#" class="command">Télécharger tous les articles</a>
+<a href="{% url 'article:save_site' %}" class="command">Télécharger tous les articles</a>
 
 <table>
 	<tr>
