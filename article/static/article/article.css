@@ -7,6 +7,10 @@ div#content {
 	width: 70%;
 }
 
+div#content iframe {
+	display: block;
+}
+
 div#more {
 	display: inline-block;
 	width: 28%;
