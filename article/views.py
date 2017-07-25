@@ -3,6 +3,7 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.conf import settings
 
@@ -86,13 +87,13 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('article:author')
     template_name = "article/delete.html"
 
-
+@login_required(login_url='/login/')
 def make_archive(request, pk):
     a = get_object_or_404(Article, pk=pk)
     archive = a.archive()
     return HttpResponseRedirect('/media/archive/'+archive)
 
-
+@login_required(login_url='/login/')
 def save_site(request):
     for a in Article.objects.all():
         a.archive()
