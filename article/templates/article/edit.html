@@ -6,6 +6,8 @@
 
 {% block content %}
 <h1>Édition</h1>
+<a class="button" href="{% url 'article:article-detail-pk' object.pk %}">Voir l'article</a><!--
+--><a class="button" href="{% url 'article:archive' object.pk %}">Télécharger l'archive</a>
 <hr>
 <h2>Général</h2>
 <form action="" enctype=multipart/form-data method=POST>
@@ -16,8 +18,8 @@
 </form>
 <hr>
 <h2>Images</h2>
-<a href="{% url 'gallery:new_image' object.pk %}" class="add_attachement">Ajouter une image</a>
-<div class="attachement_list">
+<a href="{% url 'gallery:new_image' object.pk %}" class="button add_attachment">Ajouter une image</a>
+<div class="attachment_list">
 <table>
 	<tr>
 		<th>Image</th>
@@ -37,8 +39,8 @@
 </div>
 <hr>
 <h2>Fichiers</h2>
-<a href="{% url 'gallery:new_file' object.pk %}" class="add_attachement">Ajouter un fichier</a>
-<div class="attachement_list">
+<a href="{% url 'gallery:new_file' object.pk %}" class="button add_attachment">Ajouter un fichier</a>
+<div class="attachment_list">
 <table>
 	<tr>
 		<th>Fichier</th>

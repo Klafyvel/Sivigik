@@ -37,7 +37,7 @@
 		<td>{{ article.title }}</td>
 		<td>{{ article.pub_date | date}}
 		<td>{% for a in article.authors.all %}{{ a.get_username }} {%endfor%}</td>
-		<td><a href="/media/{{article.file}}">Télécharger</a></td>
+		<td><a href="{% url 'article:archive' article.pk %}">Télécharger</a></td>
 		<td><a href="{% url 'article:edit' article.pk %}">Modifier</a></td>
 		<td><a href="{% url 'article:article-detail-wp' article.year article.month article.slug %}">Voir</a></td>
 		<td class="delete"><a href="{% url 'article:delete' article.pk %}">Supprimer</a></td>

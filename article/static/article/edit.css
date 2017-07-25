@@ -9,7 +9,7 @@ div#content h1, div#content h2, div#content form {
 	margin-bottom: 2em;
 }
 
-a.add_attachement {
+a.button {
 	color : black;
 	font-weight: bold;
 	text-decoration: none;

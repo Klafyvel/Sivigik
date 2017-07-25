@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
@@ -60,8 +60,8 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditView, self).get_context_data(**kwargs)
 
-        context['images'] = self.object.attachement_set.filter(attachement_type='IMG')
-        context['files'] = self.object.attachement_set.filter(attachement_type='FILE')
+        context['images'] = self.object.attachment_set.filter(attachment_type='IMG')
+        context['files'] = self.object.attachment_set.filter(attachment_type='FILE')
         return context
 
     def post(self, request, **kwargs):
@@ -82,3 +82,8 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Article
     success_url = reverse_lazy('article:author')
     template_name = "article/delete.html"
+
+def make_archive(request, pk):
+    a = get_object_or_404(Article, pk=pk)
+    archive = a.archive()
+    return HttpResponseRedirect('/media/archive/'+archive)
