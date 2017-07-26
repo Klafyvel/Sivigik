@@ -72,6 +72,8 @@ class AuthorView(LoginRequiredMixin, generic.ListView):
     model = Article
     context_object_name = 'articles'
 
+    queryset = Article.objects.order_by('-pub_date')
+
 
 class EditView(LoginRequiredMixin, generic.UpdateView):
     """

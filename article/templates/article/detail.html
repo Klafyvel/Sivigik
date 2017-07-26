@@ -6,7 +6,7 @@
 {% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'article/code.css' %}">{% endblock %}
 
-{% block articleScript %}<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
+{% block articleScript %}<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
 </script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -14,6 +14,9 @@ MathJax.Hub.Config({
   jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
   extensions: ["MathMenu.js", "MathZoom.js"]
 });
+</script> -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 {%endblock%}
 
