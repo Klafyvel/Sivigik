@@ -66,7 +66,7 @@ class AuthorView(LoginRequiredMixin, generic.ListView):
     """
     Display every article for authors.
     """
-    login_url = reverse_lazy('author:ask_login')
+    login_url = reverse_lazy('author:login')
 
     template_name = 'article/author.html'
     model = Article
@@ -77,7 +77,7 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
     """
     Edit an article.
     """
-    login_url = reverse_lazy('author:ask_login')
+    login_url = reverse_lazy('author:login')
 
     template_name = 'article/edit.html'
     model = Article
@@ -111,7 +111,7 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     """
     Delete an article.
     """
-    login_url = reverse_lazy('author:ask_login')
+    login_url = reverse_lazy('author:login')
     model = Article
     success_url = reverse_lazy('article:author')
     template_name = "article/delete.html"
