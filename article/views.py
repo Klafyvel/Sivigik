@@ -44,6 +44,14 @@ class ArticleView(generic.DetailView):
             context['text'] = f.read()
         return context
 
+    def get_queryset(self):
+        if 'pk' in self.kwargs :
+            return Article.objects.filter(pk=self.kwargs['pk'])
+        year = self.kwargs['year']
+        month = self.kwargs['month']
+        slug = self.kwargs['slug']
+        return Article.objects.filter(year=year, month=month, slug=slug)
+
 
 class AuthorView(LoginRequiredMixin, generic.ListView):
     login_url = reverse_lazy('author:ask_login')
