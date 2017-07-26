@@ -42,8 +42,14 @@ URL_TO_DESCRP = {
 
 
 class Article(models.Model):
+    """
+    Model for an article.
+    """
 
     def get_upload_to(self, filename):
+        """
+        Return the location of the markdown file.
+        """
         return os.path.join('article',str(self.pk),filename)
 
     authors = models.ManyToManyField(User)
@@ -67,12 +73,18 @@ class Article(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        """
+        Overwrite the slug, month, year to match with title and pub_date, then save the article.
+        """
         self.slug = slugify(self.title)
         self.month = self.pub_date.month
         self.year = self.pub_date.year
         super(Article, self).save(*args, **kwargs)
 
     def meta_json(self):
+        """
+        Return metadata in a JSON string.
+        """
         data = {
             "authors": [a.username for a in self.authors.all()],
             "title": self.title,
@@ -83,6 +95,17 @@ class Article(models.Model):
         return json.dumps(data)
 
     def archive(self):
+        """
+        Create an archive of the article.
+        Archive lokks like :
+        .
+        |- article.md
+        |- meta.json
+        |- attachements
+            | - files and images...
+
+        Return the name of the archive.
+        """
         archive_path = os.path.join(settings.ARCHIVE_ROOT, self.slug)
         try:
             os.remove(archive_path)

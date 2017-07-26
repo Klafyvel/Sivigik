@@ -9,6 +9,9 @@ from article.models import Article
 from .models import Attachment
 
 class EditView(LoginRequiredMixin, generic.UpdateView):
+    """
+    Edit an attachment.
+    """
     login_url = reverse_lazy('author:ask_login')
 
     template_name = 'gallery/edit.html'
@@ -38,6 +41,9 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
             return modelform_factory(Attachment, fields=('file',))
 
 class DeleteView(LoginRequiredMixin, generic.DeleteView):
+    """
+    Delete an attachment.
+    """
     login_url = reverse_lazy('author:ask_login')
     model = Attachment
     template_name = "article/delete.html"
@@ -46,6 +52,9 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 def new_image(request, article_pk):
+    """
+    Create an image and redirect the user to the edit view.
+    """
     image = Attachment()
     image.article = get_object_or_404(Article, pk=article_pk)
     image.attachment_type = 'IMG'
@@ -54,6 +63,9 @@ def new_image(request, article_pk):
 
 
 def new_file(request, article_pk):
+    """
+    Create a file and redirect the user to the edit view.
+    """
     file = Attachment()
     file.article = get_object_or_404(Article, pk=article_pk)
     file.attachment_type = 'FILE'

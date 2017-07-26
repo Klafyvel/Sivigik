@@ -13,6 +13,9 @@ import shutil
 from .models import Article, URL_TO_CATEGORY, URL_TO_CATEGORY_NAME, URL_TO_DESCRP
 
 class IndexView(generic.ListView):
+    """
+    Display the latest article or the articles in a given category.
+    """
     template_name = 'article/listArticles.html'
     context_object_name = 'articles'
     model = Article
@@ -34,6 +37,9 @@ class IndexView(generic.ListView):
             return Article.objects.filter(is_beta=False).filter(category=URL_TO_CATEGORY[self.args[0]]).order_by('-pub_date')
 
 class ArticleView(generic.DetailView):
+    """
+    Display an article.
+    """
     template_name = 'article/detail.html'
     model = Article
 
@@ -45,6 +51,9 @@ class ArticleView(generic.DetailView):
         return context
 
     def get_queryset(self):
+        """
+        An article can be accessed by its pk or its pub_date + slug.
+        """
         if 'pk' in self.kwargs :
             return Article.objects.filter(pk=self.kwargs['pk'])
         year = self.kwargs['year']
@@ -54,6 +63,9 @@ class ArticleView(generic.DetailView):
 
 
 class AuthorView(LoginRequiredMixin, generic.ListView):
+    """
+    Display every article for authors.
+    """
     login_url = reverse_lazy('author:ask_login')
 
     template_name = 'article/author.html'
@@ -62,6 +74,9 @@ class AuthorView(LoginRequiredMixin, generic.ListView):
 
 
 class EditView(LoginRequiredMixin, generic.UpdateView):
+    """
+    Edit an article.
+    """
     login_url = reverse_lazy('author:ask_login')
 
     template_name = 'article/edit.html'
@@ -82,6 +97,9 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
         return super(EditView, self).post(request, **kwargs)
 
 def new_article(request):
+    """
+    Create an article then redirect the user to the edit page.
+    """
     a = Article()
     a.pub_date = timezone.now()
     a.title = "Nouvel article"
@@ -90,6 +108,9 @@ def new_article(request):
 
 
 class DeleteView(LoginRequiredMixin, generic.DeleteView):
+    """
+    Delete an article.
+    """
     login_url = reverse_lazy('author:ask_login')
     model = Article
     success_url = reverse_lazy('article:author')
@@ -97,12 +118,19 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
 
 @login_required(login_url='/login/')
 def make_archive(request, pk):
+    """
+    Create an archive of an article then redirect the user to it.
+    """
     a = get_object_or_404(Article, pk=pk)
     archive = a.archive()
     return HttpResponseRedirect('/media/archive/'+archive)
 
 @login_required(login_url='/login/')
 def save_site(request):
+    """
+    Create an archive from every article then redirect the user to it.
+    """
+    Create 
     for a in Article.objects.all():
         a.archive()
     dest = os.path.join(settings.MEDIA_ROOT, 'site')

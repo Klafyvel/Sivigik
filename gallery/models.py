@@ -10,6 +10,9 @@ ATTACHEMENT_TYPE = (
 
 
 class Attachment(models.Model):
+    """
+    An attachment, can be a file or an image.
+    """
 
     def get_upload_to(self, filename):
         return os.path.join('article',str(self.article.pk), 'attachments', filename)
