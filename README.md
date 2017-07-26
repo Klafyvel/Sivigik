@@ -80,5 +80,7 @@ Le site est disponible sur http://127.0.0.1:8000/.
     ```shell
     python manage.py runserver
     ```
-   
+
+Le site est disponible sur http://127.0.0.1:8000/.
+	
 Lorsque vous souhaitez travailler sur le site, seule les étapes 8 et 12 sont à répéter. N'oubliez pas de mettre à jour votre dépôt local de temps à autres pour travailler sur la dernière version !
