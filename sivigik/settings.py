@@ -19,13 +19,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v-!*mxj3^xm!i_eh$fm%+8-an0b5k@0yd_+%5_(o!+r@s&ckj&'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+if DEBUG :
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = 'developpement secret key'
+else :
+    ALLOWED_HOSTS = ['127.0.0.1', 'sivigik.com']
+
+if not DEBUG :
+    X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
