@@ -11,6 +11,13 @@
 {% endif %}
 {%endblock%}
 
+{% block title %}
+Sivigik 
+{% if is_category %}
+- {{category_name}}
+{%endif%}
+{%endblock%}
+
 {% block articleMore %}
 {% if not is_category %}
 <aside id="category-name" class="right_aside">
