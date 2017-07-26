@@ -32,7 +32,7 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         if len(self.args) == 0 : # Main page
-            return Article.objects.filter(is_beta=False).order_by('-pub_date')[:5]
+            return Article.objects.filter(is_beta=False).order_by('-pub_date')[:10]
         else : # Category page
             return Article.objects.filter(is_beta=False).filter(category=URL_TO_CATEGORY[self.args[0]]).order_by('-pub_date')
 
