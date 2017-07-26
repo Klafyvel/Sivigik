@@ -89,7 +89,7 @@ class Article(models.Model):
             "authors": [a.username for a in self.authors.all()],
             "title": self.title,
             "category": self.category,
-            "pub_date": self.pub_date.timestamp(),
+            "pub_date": self.pub_date.isoformat(),
             "is_beta": self.is_beta,
         }
         return json.dumps(data)
