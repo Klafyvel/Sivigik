@@ -132,7 +132,6 @@ def save_site(request):
     """
     Create an archive from every article then redirect the user to it.
     """
-    Create 
     for a in Article.objects.all():
         a.archive()
     dest = os.path.join(settings.MEDIA_ROOT, 'site')
