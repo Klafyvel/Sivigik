@@ -10,6 +10,7 @@
 
 {% block content %}
 <h1>Édition : {{object.title}}</h1>
+<p>Les images seront téléversées vers /media/article/{{object.pk}}/attachments/ .</p>
 <a class="button" href="{% url 'article:article-detail-pk' object.pk %}">Voir l'article</a><!--
 --><a class="button" href="{% url 'article:archive' object.pk %}">Télécharger l'archive</a>
 <hr>

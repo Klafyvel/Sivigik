@@ -2,7 +2,7 @@ div#content {
 	background: white;
 }
 
-div#content h1, div#content h2, div#content form {
+div#content h1, div#content h2, div#content form,div#content p {
 	margin-left: 4em;
 	margin-right: 1em;
 	margin-top: 2em;
