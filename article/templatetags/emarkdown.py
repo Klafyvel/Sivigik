@@ -5,6 +5,7 @@ register = template.Library()
 
 extensions = ['markdown.extensions.extra', 
               'markdown.extensions.codehilite',
+              'markdown.extensions.toc',
               'mdx_math',
              ]
 
