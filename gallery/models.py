@@ -1,5 +1,6 @@
 from django.db import models
 from article.models import Article
+from django.dispatch import receiver
 
 import os
 
@@ -27,3 +28,38 @@ class Attachment(models.Model):
 
     def __str__(self):
         return str(self.attachment_type) + " de " + str(self.article)
+
+
+@receiver(models.signals.post_delete, sender=Attachment)
+def delete_attachment_at_delete(sender, instance, **kwargs):
+    """
+    Delete the attachment file the attachment was deleted.
+    """
+    if instance.attachment_type == 'FILE':
+        old_file = instance.file
+    else:
+        old_file = instance.image
+
+    if old_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+
+
+@receiver(models.signals.pre_save, sender=Attachment)
+def delete_attachment_on_update(sender, instance, **kwargs):
+    """
+    Delete the old attachment file when uploading a new one.
+    """
+    if not instance.pk:
+        return False
+    try:
+        if instance.attachment_type == 'FILE':
+            old_file = Attachment.objects.get(pk=instance.pk).file
+        else:
+            old_file = Attachment.objects.get(pk=instance.pk).image
+    except Attachment.DoesNotExist:
+        return False
+        
+    if old_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)

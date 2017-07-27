@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 from django.conf import settings
+from django.dispatch import receiver
 
 import shutil
 import os
@@ -97,11 +98,11 @@ class Article(models.Model):
     def archive(self):
         """
         Create an archive of the article.
-        Archive lokks like :
+        Archive looks like :
         .
         |- article.md
         |- meta.json
-        |- attachements
+        |- attachments
             | - files and images...
 
         Return the name of the archive.
@@ -122,3 +123,28 @@ class Article(models.Model):
         shutil.rmtree(directory)
 
         return self.slug + '.zip'
+
+
+@receiver(models.signals.post_delete, sender=Article)
+def delete_file_at_delete(sender, instance, **kwargs):
+    """
+    Delete the article folder in /media/ after the article was deleted.
+    """
+    shutil.rmtree(os.path.join(settings.MEDIA_ROOT, instance.get_upload_to('')))
+
+
+@receiver(models.signals.pre_save, sender=Article)
+def delete_file_on_update(sender, instance, **kwargs):
+    """
+    Delete the old article file when uploading a new one.
+    """
+    if not instance.pk:
+        return False
+    try:
+        old_file = Article.objects.get(pk=instance.pk).file
+    except Article.DoesNotExist:
+        return False
+
+    if old_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
