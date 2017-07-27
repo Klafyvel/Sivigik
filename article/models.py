@@ -107,7 +107,7 @@ class Article(models.Model):
 
         Return the name of the archive.
         """
-        archive_path = os.path.join(settings.ARCHIVE_ROOT, self.slug)
+        archive_path = os.path.join(settings.ARCHIVE_ROOT, self.slug+'_'+str(self.pk))
         try:
             os.remove(archive_path)
         except FileNotFoundError:
@@ -122,7 +122,7 @@ class Article(models.Model):
 
         shutil.rmtree(directory)
 
-        return self.slug + '.zip'
+        return self.slug + '_' + str(self.pk) + '.zip'
 
 
 @receiver(models.signals.post_delete, sender=Article)
@@ -131,6 +131,10 @@ def delete_file_at_delete(sender, instance, **kwargs):
     Delete the article folder in /media/ after the article was deleted.
     """
     shutil.rmtree(os.path.join(settings.MEDIA_ROOT, instance.get_upload_to('')))
+
+    archive_path = os.path.join(settings.ARCHIVE_ROOT, instance.slug + '_' + str(instance.pk) + '.zip')
+    if os.path.isfile(archive_path):
+        os.remove(archive_path)
 
 
 @receiver(models.signals.pre_save, sender=Article)
