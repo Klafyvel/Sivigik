@@ -4,8 +4,12 @@
 {%block articleStyle%}<link rel="stylesheet" type="text/css" href="{% static 'article/edit.css' %}">
 {%endblock%}
 
+{% block title %}
+{{ object.title }}, édition - Sivigik
+{% endblock %}
+
 {% block content %}
-<h1>Édition</h1>
+<h1>Édition : {{object.title}}</h1>
 <a class="button" href="{% url 'article:article-detail-pk' object.pk %}">Voir l'article</a><!--
 --><a class="button" href="{% url 'article:archive' object.pk %}">Télécharger l'archive</a>
 <hr>
