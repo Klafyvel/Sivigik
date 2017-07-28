@@ -27,6 +27,8 @@ if DEBUG :
     SECRET_KEY = 'developpement secret key'
 else :
     ALLOWED_HOSTS = ['127.0.0.1', 'sivigik.com']
+    with open('secret_key.txt') as f:
+        SECRET_KEY = f.read()
 
 if not DEBUG :
     X_FRAME_OPTIONS = 'DENY'
