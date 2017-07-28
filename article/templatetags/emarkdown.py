@@ -24,6 +24,6 @@ md = markdown.Markdown(extensions, extension_configs)
 def emarkdown(text):
     """Parse the given markdown text in html."""
     if sys.version_info[0] < 3:
-      return md.convert(text)
+        return md.convert(text)
     else:
-      return md.convert(text.decode("utf8"))
+        return md.convert(text.decode("utf8"))
