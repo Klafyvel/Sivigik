@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django import template
 import markdown
+import sys
 
 register = template.Library()
 
@@ -22,4 +23,7 @@ md = markdown.Markdown(extensions, extension_configs)
 @register.filter(is_safe=True)
 def emarkdown(text):
     """Parse the given markdown text in html."""
-    return md.convert(text)
+    if sys.version_info[0] < 3:
+      return md.convert(text)
+    else:
+      return md.convert(text.decode("utf8"))
