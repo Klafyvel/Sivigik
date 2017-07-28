@@ -1,3 +1,5 @@
+# coding: utf-8
+from __future__ import unicode_literals
 from django.db import models
 from article.models import Article
 from django.dispatch import receiver
