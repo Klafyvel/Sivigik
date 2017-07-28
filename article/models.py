@@ -9,6 +9,7 @@ from django.dispatch import receiver
 
 import shutil
 import os
+import sys
 import json
 
 CATEGORIES = (
@@ -110,10 +111,16 @@ class Article(models.Model):
         Return the name of the archive.
         """
         archive_path = os.path.join(settings.ARCHIVE_ROOT, self.slug+'_'+str(self.pk))
-        try:
-            os.remove(archive_path)
-        except FileNotFoundError:
-            pass
+        if sys.version_info[0] >= 3:
+            try:
+                os.remove(archive_path)
+            except FileNotFoundError:
+                pass
+        else:
+            try:
+                os.remove(archive_path)
+            except OSError:
+                pass
         directory = os.path.join(settings.ARCHIVE_ROOT, self.slug, '')
         shutil.copytree(os.path.join(settings.MEDIA_ROOT,self.get_upload_to('')), directory)
 
