@@ -108,6 +108,13 @@ def new_article(request):
     a.pub_date = timezone.now()
     a.title = "Nouvel article"
     a.save()
+    directory = os.path.join(settings.MEDIA_ROOT, a.get_upload_to(''))
+    file_path = os.path.join(directory, 'article.md')
+    os.mkdir(directory)
+    with open(file_path, 'w+') as f:
+        f.write("Nouvel article.")
+    a.file = a.get_upload_to('article.md')
+    a.save()
     return HttpResponseRedirect(reverse('article:edit', kwargs={'pk':a.pk}))
 
 
