@@ -11,6 +11,7 @@ import shutil
 import os
 import sys
 import json
+import uuid
 
 CATEGORIES = (
     ('EXP', 'Expériences et bricolages'),
@@ -54,7 +55,10 @@ class Article(models.Model):
         """
         Return the location of the markdown file.
         """
-        return os.path.join('article',str(self.pk),filename)
+        if filename:
+            return os.path.join('article',str(self.pk),str(uuid.uuid1())+'-'+filename)
+        else:
+            return os.path.join('article',str(self.pk),'')
 
     authors = models.ManyToManyField(User)
     title = models.CharField(max_length=100)
@@ -159,5 +163,5 @@ def delete_file_on_update(sender, instance, **kwargs):
         return False
 
     if old_file:
-        if os.path.isfile(old_file.path):
+        if (old_file != instance.file) and os.path.isfile(old_file.path):
             os.remove(old_file.path)

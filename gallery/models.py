@@ -3,8 +3,12 @@ from __future__ import unicode_literals
 from django.db import models
 from article.models import Article
 from django.dispatch import receiver
+from django.utils import timezone
+
 
 import os
+import uuid
+
 
 ATTACHEMENT_TYPE = (
     ('IMG', 'Image'),
@@ -16,9 +20,14 @@ class Attachment(models.Model):
     """
     An attachment, can be a file or an image.
     """
-
     def get_upload_to(self, filename):
-        return os.path.join('article',str(self.article.pk), 'attachments', filename)
+        """
+        Return the location of the file.
+        """
+        if filename:
+            return os.path.join('article',str(self.article.pk), 'attachments', str(uuid.uuid1())+'-'+filename)
+        else:
+            return os.path.join('article',str(self.pk),'attachments','')
 
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     attachment_type = models.CharField(
@@ -63,5 +72,9 @@ def delete_attachment_on_update(sender, instance, **kwargs):
         return False
         
     if old_file:
-        if os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+        if instance.attachment_type == 'FILE':
+            if (old_file != instance.file) and os.path.isfile(old_file.path):
+                os.remove(old_file.path)
+        else:
+            if (old_file != instance.image) and os.path.isfile(old_file.path):
+                os.remove(old_file.path)
