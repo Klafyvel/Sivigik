@@ -9,6 +9,7 @@ from django.forms import modelform_factory
 from django.conf import settings
 
 import os
+import sys
 
 from article.models import Article
 from .models import Attachment
@@ -65,11 +66,20 @@ def new_image(request, article_pk):
     image.attachment_type = 'IMG'
     image.save()
     directory = os.path.join(settings.MEDIA_ROOT, image.get_upload_to(''))
-    file_path = os.path.join(directory, 'image.ppm')
-    os.mkdir(directory)
+    image.image.name = image.get_upload_to('image.ppm')
+    file_path = os.path.join(settings.MEDIA_ROOT, image.image.name)
+    if sys.version_info[0] < 3 :
+        try:
+            os.mkdir(directory)
+        except OSError:
+            pass
+    else:
+        try:
+            os.mkdir(directory)
+        except FileExistsError:
+            pass
     with open(file_path, 'w+') as f:
         f.write("P1\n1 1\n0")
-    image.file.name = image.get_upload_to('image.ppm')
     image.save()
     return HttpResponseRedirect(reverse('gallery:edit', kwargs={'pk':image.pk}))
 
@@ -83,10 +93,19 @@ def new_file(request, article_pk):
     file.attachment_type = 'FILE'
     file.save()
     directory = os.path.join(settings.MEDIA_ROOT, file.get_upload_to(''))
-    file_path = os.path.join(directory, 'fichier')
-    os.mkdir(directory)
+    file.file.name = file.get_upload_to('fichier')
+    file_path = os.path.join(settings.MEDIA_ROOT, file.file.name)
+    if sys.version_info[0] < 3 :
+        try:
+            os.mkdir(directory)
+        except OSError:
+            pass
+    else:
+        try:
+            os.mkdir(directory)
+        except FileExistsError:
+            pass
     with open(file_path, 'w+') as f:
         f.write("Un fichier")
-    file.file.name = file.get_upload_to('fichier')
     file.save()
     return HttpResponseRedirect(reverse('gallery:edit', kwargs={'pk':file.pk}))
