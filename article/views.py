@@ -113,7 +113,7 @@ def new_article(request):
     os.mkdir(directory)
     with open(file_path, 'w+') as f:
         f.write("Nouvel article.")
-    a.file = a.get_upload_to('article.md')
+    a.file.name = a.get_upload_to('article.md')
     a.save()
     return HttpResponseRedirect(reverse('article:edit', kwargs={'pk':a.pk}))
 

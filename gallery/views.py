@@ -7,6 +7,8 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.forms import modelform_factory
 
+import os
+
 from article.models import Article
 from .models import Attachment
 
@@ -66,7 +68,7 @@ def new_image(request, article_pk):
     os.mkdir(directory)
     with open(file_path, 'w+') as f:
         f.write("P1\n1 1\n0")
-    image.file = image.get_upload_to('image.ppm')
+    image.file.name = image.get_upload_to('image.ppm')
     image.save()
     return HttpResponseRedirect(reverse('gallery:edit', kwargs={'pk':image.pk}))
 
@@ -84,6 +86,6 @@ def new_file(request, article_pk):
     os.mkdir(directory)
     with open(file_path, 'w+') as f:
         f.write("Un fichier")
-    file.file = file.get_upload_to('fichier')
+    file.file.name = file.get_upload_to('fichier')
     file.save()
     return HttpResponseRedirect(reverse('gallery:edit', kwargs={'pk':file.pk}))
