@@ -27,7 +27,7 @@ class Attachment(models.Model):
         if filename:
             return os.path.join('article',str(self.article.pk), 'attachments', str(uuid.uuid1())+'-'+filename)
         else:
-            return os.path.join('article',str(self.pk),'attachments','')
+            return os.path.join('article',str(self.article.pk),'attachments','')
 
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     attachment_type = models.CharField(
