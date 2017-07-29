@@ -17,7 +17,7 @@ class EditView(LoginRequiredMixin, generic.UpdateView):
     """
     Edit an attachment.
     """
-    login_url = reverse_lazy('author:ask_login')
+    login_url = reverse_lazy('author:login')
 
     template_name = 'gallery/edit.html'
     model = Attachment
@@ -49,7 +49,7 @@ class DeleteView(LoginRequiredMixin, generic.DeleteView):
     """
     Delete an attachment.
     """
-    login_url = reverse_lazy('author:ask_login')
+    login_url = reverse_lazy('author:login')
     model = Attachment
     template_name = "article/delete.html"
     def get_success_url(self, **kwargs):
