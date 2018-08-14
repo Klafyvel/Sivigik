@@ -1,13 +1,13 @@
 # coding: utf-8
 from __future__ import unicode_literals
-from django.conf.urls import url
+from django.urls import path
 
 from gallery.views import *
 
 app_name = "gallery"
 urlpatterns = [
-    url(r'^edit/(?P<pk>\d+)/$', EditView.as_view(), name='edit'),
-    url(r'^delete/(?P<pk>\d+)/$', DeleteView.as_view(), name='delete'),
-    url(r'^new_image/(?P<article_pk>\d+)/$', new_image, name='new_image'),
-    url(r'^new_file/(?P<article_pk>\d+)/$', new_file, name='new_file'),
+    path('edit/<int:pk>/', EditView.as_view(), name='edit'),
+    path('delete/<int:pk>)/', DeleteView.as_view(), name='delete'),
+    path('new_image/<int:article_pk>/', new_image, name='new_image'),
+    path('new_file/<int:article_pk>/', new_file, name='new_file'),
 ]
