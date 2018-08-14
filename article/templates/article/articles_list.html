@@ -1,0 +1,52 @@
+<div class="wrapper style3">
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 col-12-medium">
+          <section class="box article-list">
+            <h2 class="icon fa-file-text-o">
+              {% if category %}{{category_name}}{% else %}
+              Articles récents
+              {% endif %}
+            </h2>
+            <p>{{category_descpr}}</p>
+            {% for article in articles %}
+            <article class="box excerpt">
+              <a href="{% url 'article:article-detail-wp' article.year article.month article.slug %}" class="image left"><img src="{{ article.get_a_picture }}" alt="" /></a>
+              <div>
+                <header>
+                  <span class="date">Le {{ article.pub_date | date }} par <i>{{article.authors.all | join:' '}}</i></span>
+                  <h3><a href="{% url 'article:article-detail-wp' article.year article.month article.slug %}">{{ article.title }}</a></h3>
+                </header>
+                <p>{{ article.get_short_text }}</p>
+              </div>
+            </article>
+            {% endfor %}
+          </section>
+        </div>
+        <div class="col-4 col-12-medium">
+          <h2>Nos derniers tweets</h2>
+          <script>window.twttr = (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0],
+                      t = window.twttr || {};
+                    if (d.getElementById(id)) return t;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "https://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+
+                    t._e = [];
+                    t.ready = function(f) {
+                      t._e.push(f);
+                    };
+
+                    return t;
+                  }(document, "script", "twitter-wjs"));
+          </script>
+          <a class="twitter-timeline"
+               href="https://twitter.com/Sivigik" data-tweet-limit="3"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

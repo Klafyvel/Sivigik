@@ -14,29 +14,41 @@ import shutil
 
 from .models import Article, URL_TO_CATEGORY, URL_TO_CATEGORY_NAME, URL_TO_DESCRP
 
-class IndexView(generic.ListView):
+class CategoryView(generic.ListView):
     """
-    Display the latest article or the articles in a given category.
+    Display the articles in a given category.
     """
-    template_name = 'article/listArticles.html'
+    template_name = 'article/category.html'
     context_object_name = 'articles'
     model = Article
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['is_category'] = (len(self.args) > 0)
-        if context['is_category']:
-            context['category'] = self.args[0]
-            context['category_descpr'] = URL_TO_DESCRP[self.args[0]]
-            context['category_name'] = URL_TO_CATEGORY_NAME[self.args[0]]
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        context['category'] = self.kwargs.get('category')
+        if context['category']:
+            context['category_descpr'] = URL_TO_DESCRP[context['category']]
+            context['category_name'] = URL_TO_CATEGORY_NAME[context['category']]
         return context
 
     def get_queryset(self):
-        if len(self.args) == 0 : # Main page
-            return Article.objects.filter(is_beta=False).order_by('-pub_date')[:10]
-        else : # Category page
-            return Article.objects.filter(is_beta=False).filter(category=URL_TO_CATEGORY[self.args[0]]).order_by('-pub_date')
+        return Article.objects.filter(is_beta=False).filter(
+            category=URL_TO_CATEGORY[self.kwargs.get('category')]
+        ).order_by('-pub_date')
+
+
+class IndexView(generic.ListView):
+    """
+    Display the latest article.
+    """
+    template_name = 'article/home.html'
+    context_object_name = 'articles'
+    model = Article
+    paginate_by = 20
+
+    def get_queryset(self):
+        return Article.objects.filter(is_beta=False).order_by('-pub_date')[:10]
+
 
 class ArticleView(generic.DetailView):
     """

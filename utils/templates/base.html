@@ -1,38 +1,122 @@
 {% load static %}
 <!DOCTYPE html>
+<!--
+  ZeroFour by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-	<title>{% block title %}Sivigik{% endblock %}</title>
-	<meta charset="utf-8"/>
-	<meta name="description" content="Un site de passionnés de bidouillage qui vous font partager cette passion !"/>
-	{% block meta %}{%endblock%}
-	<link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
-	{% block style %}{% endblock %}
-	{% block script %}{%endblock%}
-</head>
-<body>
-{% block begining %}{% endblock %}
-<header>
-	<a href="/"><img src="{% static 'images/baniere.png' %}"></a>
-</header>
-<nav>
-	<a href="/categorie/exp" id="exp">Expériences et bricolages</a><!--
-	--><a href="/categorie/projets" id="projets">Projets</a><!--
-	--><a href="/categorie/bazar" id="bazar">Bazar de Sivigik</a><!--
-	--><a href="/categorie/programmation" id="programmation">Programmation</a><!--
-	--><a href="/categorie/site" id="site">Vie du site</a></nav>
-<main>
-	<div id="content">
-	{% block beforeContent %}{% endblock %}
-	{% block content %}
-	    
-	{% endblock content %}
-	</div>
-	<div id="more">
-	{% block more  %}{% endblock %}
-	</div>
-</main>
-<footer>Retrouvez-nous sur <a href="https://www.facebook.com/Sivigik/">Facebook</a>, <a href="https://twitter.com/Sivigik">Twitter</a> et <a href="https://www.youtube.com/channel/UCg8Sc1tfVwkbH_T2-UckE-Q">YouTube</a>.</footer>
-</body>
+  <head>
+    <title>{% block title %}Sivigik{% endblock %}</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Un site de passionnés de bidouillage qui vous font partager cette passion !"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    {% block meta %}{%endblock%}
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    {% block style %}{% endblock %}
+    {% block script %}{%endblock%}
+  </head>
+  <body class="homepage is-preload">
+    {% block begining %}{% endblock %}
+    <div id="page-wrapper">
+      <div id="header-wrapper">
+        <div class="container">
+          <header id="header">
+            <div class="inner">
+              <h1><a href="/" id="logo">Sivigik</a></h1>
+
+              <nav id="nav">
+                <ul>
+                    <li {% if not category %}class="current_page_item"{% endif %}><a href="/">Accueil</a></li>
+                  <li {% if category == 'exp' %}class="current_page_item"{% endif %}><a href="/categorie/exp">Expériences et bricolages</a></li>
+                  <li {% if category == 'projets' %}class="current_page_item"{% endif %}><a href="/categorie/projets">Projets</a></li>
+                  <li {% if category == 'bazar' %}class="current_page_item"{% endif %}><a href="/categorie/bazar">Bazar de Sivigik</a></li>
+                  <li {% if category == 'programmation' %}class="current_page_item"{% endif %}><a href="/categorie/programmation" >Programmation</a></li>
+                  <li {% if category == 'site' %}class="current_page_item"{% endif %}><a href="/categorie/site">Vie du site</a></li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+          {% block inHeader %}{% endblock %}
+        </div>
+      </div>
+
+      <div id="main-wrapper">
+        {% block beforeContent %}{% endblock %}
+        {% block content %}{% endblock content %}
+        <div id="more">
+          {% block more  %}{% endblock %}
+        </div>
+      </div>
+
+      <div id="footer-wrapper">
+        <footer id="footer" class="container">
+          <div class="row">
+            <div class="col-6 col-6-medium col-12-small">
+              <section>
+                <h2>Chuck norris fact :</h2>
+                <p id="chuck-norris-fact"></p>
+                <p>from <a href="https://api.chucknorris.io">api.chucknorris.io</a></p>
+              </section>
+            </div>
+            <div class="col-3 col-6-medium col-12-small">
+              <section>
+                <h2>Nous contacter</h2>
+                <dl class="contact">
+                  <dt>Twitter</dt>
+                  <dd><a href="https://twitter.com/">@Sivigik</a></dd>
+                  <dt>Facebook</dt>
+                  <dd><a href="https://www.facebook.com/Sivigik/">facebook.com/Sivigik</a></dd>
+                  <dt>YouTube</dt>
+                  <dd><a href="https://www.youtube.com/channel/UCg8Sc1tfVwkbH_T2-UckE-Q">Sivigik</a></dd>
+                  <dt>Email</dt>
+                  <dd><a href="mailto:admin@sivigik.com">admin@sivigik.com</a></dd>
+                </dl>
+            </div>
+            <div class="col-3 col-6-medium col-12-medium">
+              <section>
+                <h2>Administration</h2>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'author:login' %}">Connexion</a>
+                {% else %}
+                Connecté en tant que {{ user.username }} <br />
+                <a href="{% url 'author:logout' %}">Déconnexion</a> <br>
+                <a href="{% url 'article:author' %}">Accéder à la page d'édition</a>
+                {% endif %}
+              </section>
+            </div>
+            <div class="col-12">
+              <div id="copyright">
+                <ul class="menu">
+                  <li>&copy; Sivigik. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/jquery.dropotron.min.js'%}"></script>
+    <script src="{% static 'js/browser.min.js'%}"></script>
+    <script src="{% static 'js/breakpoints.min.js'%}"></script>
+    <script src="{% static 'js/util.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    <script>
+      function getJoke(){
+        var e=new XMLHttpRequest();
+        e.onreadystatechange=function(){
+          if(4==e.readyState&&200==e.status){
+            var n=JSON.parse(e.responseText);
+            document.getElementById('chuck-norris-fact').innerHTML=n.value
+          }
+        };
+        e.open('GET','https://api.chucknorris.io/jokes/random',!0);
+        e.send()
+      }
+      getJoke();
+    </script>
+  </body>
 </html>

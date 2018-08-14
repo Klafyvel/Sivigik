@@ -80,6 +80,18 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    def get_a_picture(self):
+        p = self.attachment_set.filter(attachment_type='IMG').first()
+        if p is not None:
+            return p.image.url
+        return "/static/images/pic04.jpg"
+
+    def get_short_text(self):
+        with self.file.storage.open(self.file, 'r') as f:
+            text = f.read()
+        text = '\n'.join(text.split('\n')[1:3])
+        return text
+
     def save(self, *args, **kwargs):
         """
         Overwrite the slug, month, year to match with title and pub_date, then save the article.
@@ -143,7 +155,9 @@ def delete_file_at_delete(sender, instance, **kwargs):
     """
     Delete the article folder in /media/ after the article was deleted.
     """
-    shutil.rmtree(os.path.join(settings.MEDIA_ROOT, instance.get_upload_to('')))
+    folder = os.path.join(settings.MEDIA_ROOT, instance.get_upload_to(''))
+    if os.path.isdir(folder):
+        shutil.rmtree(folder)
 
     archive_path = os.path.join(settings.ARCHIVE_ROOT, instance.slug + '_' + str(instance.pk) + '.zip')
     if os.path.isfile(archive_path):

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Sivigik
+- {{category_name}}
+{%endblock%}
+
+
+{% block content %}
+{% include "article/articles_list.html" %}
+{% endblock %}

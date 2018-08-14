@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Sivigik
+{%endblock%}
+
+{% block inHeader %}
+<div id="banner">
+  <h2><strong>Sivigik:</strong> Sivigik est un blog collaboratif de passionnés de bricolage, venez partager cette passion ! </h2>
+</div>
+{% endblock %}
+
+{% block content %}
+{% include "article/articles_list.html" %}
+{% endblock %}
