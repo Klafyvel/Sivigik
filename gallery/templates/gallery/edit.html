@@ -1,16 +1,24 @@
-{% extends "article/articleBase.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {%block articleStyle%}<link rel="stylesheet" type="text/css" href="{% static 'article/edit.css' %}">
 {%endblock%}
 
 {% block content %}
-<h1>Édition</h1>
-<form action="" enctype=multipart/form-data method=POST>
-{% csrf_token %}
-{{form.as_p}}
-<input type="submit" name="save_and_add" value="Enregistrer et ajouter un nouveau">
-<input type="submit" name="save_and_quit" value="Enregistrer et retourner à l'article">
-<input type="submit" name="cancel" value="Supprimer">
-</form>
+<div class="wrapper style2">
+  <div class="inner">
+    <div class="container">
+      <div id="content">
+        <h2>Édition</h2>
+        <form action="" enctype=multipart/form-data method=POST>
+          {% csrf_token %}
+          {{form.as_p}}
+          <input type="submit" name="save_and_add" value="Enregistrer et ajouter un nouveau">
+          <input type="submit" name="save_and_quit" value="Enregistrer et retourner à l'article">
+          <input type="submit" name="cancel" value="Supprimer">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
