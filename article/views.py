@@ -68,12 +68,20 @@ class ArticleView(generic.DetailView):
         """
         An article can be accessed by its pk or its pub_date + slug.
         """
+        allow_beta = self.request.user.is_authenticated
+        if not allow_beta:
+            search = {
+                'is_beta': False
+            }
+        else:
+            search = {}
         if 'pk' in self.kwargs :
-            return Article.objects.filter(pk=self.kwargs['pk'])
-        year = self.kwargs['year']
-        month = self.kwargs['month']
-        slug = self.kwargs['slug']
-        return Article.objects.filter(year=year, month=month, slug=slug)
+            search['pk'] = self.kwargs['pk']
+        else:
+            search['year'] = self.kwargs['year']
+            search['month'] = self.kwargs['month']
+            search['slug'] = self.kwargs['slug']
+        return Article.objects.filter(**search)
 
 
 class AuthorView(LoginRequiredMixin, generic.ListView):
