@@ -1,20 +1,14 @@
-{% extends "article/articleBase.html" %}
+{% extends "base.html" %}
 
 {%load static%}
 {% load emarkdown %}
 
-{% block articleStyle %}<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'article/code.css' %}">{% endblock %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'article/detail.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'article/code.css' %}">
+{% endblock %}
 
-{% block articleScript %}<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  config: ["MMLorHTML.js"],
-  jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
-  extensions: ["MathMenu.js", "MathZoom.js"]
-});
-</script> -->
+{% block script %}
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
@@ -39,37 +33,64 @@ MathJax.Hub.Config({
 <meta property="og:title" content="{{ article.title }}"/>
 <meta property="og:description" content="{{article.short}}"/>
 <meta property="og:locale" content="fr-FR"/>
-<!-- <meta property="fb:app_id" content="{YOUR_APP_ID}" /> -->
 {%endblock%}
-{% block author %}
-<h2>Auteur(s) :</h2>
-<p>{% for a in article.authors.all %}{{a.username}}<br/>{%endfor%}</p>
-{% if user.is_authenticated %}
-<a href="{% url 'article:edit' article.pk %}">Éditer cet article</a>
-{% endif %}
-{% endblock %}
-
-{%block connect%}{% endblock %}
 
 {% block content %}
-{% if not user.is_authenticated and article.is_beta %}
-<h3>Vous n'êtes pas autorisé à voir cet article.</h3>
-<a href="http://levisiteurdufutur.com/" rel="nofollow"><img src="http://www.heberger-image.fr/data/images/59812_beta_r.gif" alt="c'est une bêta."/></a>
-{%else%}
-<h1>{{article.title}}</h1>
-<p id="pub_date"> Le {{article.pub_date|date}}</p>
+<div class="wrapper style2">
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 col-12-medium">
+          <div id="content">
+            <article>
+              <header class="major">
+                <h2>{{article.title}}</h2>
+                <span class="date">Le {{ article.pub_date | date }}</span>
+              </header>
+              {{ text | emarkdown | safe }}
+              <hr>
 
-{{text | emarkdown |safe}}
-{%endif%}
-<hr>
-<p>
-On est sur les réseaux sociaux !
-</p>
-<div id=social>
-<a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?via=Sivigik" data-size="large" data-text="{{article.title}}" data-url="{{ request.build_absolute_uri }}">
-Tweet</a>
-<div class="fb-share-button" data-href="{{request.build_absolute_uri}}" data-layout="button" data-size="large" data-mobile-iframe="false"></div><br/>
-<div class="fb-comments" data-mobile="true" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+            </article>
+          </div>
+        </div>
+        <div class="col-4 col-12-medium">
+          <div id="sidebar">
+            <section>
+              <header class="major">
+                <h2>Auteur{{ article.authors.all | length |pluralize}}:
+                {% if article.authors.all.count > 1 %}
+                {{ article.authors.all | slice:":-1" | join:", " }} et {{ article.authors.last }}
+                {% else %}
+                {{ article.authors.first | title}}
+                {% endif %}
+                </h2>
+              </header>
+              {% if user.is_authenticated %}
+                <a href="{% url 'article:edit' article.pk %}">Éditer cet article</a>
+              {% endif %}
+              <p>On est sur les réseaux sociaux (et dans les villes, et dans les campagnes)</p>
+              <a class="fa fa-twitter"
+                 href="http://twitter.com/share?text=Sivigik : {{article.title}}&url={{request.build_absolute_uri}}"></a>
+              <a class="fa fa-facebook"
+                 href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" target="_blank"></a>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper style3">
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-12-medium">
+          <div id=social>
+            <div class="fb-comments" data-mobile="true" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

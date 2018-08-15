@@ -1,54 +1,61 @@
 div#content {
-	font-family: sans-serif;
-	background: white;
-	padding-bottom: 4em;
-	padding-top: 4em;
+  text-align:justify;
 }
 
-div#content * {
-	max-width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-div#content iframe {
-	display: block;
-}
-
-div#content p {
-	text-align: justify;
-}
-
-div#content img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-div#content #pub_date {
-	text-align: right;
-	color: #555555;
+div#content iframe, div#content video, div#content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .codehilite {
-	overflow-x: scroll;
+  overflow-x: scroll;
 }
 
 #social {
-	display: block;
-	width: 100%;
-	text-align: center;
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 div#content div#social * {
-	vertical-align: middle;
-	max-width: initial;
-}
-
-div#content video {
-	display: block;
+  vertical-align: middle;
+  max-width: initial;
 }
 
 div#content div#social .twitter-share-button, div#content div#social .fb-share-button {
-	display: inline-block;
+  display: inline-block;
+}
+
+div#sidebar section .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    display:inline-block;
+    margin: 5px 2px;
+    box-sizing: content-box;
+}
+
+/* Add a hover effect if you want */
+div#sidebar section .fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+div#sidebar section .fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+div#sidebar section .fa-twitter {
+    background: #55ACEE;
+    color: white;
 }
