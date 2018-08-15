@@ -1,56 +1,15 @@
-div#content {
-	background: white;
-}
+form input[type=checkbox] {
+-moz-appearance: checkbox;
 
-div#content h1, div#content h2, div#content form,div#content p {
-	margin-left: 4em;
-	margin-right: 1em;
-	margin-top: 2em;
-	margin-bottom: 2em;
-}
+-webkit-appearance: checkbox;
 
-a.button {
-	color : black;
-	font-weight: bold;
-	text-decoration: none;
-	border: 1px solid black;
-	padding: 5px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 1em;
-	width: 30%;
-	text-align: center;
-}
+-ms-appearance: checkbox;
 
-form * {
-	vertical-align: middle;
-}
-
-
-#content table
-{
-  background: white;
-  border-collapse: collapse;
-}
-tr
-{
-  padding: 10px;
+appearance: checkbox;
 }
 #content tr:nth-child(even) {
     background-color: #dddddd;
 }
-#content th, #content td {
-  border-left: 1px solid #dddddd;
-  text-align: center;
-  padding: 8px;
-}
-
-#content th {
-  background-color: #222222;
-  color : white; 
-}
-
 #content table img
 {
 	max-width: 100%;
@@ -63,6 +22,11 @@ div.attachement_list {
 }
 
 div.attachement_list table {
+  display:block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+form * {
+	vertical-align: middle;
 }
